@@ -1,5 +1,6 @@
 const createError = require("http-errors");
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -17,6 +18,7 @@ app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:4000" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(sessionSecret));
 app.use(express.static(path.join(__dirname, "public")));

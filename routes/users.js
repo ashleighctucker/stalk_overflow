@@ -6,7 +6,7 @@ const express = require('express');
 
 const { User } = require("../db/models");
 const { csrfProtection, asyncHandler } = require("./utils");
-
+const { check } = require("express-validator");
 
 const router = express.Router();
 
