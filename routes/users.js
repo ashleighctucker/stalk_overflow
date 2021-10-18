@@ -10,10 +10,7 @@ const { csrfProtection, asyncHandler } = require("./utils");
 
 const router = express.Router();
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
+
 const userValidators = [
   check("fullName")
     .exists({ checkFalsy: true })
@@ -74,8 +71,26 @@ const userValidators = [
     }),
 ];
 
-router.post("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
+
+router.post('/',userValidators, asyncHandler(async(req,res)=>{ //creates a user
+  const {
+    fullName,
+    userName,
+    emailAddress,
+    password
+  } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 12);
+  const user = User.create(
+    {
+      emailAddress,
+      userName,
+      fullName,
+      hashedPassword
+    });
+
+  res.status(201).json({ user:
+  {id:user.id}})
+}));
 
 module.exports = router;
