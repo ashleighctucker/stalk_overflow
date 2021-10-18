@@ -1,0 +1,16 @@
+extends layout
+
+include utils
+
+block content
+  +validationErrorSummary(errors)
+  form(action='/sign-up' method='POST')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('Full Name', 'fullName', user.fullName)
+    +field('Email Address', 'emailAddress', user.emailAddress, 'email')
+    +field('User Name', 'userName', user.userName)
+    +field('Password', 'password', user.password, 'password')
+    +field('Confirm Password', 'confirmPassword', user.confirmPassword, 'password')
+    div
+      button(type='submit') Sign Up
+      a(href='/') Cancel
