@@ -21,7 +21,7 @@ router.get(
 );
 
 router.get(
-  "/sign-up",
+  "/login",
   csrfProtection,
   asyncHandler(async (req, res) => {
     const user = await User.build();

@@ -1,17 +1,18 @@
 //External Imports
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const { validationResult } = require('express-validator');
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const { validationResult } = require("express-validator");
 
 //Internal Imports
-const { User } = require('../db/models');
-const { asyncHandler, csrfProtection } = require('./utils');
-const { userValidators, loginValidators } = require('./validators');
+const { User } = require("../db/models");
+const { asyncHandler, csrfProtection } = require("./utils");
+const { userValidators, loginValidators } = require("./validators");
+const { loginUser } = require("../auth");
 
 const router = express.Router();
 
 router.post(
-  '/',
+  "/",
   csrfProtection,
   userValidators,
   asyncHandler(async (req, res) => {
@@ -26,12 +27,12 @@ router.post(
       const hashedPassword = await bcrypt.hash(password, 12);
       user.hashedPassword = hashedPassword;
       await user.save();
-      // to-do log in user
-      res.redirect('/');
+      loginUser(user);
+      res.redirect("/");
     } else {
       console.log(validatorErrors);
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('sign-up', {
+      res.render("sign-up", {
         user,
         errors,
         csrfToken: req.csrfToken(),
@@ -49,8 +50,10 @@ router.post(
 
     let errors = [];
     const validatorErrors = validationResult(req);
+    console.log(validatorErrors)
 
     if (validatorErrors.isEmpty()) {
+      
       // Attempt to get the user by their email address.
       const user = await db.User.findOne({ where: { userName } });
 
@@ -76,7 +79,7 @@ router.post(
       errors = validatorErrors.array().map((error) => error.msg);
     }
 
-    res.render("user-login", {
+    res.render("login", {
       title: "Login",
       userName,
       errors,
