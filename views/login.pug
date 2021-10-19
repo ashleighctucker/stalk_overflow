@@ -1,4 +1,4 @@
-extends layout 
+extends layout
 
 include utils
 
@@ -6,11 +6,11 @@ block content
   +validationErrorSummary(errors)
   form(action='/users/login' method='POST' class="login-form")
     input(type='hidden' name='_csrf' value=csrfToken)
-    +field('User Name', 'userName', user.userName)
-    +field('Password', 'password', user.password, 'password') 
+    +field('User Name', 'userName', userName)
+    +field('Password', 'password', password, 'password')
     div
       button(type='submit') Login
       a(href='/') Cancel
 
-  div 
+  div
     p: a(href='/sign-up') Don't have an account?
