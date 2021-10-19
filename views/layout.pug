@@ -1,8 +1,13 @@
 doctype html
 html
   head
+    div(class="layout-main-div")
       block head
         title="Stalk Overflow"
         link(rel='stylesheet' href='../public/stylesheets/index.css')
+        //- import Bootstrap
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+        //- Bootstrap is mobile first.  the viewport meta tag
+        meta(name="viewport" content="width=device-width, initial-scale=1")
   body
     block content

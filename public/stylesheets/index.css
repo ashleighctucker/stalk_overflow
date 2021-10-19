@@ -1,3 +1,18 @@
-/* h1 {
-    color: #555555;
-} */
+* {
+    text-align: center;
+}
+
+.index-pug-title-page {
+    justify-content: center;
+    margin: 50px;
+    background-image: #C7CEDB;
+    font-size: 50px;
+}
+
+h1 {
+    color: #2E3532;
+}
+
+.layout-main-div {
+    background-image: #C7CEDB;
+}
