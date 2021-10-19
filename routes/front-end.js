@@ -24,9 +24,7 @@ router.get(
   "/login",
   csrfProtection,
   asyncHandler(async (req, res) => {
-    const user = await User.build();
     res.render("login", {
-      user,
       csrfToken: req.csrfToken(),
     });
   })

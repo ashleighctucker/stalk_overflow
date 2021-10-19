@@ -27,7 +27,7 @@ router.post(
       const hashedPassword = await bcrypt.hash(password, 12);
       user.hashedPassword = hashedPassword;
       await user.save();
-      loginUser(user);
+      loginUser(req, res, user);
       res.redirect("/");
     } else {
       console.log(validatorErrors);
@@ -42,22 +42,26 @@ router.post(
 );
 
 router.post(
-  "/user/login",
+  "/login",
   csrfProtection,
   loginValidators,
   asyncHandler(async (req, res) => {
+    console.log("1");
     const { userName, password } = req.body;
 
     let errors = [];
     const validatorErrors = validationResult(req);
     console.log(validatorErrors)
+    console.log("2");
 
     if (validatorErrors.isEmpty()) {
-      
+      console.log("3");
+
       // Attempt to get the user by their email address.
-      const user = await db.User.findOne({ where: { userName } });
+      const user = await User.findOne({ where: { userName } });
 
       if (user !== null) {
+        console.log("4");
         // If the user exists then compare their password
         // to the provided password.
         const passwordMatch = await bcrypt.compare(
@@ -72,13 +76,14 @@ router.post(
           return res.redirect("/");
         }
       }
-
+      console.log("5")
       // Otherwise display an error message to the user.
       errors.push("Login failed for the provided username and password");
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
+      console.log("6");
     }
-
+    console.log("7");
     res.render("login", {
       title: "Login",
       userName,
