@@ -30,4 +30,9 @@ router.get(
   })
 );
 
+//to-do add front end route for adding question
+
+//to-do add edit a question page, or do we want to try to make this more dynamic with js?
+
+
 module.exports = router;

@@ -1,0 +1,4 @@
+A few things to do:
+  -have a delete a question link on our question page only if the question is your own
+  -same with an edit link
+  -page view for question / answers / comments (this will be all on one page ideally)
