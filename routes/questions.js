@@ -1,5 +1,6 @@
 //External Imports
 const express = require('express');
+const { validationResult } = require('express-validator');
 
 //Internal Imports
 const { Question } = require('../db/models');
@@ -25,6 +26,40 @@ router.post(
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('questions-ask', {
         title: 'Ask a Question',
+        question,
+        errors,
+        csrfToken: req.csrfToken(),
+      });
+    }
+  })
+);
+
+router.post(
+  '/edit/:id(\\d+)',
+  csrfProtection,
+  questionValidators,
+  asyncHandler(async (req, res) => {
+    const questionId = parseInt(req.params.id, 10);
+    const questionToUpdate = await Question.findByPk(questionId);
+
+    const { question, title, categortyId, userId } = req.body;
+
+    const question = {
+      question,
+      title,
+      categortyId,
+      userId,
+    };
+
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      await questionToUpdate.update(question);
+      res.redirect(`/questions/${questionId}`);
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render('question-edit', {
+        title: 'Edit Question',
         question,
         errors,
         csrfToken: req.csrfToken(),
