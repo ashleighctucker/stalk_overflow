@@ -18,24 +18,19 @@ module.exports = (sequelize, DataTypes) => {
       categoryId: {
         allowNull: false,
         type: DataTypes.INTEGER,
-        references: {
-          model: "Category",
-          key: "id",
-        },
       },
       userId: {
         allowNull: false,
         type: DataTypes.INTEGER,
-        references: {
-          model: "User",
-          key: "id",
-        },
       },
     },
     {}
   );
-  question.associate = function (models) {
-    // associations can be defined here
+  Question.associate = function (models) {
+    Question.belongsTo(models.User, {foreignKey: 'userId'})
+    Question.hasMany(models.Answer, { foreignKey: "questionId" });
+    Question.hasMany(models.Comment, { foreignKey: "questionId" });
+
   };
   return question;
 };

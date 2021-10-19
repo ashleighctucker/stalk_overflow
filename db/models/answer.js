@@ -18,24 +18,19 @@ module.exports = (sequelize, DataTypes) => {
       questionId: {
         allowNull: false,
         type: DataTypes.INTEGER,
-        references: {
-          model: "Questions",
-          key: "id",
-        },
       },
       userId: {
         allowNull: false,
         type: DataTypes.INTEGER,
-        references: {
-          model: "Users",
-          key: "id",
-        },
       },
     },
     {}
   );
-  answer.associate = function (models) {
+  Answer.associate = function (models) {
     // associations can be defined here
+    Answer.belongsTo(models.User, { foreignKey: "userId" });
+    Answer.belongsTo(models.Question, { foreignKey: "questionId" });
+    Answer.hasMany(models.Comment, {foreignKey : 'answerId'})
   };
   return answer;
 };
