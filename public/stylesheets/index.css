@@ -1,3 +1,42 @@
-/* h1 {
-    color: #555555;
-} */
+body {
+    text-align: center;
+    background-color: #7E9181;
+}
+
+h1 {
+    color: #2E3532;
+}
+
+.title-img-div {
+    position: relative;
+    margin: 50px;
+    background-color: #C7CEDB;
+    font-size: 50px;
+    border-radius: 8px;
+    overflow: visible;
+}
+
+.title-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.8;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.tree-img-container {
+    margin: 50px;
+    background-color: #C7CEDB;
+}
+
+.tree-img {
+    position: relative;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.plant-title {
+    text-align: center;
+}
