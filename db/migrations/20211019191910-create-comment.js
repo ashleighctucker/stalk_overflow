@@ -1,16 +1,16 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("comments", {
+    return queryInterface.createTable("Comments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
+      content: {
         allowNull: false,
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(255),
       },
       answerId: {
         allowNull: false,
