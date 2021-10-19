@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const question = sequelize.define('question', {
+  const question = sequelize.define('Question', {
     question: DataTypes.TEXT,
     title: DataTypes.STRING,
     questionScore: DataTypes.INTEGER,
