@@ -9,8 +9,8 @@ const session = require('express-session');
 //Internal Imports:
 const { sequelize } = require('./db/models');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const answersRouter = require('./routes/answers');
 const frontEndRouter = require('./routes/front-end');
-const indexRouter = require('./routes/index');
 const questionsRouter = require('./routes/questions');
 const usersRouter = require('./routes/users');
 const { sessionSecret } = require('./config');
@@ -42,8 +42,8 @@ app.use(
 store.sync();
 
 app.use(restoreUser);
+app.use(answersRouter);
 app.use(frontEndRouter);
-app.use('/', indexRouter);
 app.use('/questions', questionsRouter);
 app.use('/users', usersRouter);
 

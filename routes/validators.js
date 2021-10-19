@@ -74,4 +74,8 @@ const loginValidators = [
 //   //todo
 // ];
 
+// const answerValidators = [
+//   //todo
+// ]
+
 module.exports = { userValidators, loginValidators, questionValidators };
