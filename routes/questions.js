@@ -15,12 +15,17 @@ router.post(
   questionValidators,
   asyncHandler(async (req, res) => {
     const { question, title, categortyId, userId } = req.body;
-    const question = Question.build({ question, title, categortyId, userId });
+    const newQuestion = Question.build({
+      question,
+      title,
+      categortyId,
+      userId,
+    });
 
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
-      await question.save();
+      await newQuestion.save();
       //todo: add redirect to specific question page
       res.redirect('/');
     } else {
@@ -46,7 +51,7 @@ router.post(
 
     const { question, title, categortyId, userId } = req.body;
 
-    const question = {
+    const newQuestion = {
       question,
       title,
       categortyId,
@@ -56,7 +61,7 @@ router.post(
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
-      await questionToUpdate.update(question);
+      await questionToUpdate.update(newQuestion);
       res.redirect(`/questions/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);

@@ -70,12 +70,12 @@ const loginValidators = [
     .withMessage('Please provide a value for Password'),
 ];
 
-// const questionValidators = [
-//   //todo
-// ];
+const questionValidators = [
+  //todo
+];
 
-// const answerValidators = [
-//   //todo
-// ]
+const answerValidators = [
+  //todo
+];
 
 module.exports = { userValidators, loginValidators, questionValidators };
