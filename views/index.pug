@@ -5,7 +5,18 @@ append head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
+  //- import Bootstrap
+  //- link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
+  //- Bootstrap is mobile first.  the viewport meta tag
+  //- meta(name="viewport" content="width=device-width, initial-scale=1")
+
 
 block content
-  h1= title
-  p Welcome to your Project Skeleton
+  div(class="title-img-div")
+    img(src="../images/Plants-in-hands.jpeg" alt="tree image" class="tree-img")
+    div(class="title-div")
+      h1(class="plant-title") #{title}
+    p Welcome!
+
+  //- div(class="tree-img-container")
+  //-   img(src="../images/favicon-tree.png" alt="tree image" class="tree-img2")
