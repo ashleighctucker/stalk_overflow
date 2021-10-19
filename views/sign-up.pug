@@ -3,8 +3,8 @@ extends layout
 include utils
 
 block content
-  div(class="errors-container")
-  form( class="sign-up-form")
+  +validationErrorSummary(errors)
+  form(action='/users' method='POST' class="sign-up-form")
     input(type='hidden' name='_csrf' value=csrfToken)
     +field('Full Name', 'fullName', fullName)
     +field('Email Address', 'emailAddress', emailAddress, 'email')
@@ -14,4 +14,3 @@ block content
     div
       button(type='submit') Sign Up
       a(href='/') Cancel
-  script(type='module' src='javascripts/sign-up.js')
