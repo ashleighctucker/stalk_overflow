@@ -1,19 +1,23 @@
 //External Imports
-const express = require("express");
+const express = require('express');
 
 //Internal Imports
-const { User } = require("../db/models");
-const { asyncHandler, csrfProtection } = require("./utils");
-const { userValidators } = require("./validators");
+const { User } = require('../db/models');
+const { asyncHandler, csrfProtection } = require('./utils');
+const { userValidators } = require('./validators');
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.render('home', { title: 'Home' });
+});
+
 router.get(
-  "/sign-up",
+  '/sign-up',
   csrfProtection,
   asyncHandler(async (req, res) => {
     const user = await User.build();
-    res.render("sign-up", {
+    res.render('sign-up', {
       user,
       csrfToken: req.csrfToken(),
     });
@@ -21,10 +25,10 @@ router.get(
 );
 
 router.get(
-  "/login",
+  '/login',
   csrfProtection,
   asyncHandler(async (req, res) => {
-    res.render("login", {
+    res.render('login', {
       csrfToken: req.csrfToken(),
     });
   })
@@ -33,6 +37,5 @@ router.get(
 //to-do add front end route for adding question
 
 //to-do add edit a question page, or do we want to try to make this more dynamic with js?
-
 
 module.exports = router;
