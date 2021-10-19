@@ -2,6 +2,6 @@ A few things to do:
   -have a delete a question link on our question page only if the question is your own
   -same with an edit link
   -page view for question / answers / comments (this will be all on one page ideally)
-  -add a check in the front end route for asking new questions that makes sure they are logged in, if not, redirect to log in page
-  -create question validators (done Ash)
-  -create answer validators (done Ash)
+  -add a check in the front end route for asking new questions that makes sure they are logged in, if not, redirect to log in page (done Ash needs testing)
+  -create question validators (done Ash) needs testing
+  -create answer validators (done Ash) needs testing
