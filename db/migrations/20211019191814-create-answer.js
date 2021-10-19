@@ -22,10 +22,18 @@ module.exports = {
       questionId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: "Question",
+          key: "id",
+        },
       },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        references: {
+          model: "User",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
