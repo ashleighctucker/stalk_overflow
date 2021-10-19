@@ -1,0 +1,22 @@
+First Commit:
+Changed the file structure so that our project will use 1 server/project
+  - Moved the public folder to the root
+  - Moved the views to the root, replaced the existing root folder/files
+  - Deleted the index.js,package.json,package-lock.json & the public routes folder
+
+Second Commit:
+  - changed my own .env file (not tracked), by replacing my sessionSecret with a random string useing the node repl
+  - HERE: in your own .env file you can change by opening a node repl and pasting
+    require("crypto").randomBytes(32).toString("hex");
+  - Changed the sign-up.pug to include the validation errors summary, added action and method to form, removed script tag for now
+  - Commented out sign-up.js for now
+
+Thrid Commit:
+  - Removed link to replace css in layout pug, seemed to be throwing errors, we can re add later if necessary
+  - Added some comments in app.js file
+  - removed cors from app.js
+  - created a validators.js in routes file to store validators, moved user validator and imported/exported
+
+Fourth Commit:
+  -added front end routes and sign up route
+  -refactored post route for users
