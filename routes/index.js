@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  console.log('hit the router')
+router.get('/', function (req, res, next) {
+  console.log('hit the router');
   res.render('index', { title: 'a/A Express Skeleton Home' });
 });
 

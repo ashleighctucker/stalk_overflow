@@ -17,3 +17,6 @@ Thrid Commit:
   - removed cors from app.js
   - created a validators.js in routes file to store validators, moved user validator and imported/exported
 
+Fourth Commit:
+  -added front end routes and sign up route
+  -refactored post route for users

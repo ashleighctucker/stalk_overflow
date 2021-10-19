@@ -6,11 +6,11 @@ block content
   +validationErrorSummary(errors)
   form(action='/users' method='POST' class="sign-up-form")
     input(type='hidden' name='_csrf' value=csrfToken)
-    +field('Full Name', 'fullName', fullName)
-    +field('Email Address', 'emailAddress', emailAddress, 'email')
-    +field('User Name', 'userName', userName)
-    +field('Password', 'password', password, 'password')
-    +field('Confirm Password', 'confirmPassword', confirmPassword, 'password')
+    +field('Full Name', 'fullName', user.fullName)
+    +field('Email Address', 'emailAddress', user.emailAddress, 'email')
+    +field('User Name', 'userName', user.userName)
+    +field('Password', 'password', user.password, 'password')
+    +field('Confirm Password', 'confirmPassword', user.confirmPassword, 'password')
     div
       button(type='submit') Sign Up
       a(href='/') Cancel
