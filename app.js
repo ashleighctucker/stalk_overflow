@@ -10,7 +10,6 @@ const session = require('express-session');
 const { sequelize } = require('./db/models');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const frontEndRouter = require('./routes/front-end');
-const indexRouter = require('./routes/index');
 const questionsRouter = require('./routes/questions');
 const usersRouter = require('./routes/users');
 const { sessionSecret } = require('./config');
@@ -43,7 +42,6 @@ store.sync();
 
 app.use(restoreUser);
 app.use(frontEndRouter);
-app.use('/', indexRouter);
 app.use('/questions', questionsRouter);
 app.use('/users', usersRouter);
 
