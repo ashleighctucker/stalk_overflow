@@ -1,11 +1,13 @@
+// External Imports:
 const createError = require("http-errors");
 const express = require("express");
-const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const session = require('express-session');
+
+//Internal Imports:
 const { sequelize } = require("./db/models");
-const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -15,10 +17,8 @@ const app = express();
 
 // view engine setup
 app.set("view engine", "pug");
-
 app.use(logger("dev"));
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:4000" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(sessionSecret));
 app.use(express.static(path.join(__dirname, "public")));

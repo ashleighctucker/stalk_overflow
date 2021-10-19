@@ -10,4 +10,10 @@ Second Commit:
     require("crypto").randomBytes(32).toString("hex");
   - Changed the sign-up.pug to include the validation errors summary, added action and method to form, removed script tag for now
   - Commented out sign-up.js for now
-  
+
+Thrid Commit:
+  - Removed link to replace css in layout pug, seemed to be throwing errors, we can re add later if necessary
+  - Added some comments in app.js file
+  - removed cors from app.js
+  - created a validators.js in routes file to store validators, moved user validator and imported/exported
+
