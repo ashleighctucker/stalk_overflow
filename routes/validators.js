@@ -71,11 +71,30 @@ const loginValidators = [
 ];
 
 const questionValidators = [
-  //todo
+  check('question')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for question field'),
+  check('title')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for title field')
+    .isLength({ max: 50 })
+    .withMessage('Title must not be more than 50 characters long'),
 ];
 
 const answerValidators = [
-  //todo
+  check('title')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for title field')
+    .isLength({ max: 50 })
+    .withMessage('Title must not be more than 50 characters long'),
+  check('answer')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for answer field'),
 ];
 
-module.exports = { userValidators, loginValidators, questionValidators };
+module.exports = {
+  userValidators,
+  loginValidators,
+  questionValidators,
+  answerValidators,
+};
