@@ -7,7 +7,7 @@ const { validationResult } = require("express-validator");
 const { User } = require("../db/models");
 const { asyncHandler, csrfProtection } = require("./utils");
 const { userValidators, loginValidators } = require("./validators");
-const { loginUser } = require("../auth");
+const { loginUser, logoutUser } = require("../auth");
 
 const router = express.Router();
 
@@ -92,5 +92,10 @@ router.post(
     });
   })
 );
+
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/');
+})
 
 module.exports = router;
