@@ -5,3 +5,6 @@ A few things to do:
   -add a check in the front end route for asking new questions that makes sure they are logged in, if not, redirect to log in page (done Ash needs testing)
   -create question validators (done Ash) needs testing
   -create answer validators (done Ash) needs testing
+
+  -finish answer question page
+  -finish questions ask page
