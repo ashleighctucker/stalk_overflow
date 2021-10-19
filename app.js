@@ -1,27 +1,28 @@
-const createError = require("http-errors");
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const { sequelize } = require("./db/models");
-const session = require("express-session");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const { sessionSecret } = require("./config");
+// External Imports:
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const session = require('express-session');
+
+//Internal Imports:
+const { sequelize } = require('./db/models');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const frontEndRouter = require('./routes/front-end');
+const { sessionSecret } = require('./config');
 
 const app = express();
 
 // view engine setup
-app.set("view engine", "pug");
-
-app.use(logger("dev"));
+app.set('view engine', 'pug');
+app.use(logger('dev'));
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:4000" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(sessionSecret));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // set up session middleware
 const store = new SequelizeStore({ db: sequelize });
@@ -38,8 +39,9 @@ app.use(
 // create Session table if it doesn't already exist
 store.sync();
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use(frontEndRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -50,11 +52,11 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render('error');
 });
 
 module.exports = app;
