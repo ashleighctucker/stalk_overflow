@@ -9,9 +9,10 @@ const session = require('express-session');
 //Internal Imports:
 const { sequelize } = require('./db/models');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const frontEndRouter = require('./routes/front-end');
+const indexRouter = require('./routes/index');
+const questionsRouter = require('./routes/questions');
+const usersRouter = require('./routes/users');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
 
@@ -41,9 +42,10 @@ app.use(
 store.sync();
 
 app.use(restoreUser);
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use(frontEndRouter);
+app.use('/', indexRouter);
+app.use('/questions', questionsRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
