@@ -9,4 +9,31 @@ const { answerValidators } = require('./validators');
 
 const router = express.Router();
 
+//API endpoint for adding an answer to a question
+router.post(
+  '/',
+  csrfProtection,
+  answerValidators,
+  asyncHandler(async (req, res) => {
+    const { title, answer, questionId, userId } = req.body;
+    const answer = Answer.build({ title, answer, questionId, userId });
+
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      await answer.save();
+      //re routes to specific question page
+      res.redirect(`/questions/${questionId}`);
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render('answer-question', {
+        title: 'Answer',
+        answer,
+        errors,
+        csrfToken: req.csrfToken(),
+      });
+    }
+  })
+);
+
 module.exports = router;

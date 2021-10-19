@@ -15,7 +15,7 @@ router.post(
   questionValidators,
   asyncHandler(async (req, res) => {
     const { question, title, categortyId, userId } = req.body;
-    const question = Question.build(question, title, categortyId, userId);
+    const question = Question.build({ question, title, categortyId, userId });
 
     const validatorErrors = validationResult(req);
 
