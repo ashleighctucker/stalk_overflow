@@ -10,7 +10,8 @@ const router = express.Router();
 
 // Front end route for home page
 router.get('/', (req, res) => {
-  res.render('home', { title: 'Home' });
+  //change index to home
+  res.render('index', { title: 'Home' });
 });
 
 // Front end route for sign up

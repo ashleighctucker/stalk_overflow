@@ -42,7 +42,7 @@ app.use(
 store.sync();
 
 app.use(restoreUser);
-app.use(answersRouter);
+// app.use(answersRouter);
 app.use(frontEndRouter);
 app.use('/questions', questionsRouter);
 app.use('/users', usersRouter);
