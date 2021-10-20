@@ -1,15 +1,12 @@
-.plant-title-h1 {
-    color: #2E3532;
-}
 
 #main-header-container {
     display: flex;
     justify-content: space-between;
-    border-bottom: 4px solid #1C3738;
+    border-bottom: 1px solid #1C3738;
     text-decoration: none;
     align-items: center;
     background-color: #f8f9f9;
-    height: 50px;
+    height: 30px;
 }
 
 #logo-title-div {
@@ -26,4 +23,21 @@
 #header-buttons-right {
     display: flex;
     list-style: none;
+}
+
+.plant-title-h1 {
+    color: #2E3532;
+    font-size: 70%;
+}
+
+.login-button, 
+.signup-button,
+.search-bar-submit-button,
+.search-bar {
+    font-size: 9px;
+    font-family: apple-system,BlinkMacSystemFont,"Segoe UI","Liberation Sans",sans-serif
+}
+
+.search-bar{
+    width: 300px;
 }
