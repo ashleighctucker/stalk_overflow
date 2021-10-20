@@ -3,26 +3,27 @@
 }
 
 #main-header-container {
-    /* justify-content: space-between; */
-    
-    margin: 20px;
+    display: flex;
+    justify-content: space-between;
     border-bottom: 4px solid #1C3738;
+    text-decoration: none;
+    align-items: center;
+    background-color: #f8f9f9;
+    height: 50px;
 }
 
 #logo-title-div {
-    flex-grow: 1;
     display: flex;
+    list-style: none;
 }
 
-.tree-logo {
-    border-radius: 60%;
-    width: 60px;
-}
 
 #search-container {
-    flex-grow: 1;
+    display: flex;
+    list-style: none;
 }
 
 #header-buttons-right {
-    flex-grow: 1;
+    display: flex;
+    list-style: none;
 }
