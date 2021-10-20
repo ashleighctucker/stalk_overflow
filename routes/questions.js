@@ -43,7 +43,6 @@ router.post(
 //API endpoint for editing a question
 router.post(
   '/edit/:id(\\d+)',
-  csrfProtection,
   questionValidators,
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
@@ -78,7 +77,6 @@ router.post(
 //API endpoint for deleting a question
 router.post(
   '/delete/:id(\\d+)',
-  csrfProtection,
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
     const question = await Question.findByPk(questionId);
