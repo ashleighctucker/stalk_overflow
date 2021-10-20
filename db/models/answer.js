@@ -23,7 +23,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
     },
-    {}
+    {
+      indexes: [
+        {
+          unique: true,
+          fields: ['questionId', 'userId'],
+        },
+      ],
+    }
   );
   Answer.associate = function (models) {
     Answer.belongsTo(models.User, { foreignKey: 'userId' });

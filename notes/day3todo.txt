@@ -1,0 +1,2 @@
+Seed To Do:
+  -If we get to comments add unique constaint to migration
