@@ -1,3 +1,7 @@
+* {
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+}
 
 a {
   text-decoration: none;

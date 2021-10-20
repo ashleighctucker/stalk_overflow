@@ -13,42 +13,29 @@ append head
 
 
 block content
-  div(id="main-middle-container")
-    div(id="left-side-bar")
-      div(class="side-bar-container")
-        h4(class="side-bar") Home
-        h4(class="side-bar") Messages
-        h4(class="side-bar") Questions
-        h4(class="side-bar") Users
-        h4(class="side-bar") Tags
-    div(id="right-questions-bar")
-      div(class="top-question-button-container")
-        h2(class="top-questions") Top Questions
-        button(type="submit" class="ask-question-button") Ask a Question
-      div(class="per-question-container")
-        div(class="vote-answers-views-div") vote . answers . views
-        //-  this will have 3 divs for vote . answers . views
-        div(class="per-question")  What is a plant?
-      div(class="per-question-container")
-        div(class="vote-answers-views-div") vote . answers . views
-        //-  this will have 3 divs for vote . answers . views
-        div(class="per-question")  Why does water help plant grow?
-      div(class="per-question-container")
-        div(class="vote-answers-views-div") vote . answers . views
-        //-  this will have 3 divs for vote . answers . views
-        div(class="per-question")  Why are plants green??
+  section(id="main-content-container")
+    div(id="main-content")
+      div(id="side-bar")
+        li(class="side-bar-li") Home
+        li(class="side-bar-li") Messages
+        li(class="side-bar-li") Questions
+        li(class="side-bar-li") Users
+        li(class="side-bar-li") Tags
+      div(id="questions-section")
+        ul(id="questions-header")
+          li: h2(class="questions-title") Top Questions
+          li: button(type="submit" class="ask-question-button"): a(href='/') Ask a Question
 
-
-
-
-
-  //- div(class="title-img-div")
-  //-   div(class="title-div")
-  //-     h1(class="plant-title") #{title}
-
-
-  //- div(class="tree-img-container")
-  //-   img(src="../images/favicon-tree.png" alt="tree image" class="tree-img2")
-
-
-//- HOME PAGE
+        
+        div(id="questions-container")
+          ul(class="question-data")
+            li(class="question-answers-number") 1
+            li(class="question-answer-title") answers 
+          ul(class="question-section")
+            li(class="question-link"): a(href="/") What does it mean if my monstera is dripping water from the tips of its leaves?   
+            li(class="question-categories")
+              span: a(href="/") category
+              span: a(href="/") category
+              span: a(href="/") category
+      div(id="empty-right-bar")
+      
