@@ -1,6 +1,6 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const question = sequelize.define(
+  const Question = sequelize.define(
     "Question",
     {
       question: {
@@ -32,5 +32,5 @@ module.exports = (sequelize, DataTypes) => {
     Question.hasMany(models.Comment, { foreignKey: "questionId" });
 
   };
-  return question;
+  return Question;
 };
