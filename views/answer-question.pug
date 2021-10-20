@@ -1,7 +1,18 @@
 extends layout
 
-append head 
-  link(rel="stylesheet" href="/stylesheets/navBar.css")  
+append head
+  link(rel="stylesheet" href="/stylesheets/navBar.css")
 
 block content
-  p To Do: Fill this in!
+  div(id="big-container")
+    div(id='question-container')
+      h3 Question:
+      //- TODO: (below) ---- #{question}
+      //- this is temporary question
+      h3(class='question') #{question}
+    dix(id='answer-container')
+      h3 Your Answer:
+      textarea(name='answer' class='answer-textarea')
+      button(type='submit' class='cancel-button') Cancel
+      button(type='submit' class='answer-button') Post Your Answer
+
