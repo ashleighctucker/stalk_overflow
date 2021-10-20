@@ -1,34 +1,115 @@
 /*************** INDEX.PUG *****************/
-
-
-
-#main-middle-container {
-    display: flex;
+#main-content {
+  display: flex;
 }
 
-#left-side-bar {
-    padding: 50px;
-    border-right: 2px solid #1C3738;
+#side-bar {
+  padding: 80px 10px 0 30px;
+  border-right: 1px solid #1c3738;
+  height: 100vh;
+  list-style: none;
+  flex-basis: 25%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-#right-questions-bar {
-    padding-top: 50px;
-    padding-left: 50px;
-    margin: 0;
+#empty-right-bar {
+  padding: 40px 10px 0 30px;
+  border-left: 1px solid #1c3738;
+  height: 100vh;
+  list-style: none;
+  flex-basis: 25%;
 }
 
-.top-question-button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
+#questions-section {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
 }
 
-.per-question-container {
-    display: flex;
+#questions-header {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-top: 5%;
+  width: 65vw;
+  border-bottom: 1px solid #1c3738;
 }
 
-.vote-answers-views-div {
-    margin-right: 50px;
+#questions-container {
+  display: flex;
+  margin-right: 7%;
+  border-bottom: 1px solid rgb(208, 208, 208);
+  width:70vw;
+}
+
+.side-bar-li {
+  padding-top: 10px;
+  font-size: 10px;
+  color: rgb(82, 82, 82);
+  
+}
+
+.ask-question-button {
+  background-color: #0a95ff;
+  color: white;
+  height: 20px;
+  border: none;
+  padding: 5px;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+  font-size: 8px;
+  margin-left: 210px;
+}
+
+.ask-question-button:hover {
+  background-color: hsl(206, 91%, 35%);
+}
+
+.ask-question-button a:visited {
+  color: white;
+}
+
+.question-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  font-size: 10px;
+  color: rgb(82, 82, 82);
+}
+
+.question-section {
+  list-style: none;
+  font-size: 10px;
+  color: #0063bf;
+}
+
+.question-link a:visited {
+  color: #0063bf;
+}
+
+.question-link a:hover {
+  color: #03afed;
+}
+
+
+span {
+  margin: 5px;
+  font-size: 8px;
+  background-color: #e1ecf4;
+  color: #39739d;
+}
+
+span a:visited {
+  color: #39739d;
+}
+
+span a:hover{
+    background-color: #c3dcef;
+    color: #2d6185;
 }
 
 /* .title-img-div {

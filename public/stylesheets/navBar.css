@@ -7,6 +7,7 @@
   height: 30px;
   position: fixed;
   width: 100vw;
+  box-shadow:1px 1px 1px  rgb(213, 213, 213);
 }
 
 #logo-title-div {
@@ -55,6 +56,8 @@
   height: 20px;
   border-top: 1px white;
   border-radius: 2px;
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+
 }
 
 .signup-button:hover {
@@ -72,6 +75,8 @@
   height: 20px;
   border: 1px solid #39739d;
   border-radius: 2px;
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+
 }
 
 .login-button:hover {
@@ -95,6 +100,8 @@
   height: 20px;
   border: 1px solid #39739d;
   border-radius: 2px;
+  box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+
 }
 
 .search-bar-submit-button:hover {
@@ -103,4 +110,10 @@
 
 .search-bar-submit-button a:visited {
   color: #39739d;
+}
+
+.questions-title{
+  color: #232629;
+  font-size: 20px;
+  font-weight: 200;
 }
