@@ -13,40 +13,50 @@ module.exports = {
       {
         fullName: 'Ash Tucker',
         userName: 'ashtucker',
-        email: 'ash@greenthumb.com',
+        emailAddress: 'ash@greenthumb.com',
         hashedPassword: password,
       },
       {
         fullName: 'Patrick Wellman',
         userName: 'patrickwellman',
-        email: 'patrick@greenthumb.com',
+        emailAddress: 'patrick@greenthumb.com',
         hashedPassword: password,
       },
       {
         fullName: 'Sarah Yang',
         userName: 'sarahyang',
-        email: 'sarah@greenthumb.com',
+        emailAddress: 'sarah@greenthumb.com',
         hashedPassword: password,
       },
       {
         fullName: 'Jane Green',
         userName: 'demo',
-        email: 'demo@greenthumb.com',
+        emailAddress: 'demo@greenthumb.com',
         hashedPassword: password,
-      }
+      },
     ];
 
-    
+    const usersNum = 50;
 
+    for (let i = 4; i < usersNum; i++) {
+      let firstName = faker.name.firstName();
+      let lastName = faker.name.lastName();
+      let nextUser = {
+        fullName: firstName.concat(' ', lastName),
+        userName: faker.internet.userName(),
+        emailAddress: faker.internet.email(),
+        hashedPassword: bcrypt.hashSync(`PlantLover!${i}`, 12),
+      };
+      users.push(nextUser);
+    }
+    return queryInterface.bulkInsert('Users', users, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+    return queryInterface.bulkDelete('Users', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   },
 };
