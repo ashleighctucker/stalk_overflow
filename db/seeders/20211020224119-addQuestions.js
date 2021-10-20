@@ -11,15 +11,23 @@ module.exports = {
       for (let j = usersStart; j < usersEnd; j++) {
         for (let i = 0; i < numQuestions; i++) {
           let currentQuestion = [];
+          let questionTitle = [];
           Object.values(questions['questionParts']).forEach((value) => {
             const arrLength = value.length;
             const index = Math.floor(Math.random() * arrLength);
             currentQuestion.push(value[index]);
           });
+          Object.values(questions['titleOptions']).forEach((value) => {
+            const arrLength = value.length;
+            const index = Math.floor(Math.random() * arrLength);
+            questionTitle.push(value[index]);
+          });
           currentQuestion = currentQuestion.join(' ');
+          questionTitle = questionTitle.join('');
           result.push({
-            currentQuestion,
+            question: currentQuestion,
             userId: j,
+            title: questionTitle,
           });
         }
       }
@@ -27,7 +35,7 @@ module.exports = {
     }
 
     const numUsers = await User.count();
-    const numQuestions = 4;
+    const numQuestions = 3;
     let usersStart = await User.findOne({ order: ['id'] });
     usersStart = usersStart.id + 1;
 
@@ -41,7 +49,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-
     return queryInterface.bulkDelete('Questions', null, {});
   },
 };

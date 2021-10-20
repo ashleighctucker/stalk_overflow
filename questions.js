@@ -1,4 +1,23 @@
 module.exports = {
+  titleOptions: {
+    titles: [
+      `Need Leafy Advice!`,
+      `This plant needs help!`,
+      `Not sure what I did wrong here...`,
+      `Wishing I had a green thumb.`,
+      `Inlaws are coming next week... help!`,
+      `Inlaws are coming next month... help!`,
+      `Think I am killing my friends plants...`,
+      `Help a plant sitter out...`,
+      `My dirt turned purple!`,
+      `Think I am allergic to keeping plant alive.`,
+      `I am a plant murderer.`,
+      `Help! This plant used to be so pretty!`,
+      `Need some advice quick...`,
+      `Help a plant lady out.`,
+      `I've never seen a plant this sad...`,
+    ],
+  },
   questionParts: {
     partOne: [
       `I am having trouble with my favorite plant!`,
@@ -28,10 +47,12 @@ module.exports = {
       `Does anyone have any reccomendations for browning leaves? My umbrella tree is looking rough.`,
       `Does anyone have any advice for yellowing leaves?`,
       `I went to the nursery and picked up a new golden pothos last week and now its looking not so golden. Any advice?`,
-      `Can I get some advice on how to get rid of spider mites?``SPIDER MITES! HELP!!!`,
+      `Can I get some advice on how to get rid of spider mites?`,
+      `SPIDER MITES! HELP!!!`,
       `Please help me get rid of the bugs in my soil. They are creepy.`,
       `My snake plant has been flopping over. Any tips?`,
-      `The fiddle leaf fig tree in my living room is a treenager and will not sprout new leaves. Advice?``How do I keep my parlor palm from yellowing on the tips?`,
+      `The fiddle leaf fig tree in my living room is a treenager and will not sprout new leaves. Advice?`,
+      `How do I keep my parlor palm from yellowing on the tips?`,
       `My majesty palm used to be pretty but now it is yellow and sparse. Any tips?`,
     ],
   },
