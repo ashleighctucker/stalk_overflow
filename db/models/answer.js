@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       answerScore: {
-        allowNull: false,
         type: DataTypes.INTEGER,
       },
       questionId: {
