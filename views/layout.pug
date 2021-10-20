@@ -1,13 +1,20 @@
 doctype html
 html
   head
-    div(class="layout-main-div")
       block head
-        title="Stalk Overflow"
-        link(rel='stylesheet' href='../public/stylesheets/index.css')
-        //- import Bootstrap
-        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
-        //- Bootstrap is mobile first.  the viewport meta tag
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-  body
-    block content
+            title="Stalk Overflow"
+            meta(name="viewport" content="width=device-width, initial-scale=1")
+      body
+        div(class="layout-main-div")
+          nav(id="main-header-container")
+            ul(id="logo-title-div")
+              li: img(src="../images/logo4b.png" alt="tree logo" class="tree-logo")
+              li: h1(class="plant-title-h1") #{title}
+          ul(id="search-container")
+            li: form(action="/form/submit" method="GET")
+            li: input(type="text" name="text" class="search" placeholder="Search here!")
+            li: input(type="submit" name="submit" class="submit" value="Search")
+          ul(id="header-buttons-right")
+            li: button(type="submit" class="login-button") Log in
+            li: button(type="submit" class="signup-button") Sign Up
+          block content

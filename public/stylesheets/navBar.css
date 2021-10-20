@@ -1,0 +1,28 @@
+.plant-title-h1 {
+    color: #2E3532;
+}
+
+#main-header-container {
+    /* justify-content: space-between; */
+    
+    margin: 20px;
+    border-bottom: 4px solid #1C3738;
+}
+
+#logo-title-div {
+    flex-grow: 1;
+    display: flex;
+}
+
+.tree-logo {
+    border-radius: 60%;
+    width: 60px;
+}
+
+#search-container {
+    flex-grow: 1;
+}
+
+#header-buttons-right {
+    flex-grow: 1;
+}
