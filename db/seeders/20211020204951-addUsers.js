@@ -36,7 +36,7 @@ module.exports = {
       },
     ];
 
-    const usersNum = 50;
+    const usersNum = 25;
 
     for (let i = 4; i < usersNum; i++) {
       let firstName = faker.name.firstName();
