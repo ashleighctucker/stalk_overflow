@@ -1,0 +1,106 @@
+#main-header-container {
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+  align-items: center;
+  background-color: #f8f9f9;
+  height: 30px;
+  position: fixed;
+  width: 100vw;
+}
+
+#logo-title-div {
+  display: flex;
+  list-style: none;
+}
+
+#search-container {
+  display: flex;
+  list-style: none;
+}
+
+#header-buttons-right {
+  display: flex;
+  list-style: none;
+  margin-right: 20px;
+}
+
+
+
+.nav-bar-logo{
+    color: #2e3532;
+  font-size: 70%;
+}
+
+.nav-bar-logo a:visited{
+    color: #2e3532;
+    text-decoration: none;
+}
+
+.login-button,
+.signup-button,
+.search-bar-submit-button,
+.search-bar {
+  font-size: 9px;
+  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  margin-left: 2px;
+  min-width: 30px;
+}
+
+.signup-button {
+  background-color: hsl(206, 100%, 52%);
+  color: white;
+  border: none;
+  height: 20px;
+  border-top: 1px white;
+  border-radius: 2px;
+}
+
+.signup-button:hover {
+  background-color: hsl(206, 91%, 35%);
+}
+
+.signup-button a:visited {
+  color: white;
+}
+
+.login-button {
+  background-color: #e1ecf4;
+  color: #39739d;
+  border: none;
+  height: 20px;
+  border: 1px solid #39739d;
+  border-radius: 2px;
+}
+
+.login-button:hover {
+  background-color: #b8bec3;
+}
+
+.login-button a:visited {
+  color: #39739d;
+}
+
+.search-bar {
+  width: 40vw;
+  height: 14px;
+  color: rgb(82, 82, 82);
+}
+
+.search-bar-submit-button {
+  background-color: #e1ecf4;
+  color: #39739d;
+  border: none;
+  height: 20px;
+  border: 1px solid #39739d;
+  border-radius: 2px;
+}
+
+.search-bar-submit-button:hover {
+  background-color: #b8bec3;
+}
+
+.search-bar-submit-button a:visited {
+  color: #39739d;
+}

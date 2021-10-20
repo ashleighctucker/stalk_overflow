@@ -1,13 +1,21 @@
 doctype html
 html
   head
-    div(class="layout-main-div")
       block head
-        title="Stalk Overflow"
-        link(rel='stylesheet' href='../public/stylesheets/index.css')
-        //- import Bootstrap
-        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous")
-        //- Bootstrap is mobile first.  the viewport meta tag
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-  body
-    block content
+            title="Stalk Overgrow"
+            meta(name="viewport" content="width=device-width, initial-scale=1")
+            link(rel="stylesheet" href="./stylesheets/navBar.css")
+            link(rel="stylesheet" href="./stylesheets/reset.css")
+
+      body
+          nav(id="main-header-container")
+            ul(id="logo-title-div")
+              li: h1(class="nav-bar-logo"): a(href="/") stalk overgrow
+            ul(id="search-container")
+              li: form(action="/form/submit" method="GET")
+              li: input(type="text" name="text" class="search-bar" placeholder="Search...")
+              li: input(type="submit" name="submit" class="search-bar-submit-button" value="Search")
+            ul(id="header-buttons-right")
+              li: button(type="submit" class="login-button"): a(href='/login') Log in
+              li: button(type="submit" class="signup-button"): a(href='/sign-up') Sign Up
+          block content
