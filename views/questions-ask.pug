@@ -9,9 +9,9 @@ block content
       h3 Ask a public question:
       h4 Title
       p Be specific and start your question with "What", "How", "Why", etc.
-      form(action=`/question/${question.id}/question/add` method='post')
+      form(action=`/question/${question.id}` method='post')
       input(type="text" class="ask-question")
-    dix(id='answer-container')
+    div(id='answer-container')
       h3 Your Answer:
       textarea(name='answer' class='answer-textarea')
       button(type='submit' class='cancel-button') Cancel
