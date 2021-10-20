@@ -12,11 +12,53 @@ append head
 
 
 block content
-  div(class="title-img-div")
-    img(src="../images/Plants-in-hands.jpeg" alt="tree image" class="tree-img")
-    div(class="title-div")
-      h1(class="plant-title") #{title}
-    p Welcome!
+  div(id="main-header-container")
+    div(id="logo-title-div")
+      img(src="../images/logo4b.png" alt="tree logo" class="tree-logo")
+      h1(class="plant-title-h1") #{title}
+    div(id="search-container")
+      form(action="/form/submit" method="GET")
+      input(type="text" name="text" class="search" placeholder="Search here!")
+      input(type="submit" name="submit" class="submit" value="Search")
+    div(id="header-buttons-right")
+      button(type="submit" class="login-button") Log in
+      button(type="submit" class="signup-button") Sign Up
+  div(id="main-middle-container")
+    div(id="left-side-bar")
+      div(class="side-bar-container")
+        h4(class="side-bar") Home
+        h4(class="side-bar") Messages
+        h4(class="side-bar") Questions
+        h4(class="side-bar") Users
+        h4(class="side-bar") Tags
+    div(id="right-questions-bar")
+      div(class="top-question-button-container")
+        h2(class="top-questions") Top Questions
+        button(type="submit" class="ask-question-button") Ask a Question
+      div(class="per-question-container")
+        div(class="vote-answers-views-div") vote . answers . views
+        //-  this will have 3 divs for vote . answers . views
+        div(class="per-question")  What is a plant?
+      div(class="per-question-container")
+        div(class="vote-answers-views-div") vote . answers . views
+        //-  this will have 3 divs for vote . answers . views
+        div(class="per-question")  Why does water help plant grow?
+      div(class="per-question-container")
+        div(class="vote-answers-views-div") vote . answers . views
+        //-  this will have 3 divs for vote . answers . views
+        div(class="per-question")  Why are plants green??
+
+
+
+
+
+  //- div(class="title-img-div")
+  //-   div(class="title-div")
+  //-     h1(class="plant-title") #{title}
+
 
   //- div(class="tree-img-container")
   //-   img(src="../images/favicon-tree.png" alt="tree image" class="tree-img2")
+
+
+//- HOME PAGE
