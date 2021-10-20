@@ -2,7 +2,7 @@ doctype html
 html
   head
       block head
-            title="Stalk Overflow"
+            title="Stalk Overgrow"
             meta(name="viewport" content="width=device-width, initial-scale=1")
             link(rel="stylesheet" href="./stylesheets/navBar.css")
             link(rel="stylesheet" href="./stylesheets/reset.css")
@@ -10,12 +10,12 @@ html
       body
           nav(id="main-header-container")
             ul(id="logo-title-div")
-              li: h1(class="plant-title-h1") stalk overgrow
+              li: h1(class="nav-bar-logo"): a(href="/") stalk overgrow
             ul(id="search-container")
               li: form(action="/form/submit" method="GET")
               li: input(type="text" name="text" class="search-bar" placeholder="Search...")
               li: input(type="submit" name="submit" class="search-bar-submit-button" value="Search")
             ul(id="header-buttons-right")
-              li: button(type="submit" class="login-button") Log in
-              li: button(type="submit" class="signup-button") Sign Up
+              li: button(type="submit" class="login-button"): a(href='/login') Log in
+              li: button(type="submit" class="signup-button"): a(href='/sign-up') Sign Up
           block content
