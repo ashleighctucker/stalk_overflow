@@ -2,13 +2,13 @@ extends layout
 
 
 block content
-  section(id="main-content-container")
-    div(id="main-content")
-      div(id="side-bar")
+  section(class="main-content-container")
+    div(class="main-content")
+      div(class="side-bar")
         li(class="side-bar-li") Home
         li(class="side-bar-li") Questions
         li(class="side-bar-li") Users
         li(class="side-bar-li") Categories
-      div(id="questions-section")
-      div(id="empty-right-bar")
-  script(src="/javascripts/index.js" type="module" defer)
+      div(id="question-section")
+      div(class="empty-right-bar")
+  script(src="/javascripts/questionview.js" type="module" defer)

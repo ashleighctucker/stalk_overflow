@@ -1,11 +1,11 @@
 /*************** INDEX.PUG *****************/
 
-#main-content {
+.main-content {
   display: flex;
   background-color: white;
 }
 
-#side-bar {
+.side-bar {
   padding: 80px 10px 0 30px;
   /* border-right: 1px solid #1c3738; */
   height: 100vh;
@@ -17,7 +17,7 @@
   align-items: flex-start;
 }
 
-#empty-right-bar {
+.empty-right-bar {
   padding: 40px 10px 0 30px;
   height: 100vh;
   list-style: none;
