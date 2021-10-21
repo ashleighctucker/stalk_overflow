@@ -21,7 +21,7 @@ const {
 let searchRepo;
 let loadingModuleError;
 try {
-  searchRepo = require("./search");
+  searchRepo = require("../search-data/searchdata");
 } catch (e) {
   console.error(e);
   loadingModuleError = `An error was raised "${e.message}". Check the console for details.`;
