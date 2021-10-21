@@ -37,8 +37,8 @@
   align-items: center;
   list-style: none;
   margin-top: 5%;
-  width: 65vw;
   border-bottom: 1px solid #1c3738;
+  justify-content: space-between;
 }
 
 .questions-container {
@@ -62,7 +62,7 @@
   border-radius: 2px;
   box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
   font-size: 13px;
-  margin-left: 210px;
+  margin-right: 50px;
 }
 
 .questions-title {
