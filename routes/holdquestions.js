@@ -21,6 +21,13 @@ router.get(
   })
 );
 
+//move this router to the front end
+router.get('/questions/view/:id(\\d+)', async (req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const question = await Question.findByPk(questionId);
+  res.render('question-view', { title: question.title });
+});
+
 router.get(
   '/questions/:id(\\d+)',
   asyncHandler(async (req, res) => {

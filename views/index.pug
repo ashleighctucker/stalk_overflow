@@ -1,11 +1,5 @@
 extends layout
 
-append head
-  link(rel="stylesheet" href="/stylesheets/index.css")
-
-  script(src="/javascripts/index.js" type="module" defer)
-
-
 
 block content
   section(id="main-content-container")
@@ -17,3 +11,4 @@ block content
         li(class="side-bar-li") Categories
       div(id="questions-section")
       div(id="empty-right-bar")
+  script(src="/javascripts/index.js" type="module" defer)
