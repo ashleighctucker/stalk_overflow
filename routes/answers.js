@@ -11,7 +11,7 @@ const router = express.Router();
 
 //API endpoint for adding an answer to a question
 router.post(
-  "/",
+  "questions/:id(\\d+)/answers",
   csrfProtection,
   answerValidators,
   asyncHandler(async (req, res) => {
