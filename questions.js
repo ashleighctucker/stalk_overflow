@@ -16,6 +16,8 @@ module.exports = {
       `Are there any plant clubs out there?`,
       `Is there a way to make new leaves grow in specific places?`,
       `I am having some trouble after repotting a new plant`,
+      `I can't seem to figure out how to keep this pilea alive`,
+      `Can someone recommend a nursery in the Bay Area?`,
     ],
   },
   questionParts: {
