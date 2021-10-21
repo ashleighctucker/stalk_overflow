@@ -61,7 +61,8 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await questionToUpdate.update(newQuestion);
-      res.redirect(`/questions/${questionId}`);
+      // res.redirect(`/questions/${questionId}`);
+      res.redirect(`/`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('question-edit', {
