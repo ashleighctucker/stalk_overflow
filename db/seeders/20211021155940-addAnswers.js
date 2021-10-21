@@ -64,11 +64,11 @@ module.exports = {
     usersStart = usersStart.id + 1;
 
     let answersArray = createAnswers(
-      numUsers + usersStart - 1,
       numAnswers,
       numQuestions,
       answers,
-      usersStart
+      usersStart,
+      numUsers + usersStart - 1,
     );
 
     return queryInterface.bulkInsert("Answers", answersArray, {});
