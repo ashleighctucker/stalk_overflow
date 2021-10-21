@@ -1,5 +1,4 @@
-window.addEventListener('load', async (event) => {
-  //to do make sure they are logged in!!!
+const fetchQuestions = async () => {
   const res = await fetch('http://localhost:8080/questions');
   const { questions } = await res.json();
 
@@ -31,4 +30,12 @@ window.addEventListener('load', async (event) => {
 
   questionsHTML.unshift(questionsHeader);
   questionContainer.innerHTML = questionsHTML.join('');
+};
+
+document.addEventListener('DOMContentLoaded', async (event) => {
+  try {
+    await fetchQuestions();
+  } catch (err) {
+    console.log(err);
+  }
 });
