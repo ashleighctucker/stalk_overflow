@@ -20,7 +20,7 @@
   border-left: 1px solid #1c3738;
   height: 100vh;
   list-style: none;
-  flex-basis: 25%;
+  flex-basis: 100%;
 }
 
 #questions-section {
@@ -40,16 +40,14 @@
 
 #questions-container {
   display: flex;
-  margin-right: 7%;
   border-bottom: 1px solid rgb(208, 208, 208);
-  width:70vw;
+  width: 70vw;
 }
 
 .side-bar-li {
   padding-top: 10px;
   font-size: 10px;
   color: rgb(82, 82, 82);
-  
 }
 
 .ask-question-button {
@@ -77,8 +75,12 @@
   flex-direction: column;
   align-items: center;
   list-style: none;
-  font-size: 10px;
+  font-size: 8px;
   color: rgb(82, 82, 82);
+}
+
+.question-answers-number {
+  font-size: 10px;
 }
 
 .question-section {
@@ -95,21 +97,20 @@
   color: #03afed;
 }
 
-
-span {
+.question-category-link {
   margin: 5px;
   font-size: 8px;
   background-color: #e1ecf4;
   color: #39739d;
 }
 
-span a:visited {
+.question-category-link a:visited {
   color: #39739d;
 }
 
-span a:hover{
-    background-color: #c3dcef;
-    color: #2d6185;
+.question-category-link a:hover {
+  background-color: #c3dcef;
+  color: #2d6185;
 }
 
 /* .title-img-div {

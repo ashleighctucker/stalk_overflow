@@ -1,19 +1,29 @@
 extends layout
 
 append head 
+  link(rel="stylesheet" href="/stylesheets/reset.css")
+  link(rel="stylesheet" href="/stylesheets/index.css")
   link(rel="stylesheet" href="/stylesheets/navBar.css")
+  link(rel="stylesheet" href="/stylesheets/login.css")
+
 
 include utils
 
-block content
-  +validationErrorSummary(errors)
-  form(action='/users/login' method='POST' class="login-form")
-    input(type='hidden' name='_csrf' value=csrfToken)
-    +field('User Name', 'userName', userName)
-    +field('Password', 'password', password, 'password')
-    div
-      button(type='submit') Login
-      a(href='/') Cancel
 
-  div
-    p: a(href='/sign-up') Don't have an account?
+
+
+block content
+
+  section(id="login-form-container")
+    div(id="login-form")
+      +validationErrorSummary(errors)
+      form(action='/users/login' method='POST' class="form")
+        div(class="inputs-container")
+          input(type='hidden' name='_csrf' value=csrfToken)
+          +field('User Name', 'userName', userName)
+          +field('Password', 'password', password, 'password')
+        div
+          button(type='submit' class="login-form-button") Log in
+      div(class="dont-have-account")
+        span Don't have an account?
+        span: a(href="/sign-up") Sign up
