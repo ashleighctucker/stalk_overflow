@@ -6,56 +6,45 @@ const { Answer, Category, Question, User } = require("../db/models");
 
 // const { csrfProtection, asyncHandler } = require("../utils");
 
-// const Sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
-// const router = express.Router();
+const router = express.Router();
 // ================= SEARCH =========================
 
-async function searchQuestions(term) {
-  // search for questions with the given term in its title
-  return await Question.findAll({
-    where: {
-      title: { [Op.like]: term },
-      question: { [Op.like]: term },
-    }
-  });
-
-}
-
-async function getTenNewestQuestions() {
-  return await Question.findAll({
-    limit: 10,
-    order: [["updatedAt", "DESC"]],
-  });
-}
-
-async function findAnswer(term) {
-  return await Answer.findAll({
-    where: {
-      title: { [Op.like]: term },
-      answer: { [Op.like]: term },
-    },
-  });
-}
-
-
-
-async function findUser() {
-  return await User.findAll({ include: [User] })
-
-}
-
-async function findByCategory(term) {
-     return await Category.findAll({ where: { title: { [Op.like]: term } } });
-}
-
-// ==================================================
-
-module.exports = {
-  UserQuestion,
+const {
   searchQuestions,
-  getTenNewestQuestions,
   findAnswer,
-  findUser,
-  findByCategory,
-};
+} = require('../search-data/searchdata');
+//TODO - take out any that you are not using
+
+
+let searchRepo;
+let loadingModuleError;
+try {
+  searchRepo = require("./search");
+} catch (e) {
+  console.error(e);
+  loadingModuleError = `An error was raised "${e.message}". Check the console for details.`;
+}
+
+
+router.get("/search", async (req, res) => {
+  let error = loadingModuleError;
+  let questions;
+  let answers;
+  try {
+    questions = await searchRepo.searchQuestions(`%${req.query.term}%`);
+    answers = await searchRepo.findAnswer(`%${req.query.term}%`);
+  } catch (e) {
+    console.error(e);
+    error = `An error ocurred that reads "${e.message}". Check the console for more details.`;
+  }
+  res.render("search-result.pug", {
+    listTitle: "Search Results",
+    error,
+    questions,
+    answers,
+  });
+});
+
+module.exports = router;
