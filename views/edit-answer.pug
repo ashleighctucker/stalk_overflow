@@ -1,0 +1,15 @@
+extends layout
+
+append head
+  link(rel="stylesheet" href="/stylesheets/navBar.css")
+
+block content
+    div(id="big-container")
+        div(id='answer-container')
+            h3 Previous Answer:
+            h3(class='answer' name='answer') #{answer}
+        div(id='edit-answer-container')
+            h3 Your New Answer:
+            textarea(name='answer' class='answer-textarea')
+            button(href='/'class='cancel-button') Cancel
+            button(type='submit' class='answer-button') Post Your Answer
