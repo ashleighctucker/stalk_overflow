@@ -24,7 +24,7 @@
   flex-basis: 100%;
 }
 
-#questions-section {
+.questions-section {
   border-left: 1px solid #1c3738;
   border-right: 1px solid #1c3738;
   display: flex;
@@ -32,7 +32,7 @@
   flex-basis: 50%;
 }
 
-#questions-header {
+.questions-header {
   display: flex;
   align-items: center;
   list-style: none;
@@ -90,7 +90,7 @@
   font-size: 13px;
 }
 
-.question-section {
+.indv-question-section {
   list-style: none;
   font-size: 15px;
   color: #0063bf;

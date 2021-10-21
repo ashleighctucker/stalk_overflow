@@ -1,7 +1,33 @@
-#question-section {
-  border-left: 1px solid #1c3738;
-  border-right: 1px solid #1c3738;
+.questions-container {
+  display: flex;
+  border-bottom: 1px solid rgb(208, 208, 208);
+  width: 70vw;
+}
+
+.curr-question-section {
+  list-style: none;
+  font-size: 13px;
+  color: black;
+  margin-right: 20px;
+}
+
+.question-container {
+  display: flex;
+  width: 70vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-score {
+  text-align: center;
+}
+
+.score-data {
   display: flex;
   flex-direction: column;
-  flex-basis: 50%;
+  align-items: center;
+  margin-right: 40px;
+  list-style: none;
+  font-size: 13px;
+  color: rgb(82, 82, 82);
 }
