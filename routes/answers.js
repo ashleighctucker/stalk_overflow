@@ -11,8 +11,7 @@ const router = express.Router();
 
 //API endpoint for adding an answer to a question
 router.post(
-  '/',
-  csrfProtection,
+  '/questions/:id(\\d+)/answers',
   answerValidators,
   asyncHandler(async (req, res) => {
     const { title, answer, questionId, userId } = req.body;
@@ -22,8 +21,9 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await newAnswer.save();
-      //re routes to specific question page
-      res.redirect(`/questions/${questionId}`);
+      //re routes to specific question page - un-comment and replace once we have that page done
+      // res.redirect(`/questions/${questionId}`);
+      res.redirect(`/`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('answer-question', {
@@ -35,5 +35,50 @@ router.post(
     }
   })
 );
+
+//* API endpoint for editing an Answer
+// router.post(
+//   "/edit/:id(\\d+)", // change?
+//   answerValidators,
+//   asyncHandler(async (req, res) => {
+//     const answerId = parseInt(req.params.id, 10);
+//     const updateAnswer = await Answer.findByPk(answerId);
+
+//     const { answer, title, questionId, userId } = req.body;
+
+//     const newAnswer = {
+//       answer,
+//       title,
+//       questionId,
+//       userId,
+//     };
+
+//     const validatorErrors = validationResult(req);
+
+//     if (validatorErrors.isEmpty()) {
+//       await updateAnswer.update(newAnswer);
+//       res.redirect(`/questions/${questionId}`);
+//     } else {
+//       const errors = validatorErrors.array().map((error) => error.msg);
+//       res.render("edit-answer", {
+//         title: "Edit Answer",
+//         answer,
+//         errors,
+//         csrfToken: req.csrfToken(),
+//       });
+//     }
+//   })
+// );
+
+//* API endpoint for deleting a answer
+// router.post(
+//   '/delete/:id(\\d+)',
+//   asyncHandler(async (req, res) => {
+//     const answerId = parseInt(req.params.id, 10);
+//     const answer = await Answer.findByPk(answerId);
+//     await answer.destroy();
+//     res.redirect('/');
+//   })
+// );
 
 module.exports = router;

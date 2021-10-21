@@ -1,6 +1,19 @@
 extends layout
+
 append head 
   link(rel="stylesheet" href="/stylesheets/index.css")
 
+
 block content
-  p To Do: Fill this in!
+  div(id="big-container")
+    div(id='ask-question-container')
+      h3 Ask a public question:
+      h4 Title
+      p Be specific and start your question with "What", "How", "Why", etc.
+      form(action=`/question/${question.id}` method='post')
+      input(type="text" class="ask-question")
+    div(id='answer-container')
+      h3 Your Answer:
+      textarea(name='answer' class='answer-textarea')
+      button(type='submit' class='cancel-button') Cancel
+      button(type='submit' class='answer-button') Post Your Answer
