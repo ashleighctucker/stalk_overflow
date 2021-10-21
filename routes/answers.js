@@ -37,48 +37,48 @@ router.post(
 );
 
 //* API endpoint for editing an Answer
-router.post(
-  "/edit/:id(\\d+)", // change?
-  answerValidators,
-  asyncHandler(async (req, res) => {
-    const answerId = parseInt(req.params.id, 10);
-    const updateAnswer = await Answer.findByPk(answerId);
+// router.post(
+//   "/edit/:id(\\d+)", // change?
+//   answerValidators,
+//   asyncHandler(async (req, res) => {
+//     const answerId = parseInt(req.params.id, 10);
+//     const updateAnswer = await Answer.findByPk(answerId);
 
-    const { answer, title, questionId, userId } = req.body;
+//     const { answer, title, questionId, userId } = req.body;
 
-    const newAnswer = {
-      answer,
-      title,
-      questionId,
-      userId,
-    };
+//     const newAnswer = {
+//       answer,
+//       title,
+//       questionId,
+//       userId,
+//     };
 
-    const validatorErrors = validationResult(req);
+//     const validatorErrors = validationResult(req);
 
-    if (validatorErrors.isEmpty()) {
-      await updateAnswer.update(newAnswer);
-      res.redirect(`/questions/${questionId}`);
-    } else {
-      const errors = validatorErrors.array().map((error) => error.msg);
-      res.render("edit-answer", {
-        title: "Edit Answer",
-        answer,
-        errors,
-        csrfToken: req.csrfToken(),
-      });
-    }
-  })
-);
+//     if (validatorErrors.isEmpty()) {
+//       await updateAnswer.update(newAnswer);
+//       res.redirect(`/questions/${questionId}`);
+//     } else {
+//       const errors = validatorErrors.array().map((error) => error.msg);
+//       res.render("edit-answer", {
+//         title: "Edit Answer",
+//         answer,
+//         errors,
+//         csrfToken: req.csrfToken(),
+//       });
+//     }
+//   })
+// );
 
 //* API endpoint for deleting a answer
-router.post(
-  '/delete/:id(\\d+)',
-  asyncHandler(async (req, res) => {
-    const answerId = parseInt(req.params.id, 10);
-    const answer = await Answer.findByPk(answerId);
-    await answer.destroy();
-    res.redirect('/');
-  })
-);
+// router.post(
+//   '/delete/:id(\\d+)',
+//   asyncHandler(async (req, res) => {
+//     const answerId = parseInt(req.params.id, 10);
+//     const answer = await Answer.findByPk(answerId);
+//     await answer.destroy();
+//     res.redirect('/');
+//   })
+// );
 
 module.exports = router;
