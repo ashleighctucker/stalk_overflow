@@ -21,4 +21,16 @@ router.get(
   })
 );
 
+router.get(
+  '/questions/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+    const questionId = parseInt(req.params.id, 10);
+    const question = await Question.findOne({
+      where: { id: questionId },
+      include: Answer,
+    });
+    res.json({ question });
+  })
+);
+
 module.exports = router;
