@@ -72,15 +72,15 @@ router.post(
   })
 );
 
-//* API endpoint for deleting a answer
-// router.post(
-//   '/delete/:id(\\d+)',
-//   asyncHandler(async (req, res) => {
-//     const answerId = parseInt(req.params.id, 10);
-//     const answer = await Answer.findByPk(answerId);
-//     await answer.destroy();
-//     res.redirect('/');
-//   })
-// );
+//API endpoint for deleting an answer to a question
+router.post(
+  '/answers/delete/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+    const answerId = parseInt(req.params.id, 10);
+    const answer = await Answer.findByPk(answerId);
+    await answer.destroy();
+    res.redirect('/');
+  })
+);
 
 module.exports = router;
