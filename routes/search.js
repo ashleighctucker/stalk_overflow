@@ -4,11 +4,11 @@ const express = require("express");
 //Internal Imports
 const { Answer, Category, Question, User } = require("../db/models");
 
-const { csrfProtection, asyncHandler } = require("../utils");
+// const { csrfProtection, asyncHandler } = require("../utils");
 
-const Sequelize = require("sequelize");
+// const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
-const router = express.Router();
+// const router = express.Router();
 // ================= SEARCH =========================
 
 async function searchQuestions(term) {
@@ -16,21 +16,21 @@ async function searchQuestions(term) {
   return await Question.findAll({
     where: {
       title: { [Op.like]: term },
-      answer: { [Op.like]: term },
-    },
+      question: { [Op.like]: term },
+    }
   });
-  gi;
+
 }
 
-async function getTenNewestRecipes() {
-  return await Recipe.findAll({
+async function getTenNewestQuestions() {
+  return await Question.findAll({
     limit: 10,
     order: [["updatedAt", "DESC"]],
   });
 }
 
 async function findAnswer(term) {
-  return await Question.findAll({
+  return await Answer.findAll({
     where: {
       title: { [Op.like]: term },
       answer: { [Op.like]: term },
@@ -38,23 +38,24 @@ async function findAnswer(term) {
   });
 }
 
-async function findQuestion() {
-  return await Question.findAll({ include: [User] }).then((question) => {
-    console.log(JSON.stringify(question));
-  });
-}
+
 
 async function findUser() {
-  return await Question.findAll({ include: [User] }).then((question) => {
-    console.log(JSON.stringify(question));
-  });
+  return await User.findAll({ include: [User] })
+
 }
 
-async function findByCategory(id) {}
+async function findByCategory(term) {
+     return await Category.findAll({ where: { title: { [Op.like]: term } } });
+}
 
 // ==================================================
 
 module.exports = {
   UserQuestion,
   searchQuestions,
+  getTenNewestQuestions,
+  findAnswer,
+  findUser,
+  findByCategory,
 };
