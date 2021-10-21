@@ -86,4 +86,18 @@ router.post(
   })
 );
 
+
+// ================= SEARCH =========================
+// move to search.js
+// async function searchRecipes(term) {
+//   // Use the findAll method of the Question object to search for questions with the
+//   // given term in its title
+//   //
+//   // Docs: https://sequelize.org/v5/manual/querying.html
+//   return await Question.findAll({ where: { title: { [Op.like]: term } } });
+// }
+
+// ==================================================
+
+
 module.exports = router;
