@@ -1,19 +1,14 @@
-body{
-    background-color: rgb(228, 228, 228)
-}
-
-#login-form-container{
-    display: flex;
+#sign-up-form-container{
+     display: flex;
     justify-content: center;
     align-items:center;
-
 }
 
-#login-form{
+#sign-up-form{
     display: flex;
     flex-direction: column;
     align-items:center;
-    height: 220px;
+    height: 380px;
     width: 180px;
     background-color: white; 
     border-radius: 5px;
@@ -21,26 +16,25 @@ body{
     margin-top: 100px;
 }
 
-.form{
+
+.form-sign-up{
     display: flex;
     flex-direction: column;
-    align-items:center;
-    justify-content: space-evenly;
-    height: 130px;
-    margin-top: 30px;   
+    height: 360px;
+    margin-top: 30px;  
 }
 
 .inputs-container{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 90px;
+    height: 350px;
     padding-left: 12px;
     font-size: 10px;
     font-weight: bold;
 }
 
-.login-form-button{
+login-form-button{
     margin-top: 5px;
     width: 155px;
     height: 24px;
@@ -52,23 +46,6 @@ body{
     border-radius: 2px;
 }
 
-.login-form-button:hover{
-    background-color: hsl(206, 91%, 35%);
-}
-
-
-.dont-have-account{
-    display: flex;
-    margin-top: 10px;
-    font-size: 8px;
-    font-weight: 200;
-}
-
-.dont-have-account span a:visited{
-     color: hsl(206, 100%, 52%);
-
-}
-
 span{
-    margin: 2px;
+    margin-left: 7px;
 }
