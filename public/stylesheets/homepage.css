@@ -39,7 +39,7 @@
   border-bottom: 1px solid #1c3738;
 }
 
-#questions-container {
+.questions-container {
   display: flex;
   border-bottom: 1px solid rgb(208, 208, 208);
   width: 70vw;
