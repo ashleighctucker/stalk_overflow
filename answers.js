@@ -44,7 +44,7 @@ module.exports = {
       `While it may seem counter intuitive, they actually can't handle full sun for long. It would do much better with indirect light.`,
       `I would position it somewhere that it gets partial sunlight.`,
       `Check to see if the leaves are dripping water. If so, it's just over watered and should be fine when you cut that back.`,
-      `Does anyone have any recommendations for browning leaves? My umbrella tree is looking rough.`,
+      `Sounds like too much water.`,
       `If the leaves are yellowing, but not brown around the edges, try watering less.`,
       `Check it for mites, maybe that's the cause?`,
       `Check your local plant shop for a good organic remedy.`,
