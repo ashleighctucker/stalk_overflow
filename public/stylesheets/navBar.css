@@ -1,4 +1,4 @@
-#main-header-container {
+.main-header-container {
   display: flex;
   justify-content: space-around;
   text-decoration: none;
