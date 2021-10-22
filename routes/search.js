@@ -34,6 +34,15 @@ router.get("/search", async (req, res) => {
     //   answers,
   });
 });
+router.post("/search", async (req, res) => {
+  res.render("search-result.pug", {
+    listTitle: "Search Results",
+    //   error,
+    questions: [],
+    //   answers,
+  });
+})
+
 
 router.all("/search/:searchTerm", async (req, res) => {
   //   let error = loadingModuleError;
