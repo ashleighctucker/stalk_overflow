@@ -10,5 +10,48 @@ block content
         li(class="side-bar-li") Users
         li(class="side-bar-li") Categories
       div(class="questions-section")
-      div(class="empty-right-bar")
-  script(src="/javascripts/questionview.js" type="module" defer)
+        ul(class="questions-header")
+          li: h2(class="questions-title") #{question.title}
+          li
+            button(type="submit" class="ask-question-button"): a(href='/') Ask a Question
+        div(class="question-container")
+          ul(class="score-data")
+            li(class="question-score")
+              a(id="question-upvote" class="upvote")
+                i(class="fas fa-chevron-up")
+            li(class="question-score") #{question.questionScore ? question.questionScore : 0}
+            li(class="question-score")
+              a(id="question-downvote" class="downvote")
+                i(class="fas fa-chevron-down")
+          div(class="curr-question-section")
+            p #{question.question}
+            if locals.authenticated
+              div(class="question-edit-buttons")
+                button(class="login-button") Edit Question
+                button(class="login-button") Delete Question
+        if question.Answers.length < 1
+          div(class="know-container")
+            div(class="know-section")
+              p Know someone who can answer? Share a link to this
+                a(class="know-link" href="/questions/view/${id}") question
+        else
+          div(class="know-container")
+            div(class="know-section")
+              p #{question.Answers.length} Answers
+          each answer in question.Answers
+            div(class="answer-container")
+              ul(class="score-data")
+                li(class="question-score" id=`answer-${answer.id}-upvote`)
+                  i(class="fas fa-chevron-up")
+                li(class="question-score") #{answer.answerScore ? answer.AnswerScore : 0}
+                li(class="question-score" id=`answer-${answer.id}-downvote`)
+                  i(lass="fas fa-chevron-down")
+              div(class="curr-question-section")
+                p #{answer.title}
+                p #{answer.answer}
+                if locals.authenticated
+                  div(class="question-edit-buttons")
+                    button(class="login-button") Edit Answer
+                    button(class="login-button") Delete Answer
+        div(class="empty-right-bar")
+    script(src="/javascripts/questionview.js" type="module" defer)
