@@ -21,6 +21,7 @@ const fetchQuestion = async (id) => {
             </ul>
             <div class="curr-question-section">
                 <p> ${question.question} </p>
+                <div id="question-edit-buttons"></div>
             </div>
         </div>
                 `;
@@ -81,11 +82,20 @@ const fetchQuestion = async (id) => {
   questionContainer.innerHTML = pageHtml;
 };
 
+const renderButtons = async () => {
+  const cookies = document.cookie;
+  console.log(cookies);
+  // if () {
+  //   console.log('logged in!!!!');
+  // }
+};
+
 document.addEventListener('DOMContentLoaded', async (event) => {
   const url = document.URL.split('/');
 
   try {
     await fetchQuestion(url[5]);
+    renderButtons();
   } catch (err) {
     console.log(err);
   }

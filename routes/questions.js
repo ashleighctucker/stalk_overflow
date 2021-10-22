@@ -21,7 +21,6 @@ router.post(
       categortyId,
       userId,
     });
-
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
@@ -58,11 +57,18 @@ router.post(
     };
 
     const validatorErrors = validationResult(req);
-
+    const { userId: currUserId } = req.session.auth;
+    //uncoment out to make sure this is the right person to edit
+    // if (currUserId !== questionToUpdate.userId) {
+    //   const err = new Error('Unauthorized');
+    //   err.status = 401;
+    //   err.message = 'You are not authorized to edit this Question.';
+    //   err.title = 'Unauthorized';
+    //   throw err;
+    // }
     if (validatorErrors.isEmpty()) {
       await questionToUpdate.update(newQuestion);
-      // res.redirect(`/questions/${questionId}`);
-      res.redirect(`/`);
+      res.redirect(`/questions/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('question-edit', {

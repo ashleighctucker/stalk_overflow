@@ -17,6 +17,7 @@ router.get(
       order: [['updatedAt', 'DESC']],
       limit: 15,
     });
+
     res.json({ questions });
   })
 );
