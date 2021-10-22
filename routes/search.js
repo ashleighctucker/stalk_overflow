@@ -13,10 +13,9 @@ const router = express.Router();
 
 const {
   searchQuestions,
-//   findAnswer,
-} = require('../search-data/searchdata');
+  //   findAnswer,
+} = require("../search-data/searchdata");
 //TODO - take out any that you are not using
-
 
 let searchRepo;
 let loadingModuleError;
@@ -27,35 +26,30 @@ try {
   loadingModuleError = `An error was raised "${e.message}". Check the console for details.`;
 }
 
-router.get("/search", async(req, res) => {
-    res.render("search-result.pug", {
-      listTitle: "Search Results",
+router.get("/search", async (req, res) => {
+  res.render("search-result.pug", {
+    listTitle: "Search Results",
     //   error,
-      questions: []
+    questions: [],
     //   answers,
-    });
+  });
 });
 
-router.post("/search/:searchTerm", async (req, res) => {
-//   let error = loadingModuleError;
+router.all("/search/:searchTerm", async (req, res) => {
+  //   let error = loadingModuleError;
   let questions;
 
-
   let searchData = req.params.searchTerm;
-    console.log("sdfgg", searchData);
+  console.log("sdfgg", searchData);
 
   questions = await searchRepo.searchQuestions(`%${searchData}%`);
   // --------------------------
   res.render("search-result.pug", {
-      listTitle: "Search Results",
+    listTitle: "Search Results",
     //   error,
-      questions,
+    questions,
     //   answers,
-    });
+  });
 });
-
-
-
-
 
 module.exports = router;
