@@ -50,6 +50,9 @@
 .side-bar-li {
   padding-top: 10px;
   font-size: 15px;
+}
+
+.side-bar-li a:any-link {
   color: rgb(82, 82, 82);
 }
 

@@ -5,10 +5,10 @@ block content
   section(class="main-content-container")
     div(class="main-content")
       div(class="side-bar")
-        li(class="side-bar-li") Home
-        li(class="side-bar-li") Questions
-        li(class="side-bar-li") Users
-        li(class="side-bar-li") Categories
+        li(class="side-bar-li side-bar-link"): a(href="/") Home
+        li(class="side-bar-li side-bar-link"): a(href="/search") Questions
+        //- li(class="side-bar-li side-bar-link"): a(href="/") Users
+        //- li(class="side-bar-li side-bar-link"): a(href="/") Categories
       div(class="questions-section")
       div(class="empty-right-bar")
   script(src="/javascripts/index.js" type="module" defer)

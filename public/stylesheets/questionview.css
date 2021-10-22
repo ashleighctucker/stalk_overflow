@@ -43,6 +43,11 @@
   text-align: center;
 }
 
+.question-score.current {
+  text-align: center;
+  font-size: .7rem;
+}
+
 .score-data {
   display: flex;
   flex-direction: column;
