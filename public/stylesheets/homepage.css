@@ -25,8 +25,8 @@
 }
 
 .questions-section {
-  border-left: 1px solid rgba(28, 55, 56, .4);
-  border-right: 1px solid rgba(28, 55, 56, .4);
+  border-left: 1px solid rgba(28, 55, 56, 0.4);
+  border-right: 1px solid rgba(28, 55, 56, 0.4);
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
@@ -37,7 +37,7 @@
   align-items: center;
   list-style: none;
   margin-top: 5%;
-  border-bottom: 1px solid rgba(28, 55, 56, .4);
+  border-bottom: 1px solid rgba(28, 55, 56, 0.4);
   justify-content: space-between;
 }
 
@@ -120,10 +120,31 @@
   color: #2d6185;
 }
 
-/*************** LOGIN.PUG *****************/
+#footer-container {
+  display: flex;
+}
 
-/*************** SIGN-UP.PUG *****************/
+#name-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  font-size: 10px;
+}
 
-/*************** ___.PUG *****************/
+#name-list li {
+  margin: 0 1% 0 1%;
+}
 
-/*************** ___.PUG *****************/
+.social-links {
+  margin-right: 1px;
+  margin-left: 2px;
+}
+
+.fa-linkedin {
+  color: #0072b1;
+}
+
+.fa-github {
+  color: #6e5494;
+}
