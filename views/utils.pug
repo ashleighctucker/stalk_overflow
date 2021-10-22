@@ -1,6 +1,6 @@
 mixin validationErrorSummary(errors)
   if errors
-    div
+    div(class="error-div")
       p The following error(s) occurred:
       ul
         each error in errors

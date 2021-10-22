@@ -68,6 +68,7 @@ const loginValidators = [
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Password'),
+  
 ];
 
 const questionValidators = [
