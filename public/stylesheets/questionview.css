@@ -14,7 +14,14 @@
 .question-container {
   display: flex;
   width: 70vw;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.answer-container {
+  display: flex;
+  width: 70vw;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -23,13 +30,13 @@
   width: 70vw;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 5%;
 }
 
 .know-section {
   list-style: none;
   font-size: 1.1rem;
   color: black;
+  margin-left: 5%;
 }
 
 .question-score {

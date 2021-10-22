@@ -17,7 +17,7 @@ const fetchQuestions = async () => {
                 <li class="question-answer-title"> answers </li>
             </ul>
             <ul class="indv-question-section">
-                <li class="question-link"> <a href="/"> ${question.title} </a> </li>
+                <li class="question-link"> <a href="/questions/view/${question.id}"> ${question.title} </a> </li>
                 <li class="question-categories">
                     <span class="question-category-link"> <a href="/"> category </a> </span>
                     <span class="question-category-link"> <a href="/"> category </a> </span>

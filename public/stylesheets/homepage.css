@@ -25,8 +25,8 @@
 }
 
 .questions-section {
-  border-left: 1px solid #1c3738;
-  border-right: 1px solid #1c3738;
+  border-left: 1px solid rgba(28, 55, 56, .4);
+  border-right: 1px solid rgba(28, 55, 56, .4);
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
@@ -37,7 +37,7 @@
   align-items: center;
   list-style: none;
   margin-top: 5%;
-  border-bottom: 1px solid #1c3738;
+  border-bottom: 1px solid rgba(28, 55, 56, .4);
   justify-content: space-between;
 }
 
