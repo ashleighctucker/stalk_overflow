@@ -55,7 +55,7 @@ async function searchQuestions(term) {
 //      return await Category.findAll({ where: { title: { [Op.like]: term } } });
 // }
 
-// async==================================================
+// ===================================================
 // Case insensitive search on backend
 
 // const films = await db.Film.findAll({
