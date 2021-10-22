@@ -53,19 +53,18 @@ router.get('/questions/ask', csrfProtection, async (req, res) => {
   });
 });
 
-// Front end route for a specific question
-// router.get(
-//   '/questions/:id(\\d+)',
-//   asyncHandler(async (req, res) => {
-//     const questionId = parseInt(req.params.id, 10);
-//     const question = await Question.findByPk(questionId);
-//     const answers = await Answer.findAll({
-//       where: { questionId },
-//     });
-//     //to do: grab comments for question AND each answer to pass in to res.render;
-//   })
-// );
-
-//to-do add edit a question page, or do we want to try to make this more dynamic with js?
+//Front end route for getting the edit question page
+router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const question = await Question.findOne({
+    where: { id: id },
+    include: Answer,
+  });
+  res.render('question-edit', {
+    title: `Edit Question ${id}`,
+    question,
+    csrfToken: req.csrfToken(),
+  });
+});
 
 module.exports = router;
