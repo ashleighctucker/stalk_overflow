@@ -63,6 +63,7 @@ module.exports = {
     const numUsers = await User.count();
 
     const numQuestions = await Question.count();
+    console.log(await Question.count())
 
     const numAnswers = 3;
 
