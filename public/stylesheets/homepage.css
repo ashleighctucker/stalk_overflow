@@ -1,11 +1,11 @@
 /*************** INDEX.PUG *****************/
 
-#main-content {
+.main-content {
   display: flex;
   background-color: white;
 }
 
-#side-bar {
+.side-bar {
   padding: 80px 10px 0 30px;
   /* border-right: 1px solid #1c3738; */
   height: 100vh;
@@ -17,27 +17,27 @@
   align-items: flex-start;
 }
 
-#empty-right-bar {
+.empty-right-bar {
   padding: 40px 10px 0 30px;
   height: 100vh;
   list-style: none;
   flex-basis: 100%;
 }
 
-#questions-section {
-  border-left: 1px solid #1c3738;
-  border-right: 1px solid #1c3738;
+.questions-section {
+  border-left: 1px solid rgba(28, 55, 56, .4);
+  border-right: 1px solid rgba(28, 55, 56, .4);
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
 }
 
-#questions-header {
+.questions-header {
   display: flex;
   align-items: center;
   list-style: none;
   margin-top: 5%;
-  border-bottom: 1px solid #1c3738;
+  border-bottom: 1px solid rgba(28, 55, 56, .4);
   justify-content: space-between;
 }
 
@@ -90,7 +90,7 @@
   font-size: 13px;
 }
 
-.question-section {
+.indv-question-section {
   list-style: none;
   font-size: 15px;
   color: #0063bf;
