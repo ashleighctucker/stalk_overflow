@@ -30,15 +30,28 @@ const fetchQuestion = async (id) => {
       </div>
     </div>`;
 
-  const pageHtml = questionHeader
-    .concat(questionBody)
-    .concat(knowSomebodySection);
+  const answersSection = `
+    <div class="know-container">
+      <div class="know-section">
+        <p>${question.Answers.length} Answers</p>
+      </div>
+    </div>
+  `;
+
+  let pageHtml = questionHeader.concat(questionBody);
+  if (question.Answers.length === 0) {
+    pageHtml = pageHtml.concat(knowSomebodySection);
+  } else {
+    pageHtml = pageHtml.concat(answersSection);
+  }
   questionContainer.innerHTML = pageHtml;
 };
 
 document.addEventListener('DOMContentLoaded', async (event) => {
+  const url = document.URL.split('/');
+
   try {
-    await fetchQuestion(3);
+    await fetchQuestion(url[5]);
   } catch (err) {
     console.log(err);
   }
