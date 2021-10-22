@@ -1,50 +1,49 @@
-body{
+body {
     background-color: rgb(228, 228, 228)
 }
 
-#login-form-container{
+#login-form-container {
     display: flex;
     justify-content: center;
-    align-items:center;
-
+    align-items: center;
 }
 
-#login-form{
+#login-form {
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     height: 220px;
     width: 180px;
-    background-color: white; 
+    background-color: white;
     border-radius: 5px;
     box-shadow: 0 0 12px 1px rgb(199, 199, 199);
     margin-top: 100px;
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     justify-content: space-evenly;
     height: 130px;
-    margin-top: 30px;   
+    margin-top: 30px;
 }
 
-.inputs-container{
+.inputs-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     height: 90px;
     padding-left: 12px;
-    font-size: 10px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
 }
 
-.login-form-button{
+.user-form-button {
     margin-top: 5px;
     width: 155px;
     height: 24px;
-    font-size: 8px;
+    font-size: 13px;
     background-color: hsl(206, 100%, 52%);
     box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
     color: white;
@@ -52,23 +51,24 @@ body{
     border-radius: 2px;
 }
 
-.login-form-button:hover{
+.login-form-button:hover {
     background-color: hsl(206, 91%, 35%);
 }
 
-
-.dont-have-account{
+.dont-have-account {
     display: flex;
     margin-top: 10px;
-    font-size: 8px;
-    font-weight: 200;
+    font-size: 12px;
+    font-weight: 300;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.dont-have-account span a:visited{
-     color: hsl(206, 100%, 52%);
-
+.dont-have-account span a:visited {
+    color: hsl(206, 100%, 52%);
 }
 
-span{
+span {
     margin: 2px;
 }

@@ -14,6 +14,8 @@ const frontEndRouter = require('./routes/front-end');
 const questionsRouter = require('./routes/questions');
 const  searchRouter  = require("./routes/search");
 const usersRouter = require('./routes/users');
+//temp router
+const holdRouter = require('./routes/holdquestions');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
 
@@ -46,6 +48,8 @@ app.use(searchRouter);
 app.use(restoreUser);
 app.use(answersRouter);
 app.use(frontEndRouter);
+//temp router
+app.use(holdRouter);
 app.use('/questions', questionsRouter);
 app.use('/users', usersRouter);
 
