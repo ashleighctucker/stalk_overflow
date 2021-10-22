@@ -4,13 +4,13 @@ html
       block head
             title="Stalk Overgrow"
             meta(name="viewport" content="width=device-width, initial-scale=1")
-            link(rel="stylesheet" href="./stylesheets/navBar.css")
-            link(rel="stylesheet" href="./stylesheets/reset.css")
             link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+            link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css")
+            link(rel="stylesheet" href="/stylesheets/index.css")
             script(type="module" src="./javascripts/eventlisteners.js" )
-
+                        
       body
-          nav(id="main-header-container")
+          nav(class="main-header-container")
             ul(id="logo-title-div")
               li: h1(class="nav-bar-logo"): a(href="/") stalk overflow
             ul(id="search-container")

@@ -1,8 +1,5 @@
 extends layout
 
-append head 
-    link(rel="stylesheet" href="/stylesheets/index.css")
-
 include utils
 
 block content
@@ -16,7 +13,7 @@ block content
           +field('User Name', 'userName', userName)
           +field('Password', 'password', password, 'password')
         div
-          button(type='submit' class="login-form-button") Log in
+          button(type='submit' class="user-form-button") Log in
       div(class="dont-have-account")
         span Don't have an account?
         span: a(href="/sign-up") Sign up

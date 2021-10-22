@@ -1,7 +1,5 @@
 extends layout
-append head 
-  link(rel="stylesheet" href="/stylesheets/index.css")
- 
+
 include utils
 
 block content
@@ -10,7 +8,7 @@ block content
     div(id="sign-up-form")
       +validationErrorSummary(errors)
       form(action='/users' method='POST' class="form-sign-up")
-        div(class="inputs-container")
+        div(class="sign-up-inputs-container")
           input(type='hidden' name='_csrf' value=csrfToken)
           +field('Full Name', 'fullName', user.fullName)
           +field('Email Address', 'emailAddress', user.emailAddress, 'email')
@@ -18,7 +16,7 @@ block content
           +field('Password', 'password', user.password, 'password')
           +field('Confirm Password', 'confirmPassword', user.confirmPassword, 'password')
           div
-            button(type='submit' class="login-form-button") Sign Up
-          div(class="dont-have-account") 
-            span Already have an account?
-            span: a(href="/login") Log in
+            button(type='submit' class="user-form-button") Sign Up
+        div(class="dont-have-account")
+          span Already have an account?
+          span: a(href="/login") Log in
