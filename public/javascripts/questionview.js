@@ -1,5 +1,5 @@
 const fetchQuestion = async (id) => {
-  const res = await fetch(`http://localhost:8080/questions/${id}`);
+  const res = await fetch(`/questions/${id}`);
   const { question } = await res.json();
   const questionContainer = document.querySelector('.questions-section');
   //creates the header for the question page
