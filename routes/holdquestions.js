@@ -17,6 +17,7 @@ router.get(
       order: [['updatedAt', 'DESC']],
       limit: 15,
     });
+
     res.json({ questions });
   })
 );
@@ -24,8 +25,12 @@ router.get(
 //move this router to the front end
 router.get('/questions/view/:id(\\d+)', async (req, res) => {
   const questionId = parseInt(req.params.id, 10);
-  const question = await Question.findByPk(questionId);
-  res.render('question-view', { title: question.title });
+  const question = await Question.findOne({
+    where: { id: questionId },
+    include: Answer,
+  });
+
+  res.render('question-view', { title: question.title, question });
 });
 
 router.get(
