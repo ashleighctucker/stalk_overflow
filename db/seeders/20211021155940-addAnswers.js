@@ -1,49 +1,11 @@
-"use strict";
+'use strict';
+
 const answers = require("../../answers");
 const { User } = require("../models");
-const { Question } = require("../models");
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    function createAnswers(
-      numAnswers,
-      numQuestions,
-      answers,
-      usersStart,
-      usersEnd
-    ) {
-      const result = [];
-
-
-      for (let i = usersStart; i < usersEnd; i++) {
-        let questionsArray = [];
-        for (let j = 0; j < numAnswers; j++) {
-          let answer = [];
-          let answerTitle = [];
-
-          Object.values(answers["answerParts"]).forEach((value) => {
-            const arrLength = value.length;
-            const index = Math.floor(Math.random() * arrLength);
-            answer.push(value[index]);
-          });
-          Object.values(answers["titleOptions"]).forEach((value) => {
-            const arrLength = value.length;
-            const index = Math.floor(Math.random() * arrLength);
-            answerTitle.push(value[index]);
-          });
-          answer = answer.join(" ");
-          answerTitle = answerTitle.join("");
-
-
-          let questionCount = numQuestions
-
-          let questionId = (Math.floor(Math.random() * questionCount))
-
-
-          while (questionsArray.includes(questionId))
-            questionId = Math.floor(Math.random() * questionCount);
-
-          questionsArray.push(questionId);
+  up: (queryInterface, Sequelize) => {
+    
 
 
 
@@ -80,9 +42,17 @@ module.exports = {
 
 
     return queryInterface.bulkInsert("Answers", answersArray, {});
+
+
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Answers", null, {});
-  },
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      */
+      return queryInterface.bulkDelete('Answer', null, {});
+  }
 };
