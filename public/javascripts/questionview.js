@@ -11,9 +11,11 @@ const fetchQuestion = async (id) => {
   const questionBody = `
         <div class="question-container">
             <ul class="score-data">
+                <li class="question-score"> <a id="upvote"><i class="fas fa-chevron-up"></i></a></li>
                 <li class="question-score"> ${
                   question.questionScore ? question.questionScore : 0
                 } </li>
+                <li class="question-score"> <a id="downvote"><i class="fas fa-chevron-down"></i></a></li>
             </ul>
             <div class="curr-question-section">
                 <p> ${question.question} </p>
@@ -21,7 +23,17 @@ const fetchQuestion = async (id) => {
         </div>
                 `;
 
-  questionContainer.innerHTML = questionHeader.concat(questionBody);
+  const knowSomebodySection = `
+    <div class="know-container">
+      <div class="know-section">
+        <p> Know someone who can answer? Share a link to this <a class="know-link" href="/questions/view/${id}">question</a>!</p>
+      </div>
+    </div>`;
+
+  const pageHtml = questionHeader
+    .concat(questionBody)
+    .concat(knowSomebodySection);
+  questionContainer.innerHTML = pageHtml;
 };
 
 document.addEventListener('DOMContentLoaded', async (event) => {
