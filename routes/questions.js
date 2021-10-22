@@ -7,18 +7,36 @@ const { Question } = require('../db/models');
 const { asyncHandler, csrfProtection } = require('./utils');
 const { questionValidators } = require('./validators');
 
+
 const router = express.Router();
+
+// ================================================
+// moved to search.js
+// let searchRepo;
+// let loadingModuleError;
+// try {
+//   searchRepo = require("./search");
+// } catch (e) {
+//   console.error(e);
+//   loadingModuleError = `An error was raised "${e.message}". Check the console for details.`;
+// }
+
+// ================================================
+// TODO: NEED get route
+// router.get('/:id', async (req, res) => {
+//   res.json(`this is question with id of ${req.params.id}.`)
+// })
 
 //API endpoint for posting/adding a new question
 router.post(
   '/',
   questionValidators,
   asyncHandler(async (req, res) => {
-    const { question, title, categortyId, userId } = req.body;
+    const { question, title, categoryId, userId } = req.body;
     const newQuestion = Question.build({
       question,
       title,
-      categortyId,
+      categoryId,
       userId,
     });
     const validatorErrors = validationResult(req);
@@ -47,12 +65,12 @@ router.post(
     const questionId = parseInt(req.params.id, 10);
     const questionToUpdate = await Question.findByPk(questionId);
 
-    const { question, title, categortyId, userId } = req.body;
+    const { question, title, categoryId, userId } = req.body;
 
     const newQuestion = {
       question,
       title,
-      categortyId,
+      categoryId,
       userId,
     };
 
@@ -91,5 +109,31 @@ router.post(
     res.redirect('/');
   })
 );
+
+
+// ================= SEARCH =========================
+// moved to search.js
+
+// router.get('/search', async (req, res) => {
+//   let error = loadingModuleError;
+//   let questions;
+//   let answers;
+//   try {
+//     questions = await searchRepo.searchQuestions(`%${req.query.term}%`);
+//     answers = await searchRepo.findAnswer(`%${req.query.term}%`);
+//   } catch (e) {
+//     console.error(e);
+//     error = `An error ocurred that reads "${e.message}". Check the console for more details.`;
+//   }
+//   res.render("search-result.pug", {
+//     listTitle: "Search Results",
+//     error,
+//     questions,
+//     answers,
+//   });
+// });
+
+// ==================================================
+
 
 module.exports = router;
