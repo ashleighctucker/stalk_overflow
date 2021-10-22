@@ -13,7 +13,7 @@ module.exports = {
       usersEnd
     ) {
       const result = [];
-      console.log("Inside");
+
 
       for (let i = usersStart; i < usersEnd; i++) {
         let questionsArray = [];
@@ -33,20 +33,20 @@ module.exports = {
           });
           answer = answer.join(" ");
           answerTitle = answerTitle.join("");
-          
-         
+
+
           let questionCount = numQuestions
-          
+
           let questionId = (Math.floor(Math.random() * questionCount))
 
-        
+
           while (questionsArray.includes(questionId))
             questionId = Math.floor(Math.random() * questionCount);
 
           questionsArray.push(questionId);
 
 
-          
+
 
           result.push({
             answer,
@@ -56,7 +56,7 @@ module.exports = {
           });
         }
       }
-      console.log(result);
+
       return result;
     }
 
@@ -65,7 +65,7 @@ module.exports = {
     const numQuestions = await Question.count();
 
     const numAnswers = 3;
-    console.log(numUsers, numQuestions, numAnswers);
+
 
     let usersStart = await User.findOne({ order: ["id"] });
     usersStart = usersStart.id + 1;
@@ -77,7 +77,7 @@ module.exports = {
       numUsers + usersStart - 1
     );
 
-    console.log(answersArray);
+
     return queryInterface.bulkInsert("Answers", answersArray, {});
   },
 
