@@ -64,6 +64,9 @@ const fetchQuestion = async (id) => {
             </div>
         </div>
                 `;
+
+    //to-do add an answer section here!!!
+
     answerHTML.push(answerBody);
   });
   answerHTML = answerHTML.join('');
