@@ -15,10 +15,20 @@ async function searchQuestions(term) {
   // search for questions with the given term in its title
   return await Question.findAll({
     where: {
-      title: { [Op.like]: term },
+    //   title: { [Op.like]: term }, // if you want "term" in a title
       question: { [Op.like]: term },
     },
-  });
+
+
+    });
+        //   const questions = await Question.findAll(
+        //     // include: [{ model: Quest, as: "user", attributes: ["username"] }],
+        //     // order: [["createdAt", "DESC"]],
+        //     // attributes: ["question"],
+
+        //   );
+
+    // return questions;
 }
 
 // async function getTenNewestQuestions() {
@@ -28,14 +38,14 @@ async function searchQuestions(term) {
 //   });
 // }
 
-async function findAnswer(term) {
-  return await Answer.findAll({
-    where: {
-      title: { [Op.like]: term },
-      answer: { [Op.like]: term },
-    },
-  });
-}
+// async function findAnswer(term) {
+//   return await Answer.findAll({
+//     where: {
+//       title: { [Op.like]: term },
+//       answer: { [Op.like]: term },
+//     },
+//   });
+// }
 
 // async function findUser() {
 //   return await User.findAll({ include: [User] });
@@ -49,5 +59,5 @@ async function findAnswer(term) {
 
 module.exports = {
   searchQuestions,
-  findAnswer,
+//   findAnswer,
 };

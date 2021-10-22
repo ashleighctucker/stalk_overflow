@@ -22,7 +22,10 @@ const router = express.Router();
 // }
 
 // ================================================
-
+// TODO: NEED get route
+// router.get('/:id', async (req, res) => {
+//   res.json(`this is question with id of ${req.params.id}.`)
+// })
 
 //API endpoint for posting/adding a new question
 router.post(

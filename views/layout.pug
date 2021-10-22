@@ -7,16 +7,20 @@ html
             link(rel="stylesheet" href="./stylesheets/navBar.css")
             link(rel="stylesheet" href="./stylesheets/reset.css")
             link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+            script(type="module" src="./javascripts/eventlisteners.js" )
 
       body
           nav(id="main-header-container")
             ul(id="logo-title-div")
               li: h1(class="nav-bar-logo"): a(href="/") stalk overflow
             ul(id="search-container")
-              li: form(action="/form/submit" method="GET")
-              li: input(type="text" name="text" class="search-bar" placeholder="Search...")
-              li: input(type="submit" name="submit" class="search-bar-submit-button" value="Search")
+              li: form(action="/search/water" method="POST" class="search-form" id="search-form")
+                    input(type="text" name="text" class="search-bar" placeholder="Search...")
+                    input(type="submit" name="search-form" class="search-bar-submit-button" value="Search")
+              //- li: input(type="submit"  form_id="search-form" class="search-bar-submit-button" value="Search")
+
             ul(id="header-buttons-right")
               li: button(type="submit" class="login-button"): a(href='/login') Log in
               li: button(type="submit" class="signup-button"): a(href='/sign-up') Sign Up
           block content
+//-!  submit input ----- input(type="submit" ---- seems to need to be a child of a form

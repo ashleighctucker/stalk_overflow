@@ -6,7 +6,7 @@ append head
 include utils
 
 block content
-    h1= listTitle
+    h3= listTitle
     if error
         +validationErrorSummary(error)
         p= error
@@ -14,7 +14,7 @@ block content
         if questions
         div(class="answer-question-result")
             each question in questions
-                a.search-link(href="/questions" + question.id)
+                a.search-link(href="/questions/" + question.id)
                     h3(class="question-title")= question.title
                     p= question.question
         //- each answer in answers
