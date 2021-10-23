@@ -1,12 +1,16 @@
 extends layout
 
+include utils
+
 block content
-  section()  
+  section()
     div(id="ask-question-container")
-      div(id="ask-question-form") 
+      div(id="ask-question-form")
         form(action='/questions' method='POST' class="ask-question")
+          +validationErrorSummary(errors)
           input(type='hidden' name='_csrf' value=csrfToken )
           h1(id="form-title") Ask a question
-          input(type="text" name="title" class="question-title-input" placeholder="Question title")
-          textarea(id="ask-question-field" placeholder="Ask a question...")
-          button(id="question-ask-button") Submit 
+          input(type="text" name="title" class="question-title-input" value=question.title  placeholder="Question title")
+          textarea(id="ask-question-field" name="question" placeholder="Ask a question..." value=question.question)
+          input(type='hidden' name='userId' default=locals.user.id)
+          button(id="question-ask-button") Submit

@@ -45,7 +45,7 @@ router.get('/questions/ask', csrfProtection, async (req, res) => {
   // if (!req.session.auth) {
   //   res.redirect('/login');
   // }
-  const question = Question.build();
+  const question = await Question.build();
   res.render('questions-ask', {
     title: 'Ask A Question',
     question,
@@ -54,17 +54,6 @@ router.get('/questions/ask', csrfProtection, async (req, res) => {
 });
 
 // Front end route for a specific question
-// router.get(
-//   '/questions/:id(\\d+)',
-//   asyncHandler(async (req, res) => {
-//     const questionId = parseInt(req.params.id, 10);
-//     const question = await Question.findByPk(questionId);
-//     const answers = await Answer.findAll({
-//       where: { questionId },
-//     });
-//     //to do: grab comments for question AND each answer to pass in to res.render;
-//   })
-// );
 
 //to-do add edit a question page, or do we want to try to make this more dynamic with js?
 
