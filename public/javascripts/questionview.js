@@ -1,14 +1,16 @@
 const deleteQuestionButton = document.querySelector('#delete-question-button');
 
 const createConfirmDeleteButton = (questionId) => {
-  const confirmDeleteButton = document.createElement('button');
+  const deletePost = document.createElement('form');
+  deletePost.action = `/questions/delete/${questionId}`;
+  deletePost.method = 'POST';
+  const confirmDeleteButton = document.createElement('input');
+  confirmDeleteButton.type = 'submit';
+  confirmDeleteButton.name = 'confirm-delete-button';
   confirmDeleteButton.className = 'login-button';
-  confirmDeleteButton.id = 'confirm-delete-button';
-  const deleteLink = document.createElement('a');
-  deleteLink.href = `/questions/delete/${questionId}`;
-  deleteLink.innerText = 'Confirm Delete';
-  confirmDeleteButton.appendChild(deleteLink);
-  return confirmDeleteButton;
+  confirmDeleteButton.value = 'Confirm Delete';
+  deletePost.appendChild(confirmDeleteButton);
+  return deletePost;
 };
 
 const createCancelButton = () => {
