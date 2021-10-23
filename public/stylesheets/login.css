@@ -6,6 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 95vh;
 }
 
 #login-form {
@@ -16,7 +17,6 @@ body {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 12px 1px rgb(199, 199, 199);
-  margin-top: 100px;
 }
 
 .error-container {
