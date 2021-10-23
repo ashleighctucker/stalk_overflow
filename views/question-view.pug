@@ -32,7 +32,7 @@ block content
                     button(class="login-button" id="edit-question-button"): a(href=`/questions/${question.id}/edit`) Edit Question
                   div(id="question-button-2" class="button-EL-div")
                     button(class="login-button" id="delete-question-button") Delete Question
-        if question.userId !== locals.user.id
+        if locals.user && question.userId !== locals.user.id
           div(class="know-container")
             ul(class="score-data")
               li: button(type="submit" class="ask-question-button"): a(href='/') Answer This Question
