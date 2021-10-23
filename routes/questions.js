@@ -27,8 +27,14 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await newQuestion.save();
-      //todo: add redirect to specific question page
-      res.redirect('/');
+      const thisQuestion = await Question.findOne({
+        where: {
+          question,
+          title,
+          userId,
+        },
+      });
+      res.redirect(`/questions/view/${thisQuestion.id}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('questions-ask', {
