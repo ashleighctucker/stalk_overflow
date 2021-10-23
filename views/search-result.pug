@@ -15,8 +15,8 @@ block content
                 ul(class="questions-head")
                     li: h2(class="title")= listTitle
                 if error
-                    div Hello
                     +validationErrorSummary(error)
+                    p= error
                 else
                     if questions
                         div(class="search-result-questions")
