@@ -1,15 +1,12 @@
 extends layout
 
 block content
-  div(id="big-container")
-    div(id='ask-question-container')
-      h3 Ask a public question:
-      h4 Title
-      p Be specific and start your question with "What", "How", "Why", etc.
-      form(action=`/question/${question.id}` method='post')
-      input(type="text" class="ask-question")
-    div(id='answer-container')
-      h3 Your Answer:
-      textarea(name='answer' class='answer-textarea')
-      button(type='submit' class='cancel-button') Cancel
-      button(type='submit' class='answer-button') Post Your Answer
+  section()  
+    div(id="ask-question-container")
+      div(id="ask-question-form") 
+        form(action='/questions' method='POST' class="ask-question")
+          input(type='hidden' name='_csrf' value=csrfToken )
+          h1(id="form-title") Ask a question
+          input(type="text" name="title" class="question-title-input" placeholder="Question title")
+          textarea(id="ask-question-field" placeholder="Ask a question...")
+          button(id="question-ask-button") Submit 

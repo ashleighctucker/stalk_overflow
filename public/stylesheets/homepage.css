@@ -122,6 +122,7 @@
 
 #footer-container {
   display: flex;
+  position: relative;
 }
 
 #name-list {
