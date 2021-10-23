@@ -19,8 +19,8 @@ html
                     input(type="submit" name="search-form" class="search-bar-submit-button" value="Search")
               //- li: input(type="submit"  form_id="search-form" class="search-bar-submit-button" value="Search")
             if locals.authenticated
-              ul(id="header-buttons-right" class="signed-in")
-                li Hi, #{user.fullName}!
+              ul(class="signed-in")
+                li(id="usersName") Hi, #{user.fullName}!
                 li: form(action='/users/logout' method='post')
                   button(type="submit" class="signup-button") Logout
             else
