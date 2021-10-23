@@ -59,8 +59,7 @@ router.post(
     };
 
     const validatorErrors = validationResult(req);
-    const { userId: currUserId } = req.session.auth;
-    //uncoment out to make sure this is the right person to edit
+    // const { userId: currUserId } = req.session.auth;
     // if (currUserId !== questionToUpdate.userId) {
     //   const err = new Error('Unauthorized');
     //   err.status = 401;
@@ -93,5 +92,6 @@ router.post(
     res.redirect('/');
   })
 );
+
 
 module.exports = router;
