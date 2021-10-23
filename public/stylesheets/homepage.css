@@ -152,3 +152,15 @@
 .fa-github {
   color: #6e5494;
 }
+
+.error-messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+}
+
+.error-stack {
+  text-align: center;
+}

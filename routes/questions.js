@@ -59,14 +59,15 @@ router.post(
     };
 
     const validatorErrors = validationResult(req);
-    // const { userId: currUserId } = req.session.auth;
-    // if (currUserId !== questionToUpdate.userId) {
-    //   const err = new Error('Unauthorized');
-    //   err.status = 401;
-    //   err.message = 'You are not authorized to edit this Question.';
-    //   err.title = 'Unauthorized';
-    //   throw err;
-    // }
+    const { userId: currUserId } = req.session.auth;
+    console.log(currUserId !== questionToUpdate.userId);
+    if (currUserId !== questionToUpdate.userId) {
+      const err = new Error('Unauthorized');
+      err.status = 401;
+      err.message = 'Whoops! You do not have permission to edit this question.';
+      err.title = 'Unauthorized';
+      throw err;
+    }
     if (validatorErrors.isEmpty()) {
       await questionToUpdate.update(newQuestion);
       res.redirect(`/questions/${questionId}`);
@@ -74,7 +75,7 @@ router.post(
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('question-edit', {
         title: 'Edit Question',
-        question,
+        question: newQuestion,
         errors,
         csrfToken: req.csrfToken(),
       });
@@ -92,6 +93,5 @@ router.post(
     res.redirect('/');
   })
 );
-
 
 module.exports = router;

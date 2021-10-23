@@ -1,6 +1,10 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  section()
+    div(class="ask-question-container")
+      div(class="ask-question-form")
+          form(class="ask-question")
+            div(class="error-messages")
+              h1= message
+              h2 Error Status #{error.status}

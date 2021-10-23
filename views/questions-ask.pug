@@ -4,8 +4,8 @@ include utils
 
 block content
   section()
-    div(id="ask-question-container")
-      div(id="ask-question-form")
+    div(class="ask-question-container")
+      div(class="ask-question-form")
         form(action='/questions' method='POST' class="ask-question")
           +validationErrorSummary(errors)
           input(type='hidden' name='_csrf' value=csrfToken )

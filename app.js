@@ -12,8 +12,9 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const answersRouter = require('./routes/answers');
 const frontEndRouter = require('./routes/front-end');
 const questionsRouter = require('./routes/questions');
-const  searchRouter  = require("./routes/search");
+const searchRouter = require('./routes/search');
 const usersRouter = require('./routes/users');
+const { environment } = require('./config/index.js');
 //temp router
 const holdRouter = require('./routes/holdquestions');
 const { sessionSecret } = require('./config');
@@ -53,7 +54,6 @@ app.use(holdRouter);
 app.use('/questions', questionsRouter);
 app.use('/users', usersRouter);
 
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -64,10 +64,13 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  console.log(environment);
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    title: 'Oops!',
+    environment,
+  });
 });
 
 module.exports = app;
