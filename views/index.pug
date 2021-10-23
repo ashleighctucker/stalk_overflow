@@ -10,5 +10,21 @@ block content
         //- li(class="side-bar-li side-bar-link"): a(href="/") Users
         //- li(class="side-bar-li side-bar-link"): a(href="/") Categories
       div(class="questions-section")
+        ul(class="questions-header")
+            li: h2(class="questions-title") Top Questions
+            li
+              button(type="submit" class="ask-question-button"): a(href='/questions/ask') Ask a Question
+        each question in questions
+          div(class="questions-container")
+            ul(class="question-data")
+              li(class="question-answers-number") #{question.Answers.length}
+              li(class="question-answer-title") answers
+            ul(class="indv-question-section")
+              li(class="question-link")
+                a(href=`/questions/view/${question.id}`) #{question.title}
+                li(class="question-categories")
+                  span(class="question-category-link"): a(a href="/") category
+                  span(class="question-category-link"): a(a href="/") category
+                  span(class="question-category-link"): a(a href="/") category
       div(class="empty-right-bar")
   script(src="/javascripts/index.js" type="module" defer)
