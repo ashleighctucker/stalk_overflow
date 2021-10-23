@@ -28,8 +28,8 @@ block content
             if locals.authenticated
               if question.userId === locals.user.id
                 div(class="question-edit-buttons")
-                  button(class="login-button"): a(href=`/questions/${question.id}/edit`) Edit Question
-                  button(class="login-button") Delete Question
+                  button(class="login-button" id="edit-question-button"): a(href=`/questions/${question.id}/edit`) Edit Question
+                  button(class="login-button" id="delete-question-button") Delete Question
         if question.Answers.length < 1
           div(class="know-container")
             div(class="know-section")
