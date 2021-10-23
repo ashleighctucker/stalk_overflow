@@ -27,7 +27,6 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await newQuestion.save();
-      //todo: add redirect to specific question page
       const thisQuestion = await Question.findOne({
         where: {
           question,
