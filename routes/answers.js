@@ -83,7 +83,7 @@ router.post(
   })
 );
 
-// Route for answer Upvote
+// Route for answer Upvote / Increment vote
 router.post(
   `/answers/:answerId/upvote`,
   asyncHandler(async (req, res) => {
@@ -122,23 +122,24 @@ router.post(
       console.log("gdf", hasVoted);
 
       //(1) if hasVote.vote = 1,
-      // ---- set hasVote.vote = 0.(update)
-      // ---- decrement the score
-      // ---- answerScore--;
-      // ---- answer.update({ answerScore });
+      // ------ set hasVote.vote = 0.(update)
+      // ------ decrement the score
+      // ------ answerScore--;
+      // ------ answer.update({ answerScore });
 
       // (2) else if hasVote.vote = -1
-      // ---- set hasVote.vote = 1.(update)
-      // ---- increment the score
-      // ---- answerScore += 2;
-      // ---- answer.update({ answerScore });
+      // ------ set hasVote.vote = 1.(update)
+      // ------ increment the score
+      // ------ answerScore += 2;
+      // ------ answer.update({ answerScore });
 
       // (3) else if hasVote.vote = 0
-      // ---- set hasVote.vote = 1.(update)
-      // ---- increment the score
-      // ---- answerScore++;
-      // ---- answer.update({ answerScore });
-      try {
+      // ------ set hasVote.vote = 1.(update)
+      // ------ increment the score
+      // ------ answerScore++;
+      // ------ answer.update({ answerScore });
+
+      // try {
         if (hasVoted.vote === 1) {
           hasVoted.update({ vote: 0});
           answerScore--;
@@ -155,9 +156,9 @@ router.post(
           answer.update({ answerScore });
         }
 
-      } catch (e){
-        console.log(e)
-      }
+      // } catch (e){
+      //   console.log(e)
+      // }
       res.json({ answerScore: answer.answerScore });
     }
     return;
