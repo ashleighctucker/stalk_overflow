@@ -83,7 +83,7 @@ router.post(
   })
 );
 
-//* Route for answer Upvote / Increment vote
+//* Route for Answers ----- Upvote / Increment vote
 router.post(
   `/answers/:answerId/upvote`,
   asyncHandler(async (req, res) => {
@@ -119,7 +119,7 @@ router.post(
       // return;
     } else {
       // if they HAVE voted. no update. can't vote again
-      console.log("gdf", hasVoted);
+      // console.log("gdf", hasVoted);
 
       //(1) if hasVote.vote = 1,
       // ------ set hasVote.vote = 0.(update)
@@ -163,7 +163,7 @@ router.post(
   })
 );
 
-//* Route for answer DownVote / Decrement vote
+//* Route for Answers ------ DownVote / Decrement vote
 // router.post(
 //   `/answers/:answerId/downvote`,
 //   asyncHandler(async (req, res) => {

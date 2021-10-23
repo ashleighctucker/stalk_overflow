@@ -41,10 +41,10 @@ block content
           each answer in question.Answers
             div(class="answer-container")
               ul(class="score-data")
-                li(class="question-score" id=`answer-${answer.id}-upvote`)
+                li(class="answer-score" id=`answer-${answer.id}-upvote`)
                   i(class="fas fa-chevron-up")
-                li(class="question-score") #{answer.answerScore ? answer.answerScore : 0}
-                li(class="question-score" id=`answer-${answer.id}-downvote`)
+                li(class="answer-score") #{answer.answerScore ? answer.answerScore : 0}
+                li(class="answer-score" id=`answer-${answer.id}-downvote`)
                   i(class="fas fa-chevron-down")
               div(class="curr-question-section")
                 p #{answer.title}

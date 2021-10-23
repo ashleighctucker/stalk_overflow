@@ -1,46 +1,58 @@
 // answer upvote
 let answerContainerDivs = document.getElementsByClassName("answer-container");
 // console.log("wert", answerContainerDivs); // HTMLCollection
+let answerHTMLCltnArray = Array.from(answerContainerDivs);
+// console.log(answerHTMLCltnArray); // array
 
+//
+
+// ================================================================
 // answer upvote
-let htmlCltnArray = Array.from(answerContainerDivs);
-// console.log(htmlCltnArray);
+answerHTMLCltnArray.forEach((ele) => {
+  let ulScoreData = ele.children[0].children; // HtmlCollection of UL. array
+  // console.log(ulScoreData);
+  let answerUpVoteBtnLi = ulScoreData[0]; // first LI (inside UL array)
+  let middleLITxtScore = ulScoreData[1];  // 2nd LI
+  let answerDownVoteBtnLi = ulScoreData[2]; // 3rd LI
 
-// answer upvote
-htmlCltnArray.forEach((ele) => {
-    let ulScoreData = ele.children[0].children; // HtmlCollection of UL. array
-    // console.log(ulScoreData);
-    let upVoteQScore = ulScoreData[0];
-    let downVoteQScore = ulScoreData[2];
-    let middleLIQScore = ulScoreData[1];
+  answerUpVoteBtnLi.addEventListener("click", async () => {
+    // middleLITxtScore.innerHTML ---- object
 
-    upVoteQScore.addEventListener("click", async() => {
-        // middleLIQScore.innerHTML ---- object
+    const answerId = answerUpVoteBtnLi.id.split("-")[1]; // from first LI's id ---- ${answer.id}
 
-        const answerId = upVoteQScore.id.split("-")[1];
-        const res = await fetch(`/answers/${answerId}/upvote`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        // console.log(answerId);
-        let answerUpScore = await res.json()
-        middleLIQScore.innerHTML = answerUpScore.answerScore;
-        // console.log("up vote score", answerUpScore.answerScore);
+    const res = await fetch(`/answers/${answerId}/upvote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // console.log("ytrd", answerId);
+    let answerUpScore = await res.json();
+    middleLITxtScore.innerHTML = answerUpScore.answerScore;
+    // console.log("up vote score", answerUpScore.answerScore);
+  });
 
+  answerDownVoteBtnLi.addEventListener("click", async () => {
+    // (BELOW) ---- without database
+    // let count = middleLIBtnLi.innerHTML;
+    // count--;
+    // middleLIBtnLi.innerHTML = count;
+    // ============================
+    const answerId2 = answerDownVoteBtnLi.id.split("-")[1];
 
-
+    const res = await fetch(`/answers/${answerId2}/downvote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
-    downVoteQScore.addEventListener("click", async() => {
-        let count = middleLIQScore.innerHTML;
-        count--;
-        middleLIQScore.innerHTML = count;
-    });
+    let answerDownScore = await res.json();
+    middleLITxtScore.innerHTML = answerDownScore.answerScore;
 
-    //update voting database ---- answers.js
+  });
 
-
-
+  //update voting database ---- answers.js
 });
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

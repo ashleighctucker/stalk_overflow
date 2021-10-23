@@ -43,6 +43,10 @@
   text-align: center;
 }
 
+.answer-score {
+  text-align: center;
+}
+
 .score-data {
   display: flex;
   flex-direction: column;
