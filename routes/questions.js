@@ -7,7 +7,6 @@ const { Question } = require('../db/models');
 const { asyncHandler, csrfProtection } = require('./utils');
 const { questionValidators } = require('./validators');
 
-
 const router = express.Router();
 
 // ================================================
@@ -75,8 +74,7 @@ router.post(
     };
 
     const validatorErrors = validationResult(req);
-    const { userId: currUserId } = req.session.auth;
-    //uncoment out to make sure this is the right person to edit
+    // const { userId: currUserId } = req.session.auth;
     // if (currUserId !== questionToUpdate.userId) {
     //   const err = new Error('Unauthorized');
     //   err.status = 401;
@@ -110,7 +108,6 @@ router.post(
   })
 );
 
-
 // ================= SEARCH =========================
 // moved to search.js
 
@@ -134,6 +131,5 @@ router.post(
 // });
 
 // ==================================================
-
 
 module.exports = router;
