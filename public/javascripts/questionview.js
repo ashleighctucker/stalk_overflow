@@ -27,7 +27,10 @@ deleteQuestionButton.addEventListener('click', async (event) => {
   const buttonContainer = document.querySelector('.question-edit-buttons');
   const confirmDeleteButton = createConfirmDeleteButton(questionId);
   const cancelButton = createCancelButton();
+  const formDiv = document.createElement('div');
+  formDiv.className = 'confirm-delete-container';
+  formDiv.appendChild(confirmDeleteButton);
+  formDiv.appendChild(cancelButton);
   buttonContainer.innerHTML = ``;
-  buttonContainer.appendChild(confirmDeleteButton);
-  buttonContainer.appendChild(cancelButton);
+  buttonContainer.appendChild(formDiv);
 });
