@@ -1,14 +1,13 @@
-// answer upvote
+// answer vote UL
 let answerContainerDivs = document.getElementsByClassName("answer-container");
 // console.log("wert", answerContainerDivs); // HTMLCollection
 let answerHTMLCltnArray = Array.from(answerContainerDivs);
 // console.log(answerHTMLCltnArray); // array
-// ================================================================
-
 
 
 // ================================================================
-// answer upvote
+// answer vote - front end
+// foreach ---- bc if there are more than ONE answers.
 answerHTMLCltnArray.forEach((ele) => {
   let ulScoreData = ele.children[0].children; // HtmlCollection of UL. array
   // console.log(ulScoreData);
@@ -16,6 +15,7 @@ answerHTMLCltnArray.forEach((ele) => {
   let middleLITxtScore = ulScoreData[1]; // 2nd LI
   let answerDownVoteBtnLi = ulScoreData[2]; // 3rd LI
 
+  // Answer Up vote
   answerUpVoteBtnLi.addEventListener("click", async () => {
     // middleLITxtScore.innerHTML ---- object
 
@@ -35,6 +35,7 @@ answerHTMLCltnArray.forEach((ele) => {
 
   // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+  // Answer Down vote
   answerDownVoteBtnLi.addEventListener("click", async () => {
     // (BELOW) ---- without database
     // let count = middleLIBtnLi.innerHTML;
@@ -60,3 +61,5 @@ answerHTMLCltnArray.forEach((ele) => {
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+// Question vote ----- UL
