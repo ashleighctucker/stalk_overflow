@@ -41,10 +41,9 @@ router.get(
 
 // Front end route for asking a new question
 router.get('/questions/ask', csrfProtection, async (req, res) => {
-  // to do add a check that they are logged in, if not redirect them to log in
-  // if (!req.session.auth) {
-  //   res.redirect('/login');
-  // }
+  if (!req.session.auth) {
+    res.redirect('/login');
+  }
   const question = await Question.build();
   res.render('questions-ask', {
     title: 'Ask A Question',
