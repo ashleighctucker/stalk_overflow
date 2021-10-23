@@ -21,7 +21,7 @@ const createCancelButton = () => {
   return cancelButton;
 };
 
-deleteQuestionButton.addEventListener('click', async (event) => {
+deleteQuestionButton.addEventListener('click', (event) => {
   const url = document.URL.split('/');
   const questionId = url[5];
   const buttonContainer = document.querySelector('.question-edit-buttons');

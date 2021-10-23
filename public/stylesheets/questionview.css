@@ -61,3 +61,11 @@
 .confirm-delete-container {
   display: flex;
 }
+
+.question-edit-buttons {
+  display: flex;
+}
+
+.button-EL-div {
+  width: fit-content;
+}
