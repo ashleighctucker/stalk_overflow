@@ -57,3 +57,15 @@
   font-size: 1rem;
   color: rgb(82, 82, 82);
 }
+
+.confirm-delete-container {
+  display: flex;
+}
+
+.question-edit-buttons {
+  display: flex;
+}
+
+.button-EL-div {
+  width: fit-content;
+}

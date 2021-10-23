@@ -28,8 +28,10 @@ block content
             if locals.authenticated
               if question.userId === locals.user.id
                 div(class="question-edit-buttons")
-                  button(class="login-button"): a(href=`/questions/${question.id}/edit`) Edit Question
-                  button(class="login-button") Delete Question
+                  div(id="question-button-1" class="button-EL-div")
+                    button(class="login-button" id="edit-question-button"): a(href=`/questions/${question.id}/edit`) Edit Question
+                  div(id="question-button-2" class="button-EL-div")
+                    button(class="login-button" id="delete-question-button") Delete Question
         if question.Answers.length < 1
           div(class="know-container")
             div(class="know-section")
@@ -59,3 +61,4 @@ block content
                       button(class="login-button") Delete Answer
       div(class="empty-right-bar")
     script(src="/javascripts/questionview.js" type="module" defer)
+    script(src="/javascripts/canceledit.js" type="module" defer)
