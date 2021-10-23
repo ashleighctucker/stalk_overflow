@@ -13,7 +13,7 @@ block content
         ul(class="questions-header")
           li: h2(class="questions-title") #{question.title}
           li
-            button(type="submit" class="ask-question-button"): a(href='/') Ask a Question
+            button(type="submit" class="ask-question-button"): a(href='/questions/ask') Ask a Question
         div(class="question-container")
           ul(class="score-data")
             li(class="question-score")
@@ -33,8 +33,10 @@ block content
         if question.Answers.length < 1
           div(class="know-container")
             div(class="know-section")
-              p Know someone who can answer? Share a link to this
-                a(class="know-link" href="/questions/view/${id}") question
+              p
+                span  Know someone who can answer? Share a link to this
+                  a(class="know-link" href=`/questions/view/${question.id}`)  question
+                  | !
         else
           div(class="know-container")
             div(class="know-section")

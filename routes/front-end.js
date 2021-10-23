@@ -8,10 +8,18 @@ const { asyncHandler, csrfProtection } = require('./utils');
 const router = express.Router();
 
 // Front end route for home page
-router.get('/', (req, res) => {
-  //change index to home
-  res.render('index', { title: 'Stalk Overgrow' });
-});
+
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    const questions = await Question.findAll({
+      include: Answer,
+      order: [['updatedAt', 'DESC']],
+      limit: 15,
+    });
+    res.render('index', { title: 'Stalk Overgrow', questions });
+  })
+);
 
 // Front end route for sign up
 router.get(
@@ -52,7 +60,6 @@ router.get('/questions/ask', csrfProtection, async (req, res) => {
   });
 });
 
-
 // Front end route for a specific question
 
 //Front end route for getting the edit question page
@@ -68,6 +75,5 @@ router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
     csrfToken: req.csrfToken(),
   });
 });
-
 
 module.exports = router;
