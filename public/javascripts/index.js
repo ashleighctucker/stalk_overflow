@@ -6,7 +6,7 @@ const fetchQuestions = async () => {
   const questionsHeader = `
     <ul class="questions-header">
         <li> <h2 class="questions-title"> Top Questions </h2> </li>
-        <li> <button type="submit" class="ask-question-button"> <a href='/'> Ask a Question </a> </button> </li>
+        <li> <button type="submit" class="ask-question-button"> <a href='/questions/ask'> Ask a Question </a> </button> </li>
     </ul>
   `;
   const questionsHTML = questions.map((question) => {
