@@ -50,16 +50,15 @@ router.post(
     const questionToUpdate = await Question.findByPk(questionId);
 
     const { question, title, categoryId, userId } = req.body;
-
+    const { userId: currUserId } = req.session.auth;
     const newQuestion = {
       question,
       title,
       categoryId,
-      userId,
+      userId: currUserId,
     };
 
     const validatorErrors = validationResult(req);
-    const { userId: currUserId } = req.session.auth;
     console.log(currUserId !== questionToUpdate.userId);
     if (currUserId !== questionToUpdate.userId) {
       const err = new Error('Unauthorized');
@@ -70,7 +69,7 @@ router.post(
     }
     if (validatorErrors.isEmpty()) {
       await questionToUpdate.update(newQuestion);
-      res.redirect(`/questions/${questionId}`);
+      res.redirect(`/questions/view/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('question-edit', {
