@@ -41,17 +41,19 @@ router.get(
 
 // Front end route for asking a new question
 router.get('/questions/ask', csrfProtection, async (req, res) => {
-  // to do add a check that they are logged in, if not redirect them to log in
-  // if (!req.session.auth) {
-  //   res.redirect('/login');
-  // }
-  const question = Question.build();
+  if (!req.session.auth) {
+    res.redirect('/login');
+  }
+  const question = await Question.build();
   res.render('questions-ask', {
     title: 'Ask A Question',
     question,
     csrfToken: req.csrfToken(),
   });
 });
+
+
+// Front end route for a specific question
 
 //Front end route for getting the edit question page
 router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
@@ -66,5 +68,6 @@ router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
     csrfToken: req.csrfToken(),
   });
 });
+
 
 module.exports = router;
