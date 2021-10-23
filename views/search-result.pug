@@ -23,7 +23,7 @@ block content
                             each question in questions
                                 div(class="question-box")
                                     div(class="question-box-2")
-                                        a.search-link(class="search-result-link" href=`/questions/view/${question.id}` + question.id)
+                                        a.search-link(class="search-result-link" href=`/questions/view/${question.id}`
                                             h3(class="question-box-title")= question.title
                                             p(class="result-question")= question.question
             div(class="right-side")
