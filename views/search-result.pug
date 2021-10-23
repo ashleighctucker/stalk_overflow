@@ -15,15 +15,15 @@ block content
                 ul(class="questions-head")
                     li: h2(class="title")= listTitle
                 if error
+                    div Hello
                     +validationErrorSummary(error)
-                    p= error
                 else
                     if questions
                         div(class="search-result-questions")
                             each question in questions
                                 div(class="question-box")
                                     div(class="question-box-2")
-                                        a.search-link(class="search-result-link" href=`/questions/view/${question.id}`
+                                        a.search-link(class="search-result-link" href=`/questions/view/${question.id}`)
                                             h3(class="question-box-title")= question.title
                                             p(class="result-question")= question.question
             div(class="right-side")
