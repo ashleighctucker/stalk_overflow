@@ -43,9 +43,9 @@ block content
               ul(class="score-data")
                 li(class="question-score" id=`answer-${answer.id}-upvote`)
                   i(class="fas fa-chevron-up")
-                li(class="question-score") #{answer.answerScore ? answer.AnswerScore : 0}
+                li(class="question-score") #{answer.answerScore ? answer.answerScore : 0}
                 li(class="question-score" id=`answer-${answer.id}-downvote`)
-                  i(lass="fas fa-chevron-down")
+                  i(class="fas fa-chevron-down")
               div(class="curr-question-section")
                 p #{answer.title}
                 p #{answer.answer}
@@ -54,4 +54,4 @@ block content
                     button(class="login-button") Edit Answer
                     button(class="login-button") Delete Answer
         div(class="empty-right-bar")
-    script(src="/javascripts/questionview.js" type="module" defer)
+    script(src="/javascripts/voting.js" type="module")
