@@ -6,31 +6,24 @@ append head
 include utils
 
 block content
-    h3= listTitle
-    if error
-        +validationErrorSummary(error)
-        p= error
-    else
-        if questions
-        div(class="answer-question-result")
-            each question in questions
-                a.search-link(href="/questions/" + question.id)
-                    h3(class="question-title")= question.title
-                    p= question.question
-        //- each answer in answers
-    //-         a.search-link(href="/answers" + answer.id)
-        //-         h3(class="answer-title")= answer.title
-        //-         p= answer.answer
-        //- else
-        div(class="need-alert")
-            h3 You have no recipes
-        //- p Why don't you go and #[a(href="/question/new") make one]!
-//-         //- "p" needs editing
-
-//- //- ==================================================
-//- //- add css below:
-
-//- //- .undecorated,
-//- //- .undecorated:hover {
-//- //-   text-decoration: none;
-//- //- }
+    section(id="search-result-container")
+        div(id="content-container")
+            div(class="left-side")
+                li(class="side-bar-li side-bar-link"): a(href="/") Home
+                li(class="side-bar-li side-bar-link"): a(href="/search") Questions
+            div(class="center")
+                ul(class="questions-head")
+                    li: h2(class="title")= listTitle
+                if error
+                    +validationErrorSummary(error)
+                    p= error
+                else
+                    if questions
+                        div(class="search-result-questions")
+                            each question in questions
+                                div(class="question-box")
+                                    div(class="question-box-2")
+                                        a.search-link(class="search-result-link" href=`/questions/view/${question.id}` + question.id)
+                                            h3(class="question-box-title")= question.title
+                                            p(class="result-question")= question.question
+            div(class="right-side")
