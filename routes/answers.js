@@ -83,7 +83,7 @@ router.post(
   })
 );
 
-// Route for answer Upvote / Increment vote
+//* Route for answer Upvote / Increment vote
 router.post(
   `/answers/:answerId/upvote`,
   asyncHandler(async (req, res) => {
@@ -140,21 +140,19 @@ router.post(
       // ------ answer.update({ answerScore });
 
       // try {
-        if (hasVoted.vote === 1) {
-          hasVoted.update({ vote: 0});
-          answerScore--;
-          answer.update({ answerScore });
-        }
-        else if (hasVoted.vote === -1) {
-          hasVoted.update({ vote: 1});
-          answerScore += 2;
-          answer.update({ answerScore });
-        }
-        else if (hasVoted.vote === 0) {
-          hasVoted.update({ vote: 1});
-          answerScore++;
-          answer.update({ answerScore });
-        }
+      if (hasVoted.vote === 1) {
+        hasVoted.update({ vote: 0 });
+        answerScore--;
+        answer.update({ answerScore });
+      } else if (hasVoted.vote === -1) {
+        hasVoted.update({ vote: 1 });
+        answerScore += 2;
+        answer.update({ answerScore });
+      } else if (hasVoted.vote === 0) {
+        hasVoted.update({ vote: 1 });
+        answerScore++;
+        answer.update({ answerScore });
+      }
 
       // } catch (e){
       //   console.log(e)
@@ -165,4 +163,13 @@ router.post(
   })
 );
 
+//* Route for answer DownVote / Decrement vote
+// router.post(
+//   `/answers/:answerId/downvote`,
+//   asyncHandler(async (req, res) => {
+
+//   })
+// );
+
+//=============================================
 module.exports = router;

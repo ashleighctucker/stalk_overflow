@@ -1,12 +1,12 @@
-
+// answer upvote
 let answerContainerDivs = document.getElementsByClassName("answer-container");
 // console.log("wert", answerContainerDivs); // HTMLCollection
 
-
+// answer upvote
 let htmlCltnArray = Array.from(answerContainerDivs);
 // console.log(htmlCltnArray);
 
-
+// answer upvote
 htmlCltnArray.forEach((ele) => {
     let ulScoreData = ele.children[0].children; // HtmlCollection of UL. array
     // console.log(ulScoreData);
@@ -39,7 +39,7 @@ htmlCltnArray.forEach((ele) => {
         middleLIQScore.innerHTML = count;
     });
 
-    //update voting database
+    //update voting database ---- answers.js
 
 
 
