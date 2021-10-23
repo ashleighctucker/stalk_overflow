@@ -1,9 +1,9 @@
-const deleteQuestionButton = document.querySelector('#question-button-2');
+const deleteButton = document.querySelector('#question-button-2');
 
-const createConfirmDeleteButton = (questionId) => {
+const createConfirmDeleteButton = (id, target) => {
   const buttonContainer = document.querySelector('#question-button-1');
   const deletePost = document.createElement('form');
-  deletePost.action = `/questions/delete/${questionId}`;
+  deletePost.action = `/${target}/delete/${id}`;
   deletePost.method = 'POST';
   const confirmDeleteButton = document.createElement('input');
   confirmDeleteButton.type = 'submit';
@@ -27,14 +27,36 @@ const createCancelButton = () => {
   return buttonContainer;
 };
 
-deleteQuestionButton.addEventListener('click', (event) => {
+//deleting questions
+deleteButton.addEventListener('click', (event) => {
   let targetElement = event.target;
   let selector = '#delete-question-button';
   if (targetElement.matches(selector)) {
     const url = document.URL.split('/');
     const questionId = url[5];
     const buttonContainer = document.querySelector('.question-edit-buttons');
-    const confirmDeleteButton = createConfirmDeleteButton(questionId);
+    const confirmDeleteButton = createConfirmDeleteButton(
+      questionId,
+      'questions'
+    );
+    const cancelButton = createCancelButton();
+    const formDiv = document.createElement('div');
+    formDiv.className = 'confirm-delete-container';
+    formDiv.appendChild(confirmDeleteButton);
+    formDiv.appendChild(cancelButton);
+    buttonContainer.innerHTML = ``;
+    buttonContainer.appendChild(formDiv);
+  }
+});
+
+//deleting answers
+deleteButton.addEventListener('click', (event) => {
+  let targetElement = event.target;
+  let selector = '.delete-answer-button';
+  if (targetElement.matches(selector)) {
+    const answerId = parseInt(targetElement.id.split('-')[0], 10);
+    const buttonContainer = document.querySelector('.question-edit-buttons');
+    const confirmDeleteButton = createConfirmDeleteButton(answerId, 'answers');
     const cancelButton = createCancelButton();
     const formDiv = document.createElement('div');
     formDiv.className = 'confirm-delete-container';
