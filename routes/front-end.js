@@ -76,4 +76,18 @@ router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
   });
 });
 
+router.get('/answers/:id(\\d+)/edit', csrfProtection, async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const answer = await Answer.findOne({
+    where: { id: id },
+    include: Question,
+  });
+  res.render('answer-edit', {
+    title: `Edit Answer ${id}`,
+    question: answer.Question,
+    answer,
+    csrfToken: req.csrfToken(),
+  });
+});
+
 module.exports = router;
