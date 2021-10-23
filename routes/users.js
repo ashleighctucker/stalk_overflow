@@ -30,7 +30,6 @@ router.post(
       loginUser(req, res, user);
       res.redirect('/');
     } else {
-      console.log(validatorErrors);
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('sign-up', {
         title: 'Sign Up',

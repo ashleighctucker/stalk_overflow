@@ -50,6 +50,9 @@
 .side-bar-li {
   padding-top: 10px;
   font-size: 15px;
+}
+
+.side-bar-li a:any-link {
   color: rgb(82, 82, 82);
 }
 
@@ -122,6 +125,7 @@
 
 #footer-container {
   display: flex;
+  position: relative;
 }
 
 #name-list {
@@ -147,4 +151,13 @@
 
 .fa-github {
   color: #6e5494;
+}
+
+.error-messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  text-align: center;
 }

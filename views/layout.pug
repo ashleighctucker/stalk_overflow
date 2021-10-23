@@ -18,22 +18,27 @@ html
                     input(type="text" name="text" class="search-bar" placeholder="Search...")
                     input(type="submit" name="search-form" class="search-bar-submit-button" value="Search")
               //- li: input(type="submit"  form_id="search-form" class="search-bar-submit-button" value="Search")
-
-            ul(id="header-buttons-right")
-              li: button(type="submit" class="login-button"): a(href='/login') Log in
-              li: button(type="submit" class="signup-button"): a(href='/sign-up') Sign Up
+            if locals.authenticated
+              ul(class="signed-in")
+                li(id="usersName") Hi, #{user.fullName}!
+                li: form(action='/users/logout' method='post')
+                  button(type="submit" class="signup-button") Logout
+            else
+              ul(id="header-buttons-right" class="signed-out")
+                li: button(type="submit" class="login-button"): a(href='/login') Log in
+                li: button(type="submit" class="signup-button"): a(href='/sign-up') Sign Up
           block content
 
-          block footer 
-            #footer 
-              div(id="footer-container") 
-                ul(id="name-list") Created by:                 
-                  li Ashleigh Tucker 
+          block footer
+            #footer
+              div(id="footer-container")
+                ul(id="name-list") Created by:
+                  li Ashleigh Tucker
                     a(class="fab fa-linkedin social-links" target="_blank" href="https://www.linkedin.com/in/ashleighctucker/")
                     a(class="fab fa-github social-links" target="_blank" href="https://github.com/ashleighctucker")
                   li Patrick Wellman
                     a(class="fab fa-linkedin social-links" target="_blank" href="https://www.linkedin.com/in/patrick-wellman-1533551a2/")
                     a(class="fab fa-github social-links" target="_blank" href="https://github.com/patrickwellman")
                   li Sarah Yang
-                    a(class="fab fa-linkedin social-links" target="_blank" href="https://www.linkedin.com/in/sarahhhyang/")
+                    a(class="fab fa-linkedin social-links" target="_blank" href="https://www.linkedin.com/in/sarahhhhyang/")
                     a(class="fab fa-github social-links" target="_blank" href="https://github.com/Sarawwrrx3")

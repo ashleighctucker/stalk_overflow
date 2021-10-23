@@ -7,32 +7,16 @@ const { Question } = require('../db/models');
 const { asyncHandler, csrfProtection } = require('./utils');
 const { questionValidators } = require('./validators');
 
-
 const router = express.Router();
-
-// ================================================
-// moved to search.js
-// let searchRepo;
-// let loadingModuleError;
-// try {
-//   searchRepo = require("./search");
-// } catch (e) {
-//   console.error(e);
-//   loadingModuleError = `An error was raised "${e.message}". Check the console for details.`;
-// }
-
-// ================================================
-// TODO: NEED get route
-// router.get('/:id', async (req, res) => {
-//   res.json(`this is question with id of ${req.params.id}.`)
-// })
 
 //API endpoint for posting/adding a new question
 router.post(
   '/',
+  csrfProtection,
   questionValidators,
   asyncHandler(async (req, res) => {
-    const { question, title, categoryId, userId } = req.body;
+    const { question, title, categoryId } = req.body;
+    const { userId } = req.session.auth;
     const newQuestion = Question.build({
       question,
       title,
@@ -43,8 +27,14 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await newQuestion.save();
-      //todo: add redirect to specific question page
-      res.redirect('/');
+      const thisQuestion = await Question.findOne({
+        where: {
+          question,
+          title,
+          userId,
+        },
+      });
+      res.redirect(`/questions/view/${thisQuestion.id}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('questions-ask', {
@@ -66,32 +56,31 @@ router.post(
     const questionToUpdate = await Question.findByPk(questionId);
 
     const { question, title, categoryId, userId } = req.body;
-
+    const { userId: currUserId } = req.session.auth;
     const newQuestion = {
       question,
       title,
       categoryId,
-      userId,
+      userId: currUserId,
     };
 
     const validatorErrors = validationResult(req);
-    const { userId: currUserId } = req.session.auth;
-    //uncoment out to make sure this is the right person to edit
-    // if (currUserId !== questionToUpdate.userId) {
-    //   const err = new Error('Unauthorized');
-    //   err.status = 401;
-    //   err.message = 'You are not authorized to edit this Question.';
-    //   err.title = 'Unauthorized';
-    //   throw err;
-    // }
+    console.log(currUserId !== questionToUpdate.userId);
+    if (currUserId !== questionToUpdate.userId) {
+      const err = new Error('Unauthorized');
+      err.status = 401;
+      err.message = 'Whoops! You do not have permission to edit this question.';
+      err.title = 'Unauthorized';
+      throw err;
+    }
     if (validatorErrors.isEmpty()) {
       await questionToUpdate.update(newQuestion);
-      res.redirect(`/questions/${questionId}`);
+      res.redirect(`/questions/view/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('question-edit', {
         title: 'Edit Question',
-        question,
+        question: newQuestion,
         errors,
         csrfToken: req.csrfToken(),
       });
@@ -109,31 +98,5 @@ router.post(
     res.redirect('/');
   })
 );
-
-
-// ================= SEARCH =========================
-// moved to search.js
-
-// router.get('/search', async (req, res) => {
-//   let error = loadingModuleError;
-//   let questions;
-//   let answers;
-//   try {
-//     questions = await searchRepo.searchQuestions(`%${req.query.term}%`);
-//     answers = await searchRepo.findAnswer(`%${req.query.term}%`);
-//   } catch (e) {
-//     console.error(e);
-//     error = `An error ocurred that reads "${e.message}". Check the console for more details.`;
-//   }
-//   res.render("search-result.pug", {
-//     listTitle: "Search Results",
-//     error,
-//     questions,
-//     answers,
-//   });
-// });
-
-// ==================================================
-
 
 module.exports = router;

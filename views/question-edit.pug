@@ -1,12 +1,17 @@
 extends layout
 
+include utils
+
 block content
-    div(id="big-container")
-        div(id='question-container')
-            h3 #{title}
-            h3(class='question' name='question') #{question}
-        div(id='edit-question-container')
-            h3 Your New Question:
-            textarea(name='answer' class='question-textarea')
-            button(href='/' class='cancel-button') Cancel
-            button(type='submit' class='question-button') Post Your Question
+  section()
+    div(class="ask-question-container")
+      div(class="ask-question-form")
+        form(action=`/questions/edit/${question.id}` method='POST' class="ask-question")
+          +validationErrorSummary(errors)
+          input(type='hidden' name='_csrf' value=csrfToken )
+          h1(id="form-title") Edit Question
+          input(type="text" name="title" class="question-title-input" value=question.title  placeholder="Question title")
+          textarea(id="ask-question-field" name="question" value=question.question ) #{question.question}
+          input(type='hidden' name='userId' default=locals.user.id)
+          button(id="question-ask-button") Submit
+    

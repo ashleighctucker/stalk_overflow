@@ -8,10 +8,18 @@ const { asyncHandler, csrfProtection } = require('./utils');
 const router = express.Router();
 
 // Front end route for home page
-router.get('/', (req, res) => {
-  //change index to home
-  res.render('index', { title: 'Stalk Overgrow' });
-});
+
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    const questions = await Question.findAll({
+      include: Answer,
+      order: [['updatedAt', 'DESC']],
+      limit: 15,
+    });
+    res.render('index', { title: 'Stalk Overgrow', questions });
+  })
+);
 
 // Front end route for sign up
 router.get(
@@ -41,11 +49,10 @@ router.get(
 
 // Front end route for asking a new question
 router.get('/questions/ask', csrfProtection, async (req, res) => {
-  // to do add a check that they are logged in, if not redirect them to log in
-  // if (!req.session.auth) {
-  //   res.redirect('/login');
-  // }
-  const question = Question.build();
+  if (!req.session.auth) {
+    res.redirect('/login');
+  }
+  const question = await Question.build();
   res.render('questions-ask', {
     title: 'Ask A Question',
     question,
@@ -54,18 +61,19 @@ router.get('/questions/ask', csrfProtection, async (req, res) => {
 });
 
 // Front end route for a specific question
-// router.get(
-//   '/questions/:id(\\d+)',
-//   asyncHandler(async (req, res) => {
-//     const questionId = parseInt(req.params.id, 10);
-//     const question = await Question.findByPk(questionId);
-//     const answers = await Answer.findAll({
-//       where: { questionId },
-//     });
-//     //to do: grab comments for question AND each answer to pass in to res.render;
-//   })
-// );
 
-//to-do add edit a question page, or do we want to try to make this more dynamic with js?
+//Front end route for getting the edit question page
+router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const question = await Question.findOne({
+    where: { id: id },
+    include: Answer,
+  });
+  res.render('question-edit', {
+    title: `Edit Question ${id}`,
+    question,
+    csrfToken: req.csrfToken(),
+  });
+});
 
 module.exports = router;
