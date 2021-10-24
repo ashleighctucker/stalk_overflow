@@ -35,7 +35,7 @@ block content
         if locals.user && question.userId !== locals.user.id
           div(class="know-container")
             ul(class="score-data")
-              li: button(type="submit" class="ask-question-button"): a(href='/') Answer This Question
+              li: button(type="submit" class="ask-question-button"): a(href=`/questions/${question.id}/answer`) Answer This Question
         if question.Answers.length < 1
           div(class="know-container")
             div(class="know-section")
