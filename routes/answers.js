@@ -90,6 +90,7 @@ router.post(
 
     // check if the user already voted
     const { userId } = req.session.auth;
+
     const hasVoted = await Vote.findOne({
       where: {
         userId,
@@ -107,7 +108,7 @@ router.post(
         answerId: answerId,
         vote: 1, //up vote
       });
-      res.json({ answerScore: answer.answerScore });
+      return res.json({ answerScore: answer.answerScore });
     } else {
       if (hasVoted.vote === 1) {
         await hasVoted.update({ vote: 0 });
@@ -122,9 +123,8 @@ router.post(
         answerScore++;
         await answer.update({ answerScore });
       }
-      res.json({ answerScore: answer.answerScore });
+      return res.json({ answerScore: answer.answerScore });
     }
-    return;
   })
 );
 
@@ -135,6 +135,7 @@ router.post(
 
     // check if the user already voted
     const { userId } = req.session.auth;
+
     const hasVoted = await Vote.findOne({
       where: {
         userId,

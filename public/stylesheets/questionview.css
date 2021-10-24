@@ -41,12 +41,13 @@
 
 .question-score {
   text-align: center;
-  list-style-type:none;
+  list-style-type: none;
 }
 
 .answer-score {
   text-align: center;
 }
+
 .question-score.current {
   text-align: center;
   font-size: .7rem;
@@ -72,4 +73,8 @@
 
 .button-EL-div {
   width: fit-content;
+}
+
+.logged-out-score {
+  font-size: .75rem;
 }

@@ -1,3 +1,4 @@
+
 const deleteButton = document.querySelector('#question-button-2');
 
 const createConfirmDeleteButton = (id, target) => {
@@ -66,4 +67,3 @@ deleteButton.addEventListener('click', (event) => {
     buttonContainer.appendChild(formDiv);
   }
 });
-

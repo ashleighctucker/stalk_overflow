@@ -14,13 +14,6 @@ block content
             button(type="submit" class="ask-question-button"): a(href='/questions/ask') Ask a Question
         div(class="question-container")
           ul(class="question-score-data")
-            li(class="question-score" id=`answer-${question.id}-upvote`)
-              //- a(id="question-upvote" class="upvote")
-              i(class="fas fa-chevron-up")
-            li(class="question-score") #{question.questionScore ? question.questionScore : 0}
-            li(class="question-score" id=`answer-${question.id}-downvote`)
-              //- a(id="question-downvote" class="downvote")
-              i(class="fas fa-chevron-down")
           div(class="curr-question-section")
             p #{question.question}
             if locals.authenticated
@@ -48,11 +41,15 @@ block content
           each answer in question.Answers
             div(class="answer-container")
               ul(class="score-data")
-                li(class="answer-score" id=`answer-${answer.id}-upvote`)
-                  i(class="fas fa-chevron-up")
+                if locals.autenticated
+                  i(class="answer-score" id=`answer-${answer.id}-upvote`)
+                    i(class="fas fa-chevron-up")
                 li(class="answer-score") #{answer.answerScore ? answer.answerScore : 0}
-                li(class="answer-score" id=`answer-${answer.id}-downvote`)
-                  i(class="fas fa-chevron-down")
+                if locals.autenticated
+                  li(class="answer-score" id=`answer-${answer.id}-downvote`)
+                    i(class="fas fa-chevron-down")
+                else
+                  li(class="answer-score logged-out-score" ) Score
               div(class="curr-question-section")
                 p #{answer.title}
                 p #{answer.answer}
@@ -64,6 +61,7 @@ block content
                       div(id="question-button-2" class="button-EL-div")
                         button(class="login-button delete-answer-button" id=`${answer.id}-delete`  ) Delete Answer
       div(class="empty-right-bar")
-    script(src="/javascripts/questionview.js" type="module" defer)
-    script(src="/javascripts/canceldelete.js" type="module" defer)
-    script(src="/javascripts/voting.js" type="module" defer)
+    if locals.authenticated
+      script(src="/javascripts/questionview.js" type="module" defer)
+      script(src="/javascripts/canceldelete.js" type="module" defer)
+      script(src="/javascripts/voting.js" type="module" defer)
