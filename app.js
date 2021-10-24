@@ -58,7 +58,7 @@ app.use('/users', usersRouter);
 app.use(function (req, res, next) {
   const err = new Error('The requested page could not be found.');
   err.status = 404;
-  next(err);
+  return next(err);
 });
 
 // error handler
@@ -73,6 +73,7 @@ app.use(function (err, req, res, next) {
     title: 'Oops!',
     environment,
   });
+  return null;
 });
 
 module.exports = app;

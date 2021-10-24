@@ -86,6 +86,7 @@ router.post(
 
 router.post('/logout', (req, res) => {
   logoutUser(req, res);
+  console.log('Here!');
   res.redirect('/');
 });
 

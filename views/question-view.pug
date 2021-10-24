@@ -62,9 +62,9 @@ block content
                   if answer.userId === locals.user.id
                     div(class="question-edit-buttons")
                       div(id="question-button-1" class="button-EL-div")
-                        button(class="login-button" class="edit-answer-button" id=`${answer.id}-edit`): a(href=`/answers/${answer.id}/edit`) Edit Answer
+                        button(class="login-button edit-answer-button" id=`${answer.id}-edit` ): a(href=`/answers/${answer.id}/edit`) Edit Answer
                       div(id="question-button-2" class="button-EL-div")
-                        button(class="login-button" class="delete-answer-button" id=`${answer.id}-delete`) Delete Answer
+                        button(class="login-button delete-answer-button" id=`${answer.id}-delete`  ) Delete Answer
       div(class="empty-right-bar")
     script(src="/javascripts/questionview.js" type="module" defer)
     script(src="/javascripts/canceldelete.js" type="module" defer)
