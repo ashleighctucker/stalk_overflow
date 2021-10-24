@@ -167,7 +167,6 @@ router.post(
 
 //? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
 //* Route for Answers ------ DownVote / Decrement vote
 router.post(
   `/answers/:answerId/downvote`,
@@ -247,7 +246,6 @@ router.post(
     return;
   })
 );
-
 
 //=============================================
 module.exports = router;

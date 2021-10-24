@@ -41,6 +41,7 @@
 
 .question-score {
   text-align: center;
+  list-style-type:none;
 }
 
 .answer-score {
