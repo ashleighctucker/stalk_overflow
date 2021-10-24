@@ -109,7 +109,7 @@ router.get(
       where: { userId, questionId: question.id },
     });
     if (testAnswer) {
-      res.redirect(`/answers/${testAnswer.id}/edit`);
+      return res.redirect(`/answers/${testAnswer.id}/edit`);
     }
     const answer = Answer.build();
     res.render('answer-question', {
