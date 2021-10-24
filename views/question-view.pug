@@ -43,14 +43,14 @@ block content
             div(class="answer-container")
               ul(class="score-data")
                 li(class="answer-score" id=`answer-${answer.id}-upvote`)
-                  if locals.autenticated
+                  if locals.authenticated
                     i(class="fas fa-chevron-up")
                 li(class="answer-score") #{answer.answerScore ? answer.answerScore : 0}
                   li(class="answer-score" id=`answer-${answer.id}-downvote`)
-                    if locals.autenticated
+                    if locals.authenticated
                       i(class="fas fa-chevron-down")
                     else
-                      li(class="answer-score logged-out-score" ) Score
+                      p Score 
               div(class="curr-question-section")
                 p #{answer.title}
                 p #{answer.answer}
