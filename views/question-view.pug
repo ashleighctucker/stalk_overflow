@@ -17,13 +17,13 @@ block content
           div(class="curr-question-section")
             p #{question.question}
             if locals.authenticated
-              div(class="question-edit-buttons")
+              div(class="question-edit-buttons" id=`${question.id}-question-edit-container`)
                 div(id="question-button-1" class="button-EL-div")
                   if question.userId === locals.user.id
                     button(class="login-button" id="edit-question-button"): a(href=`/questions/${question.id}/edit`) Edit Question
                 div(id="question-button-2" class="button-EL-div")
                   if question.userId === locals.user.id
-                    button(class="login-button" id="delete-question-button") Delete Question
+                    button(class="login-button delete-question-button" id=`${question.id}-delete`) Delete Question
         if locals.user && question.userId !== locals.user.id
           div(class="know-container")
             ul(class="score-data")
@@ -55,15 +55,14 @@ block content
                 p #{answer.title}
                 p #{answer.answer}
                 if locals.authenticated
-                  div(class="question-edit-buttons")
-                    div(id="question-button-1" class="button-EL-div")
+                  div(class="question-edit-buttons" id=`${answer.id}-answer-edit-container`)
+                    div(id=`${answer.id}-answer-button-1` class="button-EL-div edit-answer")
                       if answer.userId === locals.user.id
                         button(class="login-button edit-answer-button" id=`${answer.id}-edit` ): a(href=`/answers/${answer.id}/edit`) Edit Answer
-                    div(id="question-button-2" class="button-EL-div")
+                    div(id=`${answer.id}-answer-button-2` class="button-EL-div delete-answer")
                       if answer.userId === locals.user.id
-                        button(class="login-button delete-answer-button" id=`${answer.id}-delete`  ) Delete Answer
+                        button(class="login-button delete-answer-button" id=`${answer.id}-delete`) Delete Answer
       div(class="empty-right-bar")
-    if locals.authenticated
-      script(src="/javascripts/questionview.js" type="module" defer)
-      script(src="/javascripts/canceldelete.js" type="module" defer)
-      script(src="/javascripts/voting.js" type="module" defer)
+    script(src="/javascripts/questionview.js" type="module" defer)
+    script(src="/javascripts/canceldelete.js" type="module" defer)
+    script(src="/javascripts/voting.js" type="module" defer)
