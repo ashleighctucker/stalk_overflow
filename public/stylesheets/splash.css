@@ -86,6 +86,9 @@
   font-family: "Bree Serif", serif;
   color: #3fa922;
 }
+.small-text {
+  font-family: "Bree Serif", serif;
+}
 
 #third-box {
   display: flex;
