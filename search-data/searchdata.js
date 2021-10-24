@@ -1,9 +1,8 @@
-const { Answer, Category, Question, User } = require('../db/models');
+const { Question } = require('../db/models');
 
 const { Op } = require('sequelize');
 
 async function searchQuestions(term) {
-  // search for questions with the given term in its title
   const questionsTitle = await Question.findAll({
     where: {
       title: { [Op.iLike]: `%${term}%` },
