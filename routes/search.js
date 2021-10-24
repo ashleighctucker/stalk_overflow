@@ -1,64 +1,47 @@
 //External Imports
-const express = require("express");
+const express = require('express');
 
 //Internal Imports
-const { Answer, Category, Question, User } = require("../db/models");
+const { Question } = require('../db/models');
+const { asyncHandler } = require('../routes/utils');
+const searchRepo = require('../search-data/searchdata');
 
-// const { csrfProtection, asyncHandler } = require("../utils");
-
-const Sequelize = require("sequelize");
-const { Op } = require("sequelize");
 const router = express.Router();
-// ================= SEARCH =========================
 
-const {
-  searchQuestions,
-  //   findAnswer,
-} = require("../search-data/searchdata");
-//TODO - take out any that you are not using
-
-let searchRepo;
-let loadingModuleError;
-try {
-  searchRepo = require("../search-data/searchdata");
-} catch (e) {
-  console.error(e);
-  loadingModuleError = `An error was raised "${e.message}". Check the console for details.`;
-}
-
-router.get("/search", async (req, res) => {
-  res.render("search-result.pug", {
-    listTitle: "Search Results",
-    //   error,
-    questions: [],
-    //   answers,
+router.get('/search', async (req, res) => {
+  const questions = await Question.findAll({
+    order: [['createdAt', 'DESC']],
+    limit: 15,
+  });
+  res.render('search-result.pug', {
+    listTitle: 'Search Results',
+    questions: questions,
   });
 });
-router.post("/search", async (req, res) => {
-  res.render("search-result.pug", {
-    listTitle: "Search Results",
-    //   error,
-    questions: [],
-    //   answers,
+
+router.post('/search', async (req, res) => {
+  const questions = await Question.findAll({
+    order: [['createdAt', 'DESC']],
+    limit: 15,
   });
-})
-
-
-router.all("/search/:searchTerm", async (req, res) => {
-  //   let error = loadingModuleError;
-  let questions;
-
-  let searchData = req.params.searchTerm;
-  console.log("sdfgg", searchData);
-
-  questions = await searchRepo.searchQuestions(`%${searchData}%`);
-  // --------------------------
-  res.render("search-result.pug", {
-    listTitle: "Search Results",
-    //   error,
-    questions,
-    //   answers,
+  res.render('search-result.pug', {
+    listTitle: 'Search Results',
+    questions: questions,
   });
 });
+
+router.all(
+  '/search/:searchTerm',
+  asyncHandler(async (req, res) => {
+    const searchData = req.params.searchTerm;
+
+    const questions = await searchRepo.searchQuestions(`%${searchData}%`);
+
+    res.render('search-result.pug', {
+      listTitle: 'Search Results',
+      questions,
+    });
+  })
+);
 
 module.exports = router;

@@ -5,18 +5,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 //Internal Imports:
 const { sequelize } = require('./db/models');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const answersRouter = require('./routes/answers');
 const frontEndRouter = require('./routes/front-end');
 const questionsRouter = require('./routes/questions');
 const searchRouter = require('./routes/search');
 const usersRouter = require('./routes/users');
 const { environment } = require('./config/index.js');
-//temp router
-const holdRouter = require('./routes/holdquestions');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
 
@@ -30,9 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(sessionSecret));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// set up session middleware
 const store = new SequelizeStore({ db: sequelize });
-
 app.use(
   session({
     secret: sessionSecret,
@@ -42,15 +38,11 @@ app.use(
   })
 );
 
-// create Session table if it doesn't already exist
 store.sync();
-
 app.use(searchRouter);
 app.use(restoreUser);
 app.use(answersRouter);
 app.use(frontEndRouter);
-//temp router
-app.use(holdRouter);
 app.use('/questions', questionsRouter);
 app.use('/users', usersRouter);
 
@@ -58,7 +50,7 @@ app.use('/users', usersRouter);
 app.use(function (req, res, next) {
   const err = new Error('The requested page could not be found.');
   err.status = 404;
-  next(err);
+  return next(err);
 });
 
 // error handler
@@ -67,12 +59,12 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   console.log(environment);
-  // render the error page
   res.status(err.status || 500);
   res.render('error', {
     title: 'Oops!',
     environment,
   });
+  return null;
 });
 
 module.exports = app;

@@ -19,6 +19,7 @@
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 0 12px 1px rgb(199, 199, 199);
+  width: fit-content;
 }
 
 #form-title {
@@ -48,17 +49,17 @@
   border-radius: 2px;
 }
 
-#answer-question-question{
+#answer-question-question {
   margin-left: 10px;
   margin-right: 10px;
   width: 400px;
   color: #008fc3;
 }
 
-.ask-question-form{
+.ask-question-form {
   max-width: 400px;
 }
 
-.form-title{
+.form-title {
   color: #0063bf;
 }

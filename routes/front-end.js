@@ -12,7 +12,6 @@ router.get("/splash", (req, res) => {
 });
 
 // Front end route for home page
-
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -65,6 +64,15 @@ router.get("/questions/ask", csrfProtection, async (req, res) => {
 });
 
 // Front end route for a specific question
+router.get('/questions/view/:id(\\d+)', async (req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const question = await Question.findOne({
+    where: { id: questionId },
+    include: Answer,
+  });
+
+  res.render('question-view', { title: question.title, question });
+});
 
 //Front end route for getting the edit question page
 router.get("/questions/:id(\\d+)/edit", csrfProtection, async (req, res) => {
@@ -85,11 +93,21 @@ router.get(
   "/questions/:id(\\d+)/answer",
   csrfProtection,
   asyncHandler(async (req, res) => {
+    if (!req.session.auth) {
+      res.redirect('/login');
+    }
     const id = parseInt(req.params.id, 10);
     const question = await Question.findOne({
       where: { id: id },
       include: Answer,
     });
+    const { userId } = req.session.auth;
+    const testAnswer = await Answer.findOne({
+      where: { userId, questionId: question.id },
+    });
+    if (testAnswer) {
+      res.redirect(`/answers/${testAnswer.id}/edit`);
+    }
     const answer = Answer.build();
     res.render("answer-question", {
       title: `${question.title}`,
