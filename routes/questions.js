@@ -75,7 +75,7 @@ router.post(
     }
     if (validatorErrors.isEmpty()) {
       await questionToUpdate.update(newQuestion);
-      res.redirect(`/questions/view/${questionId}`);
+      return res.redirect(`/questions/view/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render("question-edit", {
@@ -95,7 +95,7 @@ router.post(
     const questionId = parseInt(req.params.id, 10);
     const question = await Question.findByPk(questionId);
     await question.destroy();
-    res.redirect("/");
+    return res.redirect("/");
   })
 );
 

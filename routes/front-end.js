@@ -56,7 +56,7 @@ router.get(
 // Front end route for asking a new question
 router.get('/questions/ask', csrfProtection, async (req, res) => {
   if (!req.session.auth) {
-    res.redirect('/login');
+    return res.redirect('/login');
   }
   const question = await Question.build();
   return res.render('questions-ask', {
@@ -97,7 +97,7 @@ router.get(
   csrfProtection,
   asyncHandler(async (req, res) => {
     if (!req.session.auth) {
-      res.redirect('/login');
+      return res.redirect('/login');
     }
     const id = parseInt(req.params.id, 10);
     const question = await Question.findOne({
