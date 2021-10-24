@@ -13,7 +13,7 @@ router.get('/search', async (req, res) => {
     order: [['createdAt', 'DESC']],
     limit: 15,
   });
-  res.render('search-result.pug', {
+  return res.render('search-result.pug', {
     listTitle: 'Search Results',
     questions: questions,
   });
@@ -24,7 +24,7 @@ router.post('/search', async (req, res) => {
     order: [['createdAt', 'DESC']],
     limit: 15,
   });
-  res.render('search-result.pug', {
+  return res.render('search-result.pug', {
     listTitle: 'Search Results',
     questions: questions,
   });
@@ -37,7 +37,7 @@ router.all(
 
     const questions = await searchRepo.searchQuestions(`%${searchData}%`);
 
-    res.render('search-result.pug', {
+    return res.render('search-result.pug', {
       listTitle: 'Search Results',
       questions,
     });

@@ -24,10 +24,10 @@ router.post(
     const question = await Question.findByPk(questionId);
     if (validatorErrors.isEmpty()) {
       await newAnswer.save();
-      res.redirect(`/questions/view/${questionId}`);
+      return res.redirect(`/questions/view/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('answer-question', {
+      return res.render('answer-question', {
         title: 'Answer',
         question,
         answer: newAnswer,
@@ -59,10 +59,10 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await answerToUpdate.update(newAnswer);
-      res.redirect(`/questions/view/${questionId}`);
+      return res.redirect(`/questions/view/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('answer-edit', {
+      return res.render('answer-edit', {
         title: `Edit Answer ${answer.id}`,
         answer,
         errors,
@@ -79,7 +79,7 @@ router.post(
     const answerId = parseInt(req.params.id, 10);
     const answer = await Answer.findByPk(answerId);
     await answer.destroy();
-    res.redirect('/');
+    return res.redirect('/');
   })
 );
 

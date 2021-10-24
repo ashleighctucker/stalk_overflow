@@ -26,10 +26,10 @@ router.post(
       user.hashedPassword = hashedPassword;
       await user.save();
       loginUser(req, res, user);
-      res.redirect('/');
+      return res.redirect('/');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('sign-up', {
+      return res.render('sign-up', {
         title: 'Sign Up',
         user,
         errors,
@@ -67,7 +67,7 @@ router.post(
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
     }
-    res.render('login', {
+    return res.render('login', {
       title: 'Login',
       userName,
       errors,
@@ -78,8 +78,7 @@ router.post(
 
 router.post('/logout', (req, res) => {
   logoutUser(req, res);
-  console.log('Here!');
-  res.redirect('/');
+  return res.redirect('/');
 });
 
 module.exports = router;
