@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: center;
   width: 95vw;
-  height: 95vh;
+  height: 88vh;
   background-image: linear-gradient(rgb(21, 21, 21), rgb(60, 60, 60));
   border-radius: 5px;
 }
@@ -143,6 +143,7 @@
   height: 50px;
   width: 170px;
   font-size: 15px;
+  margin: 3px;
   border-radius: 5px;
 }
 
