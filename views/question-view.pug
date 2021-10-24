@@ -16,11 +16,11 @@ block content
             button(type="submit" class="ask-question-button"): a(href='/questions/ask') Ask a Question
         div(class="question-container")
           ul(class="score-data")
-            li(class="question-score")
+            li(class="question-score" id=`answer-${question.id}-upvote`)
               a(id="question-upvote" class="upvote")
                 i(class="fas fa-chevron-up")
             li(class="question-score") #{question.questionScore ? question.questionScore : 0}
-            li(class="question-score")
+            li(class="question-score" id=`answer-${question.id}-downvote`)
               a(id="question-downvote" class="downvote")
                 i(class="fas fa-chevron-down")
           div(class="curr-question-section")
