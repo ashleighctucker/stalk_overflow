@@ -17,11 +17,12 @@ block content
           div(class="curr-question-section")
             p #{question.question}
             if locals.authenticated
-              if question.userId === locals.user.id
-                div(class="question-edit-buttons")
-                  div(id="question-button-1" class="button-EL-div")
+              div(class="question-edit-buttons")
+                div(id="question-button-1" class="button-EL-div")
+                  if question.userId === locals.user.id
                     button(class="login-button" id="edit-question-button"): a(href=`/questions/${question.id}/edit`) Edit Question
-                  div(id="question-button-2" class="button-EL-div")
+                div(id="question-button-2" class="button-EL-div")
+                  if question.userId === locals.user.id
                     button(class="login-button" id="delete-question-button") Delete Question
         if locals.user && question.userId !== locals.user.id
           div(class="know-container")
@@ -41,24 +42,25 @@ block content
           each answer in question.Answers
             div(class="answer-container")
               ul(class="score-data")
-                if locals.autenticated
-                  i(class="answer-score" id=`answer-${answer.id}-upvote`)
+                li(class="answer-score" id=`answer-${answer.id}-upvote`)
+                  if locals.autenticated
                     i(class="fas fa-chevron-up")
                 li(class="answer-score") #{answer.answerScore ? answer.answerScore : 0}
-                if locals.autenticated
                   li(class="answer-score" id=`answer-${answer.id}-downvote`)
-                    i(class="fas fa-chevron-down")
-                else
-                  li(class="answer-score logged-out-score" ) Score
+                    if locals.autenticated
+                      i(class="fas fa-chevron-down")
+                    else
+                      li(class="answer-score logged-out-score" ) Score
               div(class="curr-question-section")
                 p #{answer.title}
                 p #{answer.answer}
                 if locals.authenticated
-                  if answer.userId === locals.user.id
-                    div(class="question-edit-buttons")
-                      div(id="question-button-1" class="button-EL-div")
+                  div(class="question-edit-buttons")
+                    div(id="question-button-1" class="button-EL-div")
+                      if answer.userId === locals.user.id
                         button(class="login-button edit-answer-button" id=`${answer.id}-edit` ): a(href=`/answers/${answer.id}/edit`) Edit Answer
-                      div(id="question-button-2" class="button-EL-div")
+                    div(id="question-button-2" class="button-EL-div")
+                      if answer.userId === locals.user.id
                         button(class="login-button delete-answer-button" id=`${answer.id}-delete`  ) Delete Answer
       div(class="empty-right-bar")
     if locals.authenticated
