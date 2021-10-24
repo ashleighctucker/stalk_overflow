@@ -99,4 +99,174 @@ router.post(
   })
 );
 
+
+
+//? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//* Route for Questions ----- Upvote / Increment vote
+router.post(
+  `/questions/:answerId/upvote`,
+  asyncHandler(async (req, res) => {
+    //update the score inside pug
+    const { answerId } = req.params; // from ----- /questions/:answerId/upvote & pug (middlie li)
+
+    // check if the user already voted
+    let userId = req.session.auth.userId;
+    const hasVoted = await Vote.findOne({
+      where: {
+        userId: Number(userId),
+        answerId: Number(answerId),
+      },
+    });
+
+    const answer = await Answer.findByPk(answerId);
+    let answerScore = answer.answerScore;
+    // console.log("wert", userId, answerId, hasVoted);
+    if (!hasVoted) {
+      // have NOT voted
+      // updates  the score
+      answerScore++;
+      answer.update({ answerScore });
+
+      // if a user has NOT voted, update Vote table
+      await Vote.create({
+        userId: userId,
+        answerId: answerId,
+        vote: 1, //up vote
+      });
+      // send answerScore to the front end
+      res.json({ answerScore: answer.answerScore });
+      // return;
+    } else {
+      // if they HAVE voted. no update. can't vote again
+      // console.log("gdf", hasVoted);
+
+      //(1) if hasVote.vote = 1,
+      // ------ set hasVote.vote = 0.(update)
+      // ------ decrement the score
+      // ------ answerScore--;
+      // ------ answer.update({ answerScore });
+
+      // (2) else if hasVote.vote = -1
+      // ------ set hasVote.vote = 1.(update)
+      // ------ increment the score
+      // ------ answerScore += 2;
+      // ------ answer.update({ answerScore });
+
+      // (3) else if hasVote.vote = 0
+      // ------ set hasVote.vote = 1.(update)
+      // ------ increment the score
+      // ------ answerScore++;
+      // ------ answer.update({ answerScore });
+
+      // try {
+      if (hasVoted.vote === 1) {
+        hasVoted.update({ vote: 0 });
+        answerScore--;
+        answer.update({ answerScore });
+      } else if (hasVoted.vote === -1) {
+        hasVoted.update({ vote: 1 });
+        answerScore += 2;
+        answer.update({ answerScore });
+      } else if (hasVoted.vote === 0) {
+        hasVoted.update({ vote: 1 });
+        answerScore++;
+        answer.update({ answerScore });
+      }
+
+      // } catch (e){
+      //   console.log(e)
+      // }
+      res.json({ answerScore: answer.answerScore });
+    }
+    return;
+  })
+);
+
+//? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+//* Route for Questions ------ DownVote / Decrement vote
+
+// router.post(
+//   `/questions/:answerId/downvote`,
+//   asyncHandler(async (req, res) => {
+//     //update the score inside pug
+//     const { answerId } = req.params; // from ----- /questions/:answerId/upvote & pug (middlie li)
+
+//     // check if the user already voted
+//     let userId = req.session.auth.userId;
+//     const hasVoted = await Vote.findOne({
+//       where: {
+//         userId: Number(userId),
+//         answerId: Number(answerId),
+//       },
+//     });
+
+//     const answer = await Answer.findByPk(answerId); // from req.params ?
+//     let answerScore = answer.answerScore; // (__.____) 2nd one is from Model
+//     // console.log("wert", userId, answerId, hasVoted);
+//     if (!hasVoted) {
+//       // have NOT voted
+//       // updates  the score
+//       answerScore--;
+//       answer.update({ answerScore });
+
+//       // if a user has NOT voted, update Vote table
+//       await Vote.create({
+//         userId: userId,
+//         answerId: answerId,
+//         vote: -1, //up vote
+//       });
+//       // send answerScore to the front end
+//       res.json({ answerScore: answer.answerScore });
+//       // return;
+//     } else {
+//       // if they HAVE voted. no update. can't vote again
+//       // console.log("gdf", hasVoted);
+
+//       //(1) if hasVote.vote = -1,
+//       // ------ set hasVote.vote = 0.(update)
+//       // ------ increment the score
+//       // ------ answerScore++;
+//       // ------ answer.update({ answerScore });
+
+//       // (2) else if hasVote.vote = 1
+//       // ------ set hasVote.vote = -1.(update)
+//       // ------ decrement the score
+//       // ------ answerScore -= 2;
+//       // ------ answer.update({ answerScore });
+
+//       // (3) else if hasVote.vote = 0
+//       // ------ set hasVote.vote = -1.(update)
+//       // ------ decrement the score
+//       // ------ answerScore--;
+//       // ------ answer.update({ answerScore });
+
+//       // try {
+//       if (hasVoted.vote === -1) {
+//         hasVoted.update({ vote: 0 });
+//         answerScore++;
+//         answer.update({ answerScore });
+//       } else if (hasVoted.vote === 1) {
+//         hasVoted.update({ vote: -1 });
+//         answerScore--;
+//         answer.update({ answerScore });
+//       } else if (hasVoted.vote === 0) {
+//         hasVoted.update({ vote: -1 });
+//         answerScore--;
+//         answer.update({ answerScore });
+//       }
+
+//       // } catch (e){
+//       //   console.log(e)
+//       // }
+//       res.json({ answerScore: answer.answerScore });
+//     }
+//     return;
+//   })
+// );
+
+
+//=============================================
 module.exports = router;
