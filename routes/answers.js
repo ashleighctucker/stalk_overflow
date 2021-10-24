@@ -83,14 +83,10 @@ router.post(
   })
 );
 
-//? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-//* Route for Answers ----- Upvote / Increment vote
 router.post(
   `/answers/:answerId(\\d+)/upvote`,
   asyncHandler(async (req, res) => {
-    //update the score inside pug
-    const answerId = parseInt(req.params.answerId, 10); // from ----- /answers/:answerId/upvote & pug (middlie li)
+    const answerId = parseInt(req.params.answerId, 10);
 
     // check if the user already voted
     const { userId } = req.session.auth;
@@ -102,45 +98,17 @@ router.post(
     });
     const answer = await Answer.findByPk(answerId);
     let answerScore = answer.answerScore;
-    // console.log("wert", userId, answerId, hasVoted);
     if (!hasVoted) {
-      // have NOT voted
-      // updates  the score
       answerScore++;
       await answer.update({ answerScore });
 
-      // if a user has NOT voted, update Vote table
       await Vote.create({
         userId: userId,
         answerId: answerId,
         vote: 1, //up vote
       });
-      // send answerScore to the front end
       res.json({ answerScore: answer.answerScore });
-      // return;
     } else {
-      // if they HAVE voted. no update. can't vote again
-      // console.log("gdf", hasVoted);
-
-      //(1) if hasVote.vote = 1,
-      // ------ set hasVote.vote = 0.(update)
-      // ------ decrement the score
-      // ------ answerScore--;
-      // ------ answer.update({ answerScore });
-
-      // (2) else if hasVote.vote = -1
-      // ------ set hasVote.vote = 1.(update)
-      // ------ increment the score
-      // ------ answerScore += 2;
-      // ------ answer.update({ answerScore });
-
-      // (3) else if hasVote.vote = 0
-      // ------ set hasVote.vote = 1.(update)
-      // ------ increment the score
-      // ------ answerScore++;
-      // ------ answer.update({ answerScore });
-
-      // try {
       if (hasVoted.vote === 1) {
         await hasVoted.update({ vote: 0 });
         answerScore--;
@@ -154,23 +122,16 @@ router.post(
         answerScore++;
         await answer.update({ answerScore });
       }
-      // } catch (e){
-      //   console.log(e)
-      // }
       res.json({ answerScore: answer.answerScore });
     }
     return;
   })
 );
 
-//? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-//* Route for Answers ------ DownVote / Decrement vote
 router.post(
   `/answers/:answerId(\\d+)/downvote`,
   asyncHandler(async (req, res) => {
-    //update the score inside pug
-    const answerId = parseInt(req.params.answerId, 10); // from ----- /answers/:answerId/upvote & pug (middlie li)
+    const answerId = parseInt(req.params.answerId, 10);
 
     // check if the user already voted
     const { userId } = req.session.auth;
@@ -180,9 +141,9 @@ router.post(
         answerId,
       },
     });
-    const answer = await Answer.findByPk(answerId); // from req.params ?
-    let answerScore = answer.answerScore; // (__.____) 2nd one is from Model
-    // console.log("wert", userId, answerId, hasVoted);
+    const answer = await Answer.findByPk(answerId);
+    let answerScore = answer.answerScore;
+
     if (!hasVoted) {
       // have NOT voted
       // updates  the score
@@ -195,32 +156,9 @@ router.post(
         answerId: answerId,
         vote: -1, //down vote
       });
-      // send answerScore to the front end
+
       res.json({ answerScore: answer.answerScore });
-      // return;
     } else {
-      // if they HAVE voted. no update. can't vote again
-      // console.log("gdf", hasVoted);
-
-      //(1) if hasVote.vote = -1,
-      // ------ set hasVote.vote = 0.(update)
-      // ------ increment the score
-      // ------ answerScore++;
-      // ------ answer.update({ answerScore });
-
-      // (2) else if hasVote.vote = 1
-      // ------ set hasVote.vote = -1.(update)
-      // ------ decrement the score
-      // ------ answerScore -= 2;
-      // ------ answer.update({ answerScore });
-
-      // (3) else if hasVote.vote = 0
-      // ------ set hasVote.vote = -1.(update)
-      // ------ decrement the score
-      // ------ answerScore--;
-      // ------ answer.update({ answerScore });
-
-      // try {
       if (hasVoted.vote === -1) {
         await hasVoted.update({ vote: 0 });
         answerScore++;
@@ -234,14 +172,11 @@ router.post(
         answerScore--;
         await answer.update({ answerScore });
       }
-      // } catch (e){
-      //   console.log(e)
-      // }
+
       res.json({ answerScore: answer.answerScore });
     }
     return;
   })
 );
 
-//=============================================
 module.exports = router;
