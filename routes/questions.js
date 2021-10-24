@@ -104,38 +104,39 @@ router.post(
 //? @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //* Route for Questions ----- Upvote / Increment vote
+
 router.post(
-  `/questions/:answerId/upvote`,
+  `/questions/:questionId/upvote`,
   asyncHandler(async (req, res) => {
     //update the score inside pug
-    const { answerId } = req.params; // from ----- /questions/:answerId/upvote & pug (middlie li)
+    const { questionId } = req.params; // from ----- /questions/:questionId/upvote & pug (middlie li)
 
     // check if the user already voted
     let userId = req.session.auth.userId;
     const hasVoted = await Vote.findOne({
       where: {
         userId: Number(userId),
-        answerId: Number(answerId),
+        questionId: Number(questionId),
       },
     });
 
-    const answer = await Answer.findByPk(answerId);
-    let answerScore = answer.answerScore;
-    // console.log("wert", userId, answerId, hasVoted);
+    const question = await Question.findByPk(questionId);
+    let questionScore = question.questionScore;
+    // console.log("wert", userId, questionId, hasVoted);
     if (!hasVoted) {
       // have NOT voted
       // updates  the score
-      answerScore++;
-      answer.update({ answerScore });
+      questionScore++;
+      question.update({ questionScore });
 
       // if a user has NOT voted, update Vote table
       await Vote.create({
         userId: userId,
-        answerId: answerId,
+        questionId: questionId,
         vote: 1, //up vote
       });
-      // send answerScore to the front end
-      res.json({ answerScore: answer.answerScore });
+      // send questionScore to the front end
+      res.json({ questionScore: question.questionScore });
       // return;
     } else {
       // if they HAVE voted. no update. can't vote again
@@ -144,40 +145,40 @@ router.post(
       //(1) if hasVote.vote = 1,
       // ------ set hasVote.vote = 0.(update)
       // ------ decrement the score
-      // ------ answerScore--;
-      // ------ answer.update({ answerScore });
+      // ------ questionScore--;
+      // ------ question.update({ questionScore });
 
       // (2) else if hasVote.vote = -1
       // ------ set hasVote.vote = 1.(update)
       // ------ increment the score
-      // ------ answerScore += 2;
-      // ------ answer.update({ answerScore });
+      // ------ questionScore += 2;
+      // ------ question.update({ questionScore });
 
       // (3) else if hasVote.vote = 0
       // ------ set hasVote.vote = 1.(update)
       // ------ increment the score
-      // ------ answerScore++;
-      // ------ answer.update({ answerScore });
+      // ------ questionScore++;
+      // ------ question.update({ questionScore });
 
       // try {
       if (hasVoted.vote === 1) {
         hasVoted.update({ vote: 0 });
-        answerScore--;
-        answer.update({ answerScore });
+        questionScore--;
+        question.update({ questionScore });
       } else if (hasVoted.vote === -1) {
         hasVoted.update({ vote: 1 });
-        answerScore += 2;
-        answer.update({ answerScore });
+        questionScore += 2;
+        question.update({ questionScore });
       } else if (hasVoted.vote === 0) {
         hasVoted.update({ vote: 1 });
-        answerScore++;
-        answer.update({ answerScore });
+        questionScore++;
+        question.update({ questionScore });
       }
 
       // } catch (e){
       //   console.log(e)
       // }
-      res.json({ answerScore: answer.answerScore });
+      res.json({ questionScore: question.questionScore });
     }
     return;
   })
@@ -189,21 +190,21 @@ router.post(
 //* Route for Questions ------ DownVote / Decrement vote
 
 // router.post(
-//   `/questions/:answerId/downvote`,
+//   `/questions/:questionId/downvote`,
 //   asyncHandler(async (req, res) => {
 //     //update the score inside pug
-//     const { answerId } = req.params; // from ----- /questions/:answerId/upvote & pug (middlie li)
+//     const { questionId } = req.params; // from ----- /questions/:questionId/upvote & pug (middlie li)
 
 //     // check if the user already voted
 //     let userId = req.session.auth.userId;
 //     const hasVoted = await Vote.findOne({
 //       where: {
 //         userId: Number(userId),
-//         answerId: Number(answerId),
+//         questionId: Number(questionId),
 //       },
 //     });
 
-//     const answer = await Answer.findByPk(answerId); // from req.params ?
+//     const answer = await Question.findByPk(answerId); // from req.params ?
 //     let answerScore = answer.answerScore; // (__.____) 2nd one is from Model
 //     // console.log("wert", userId, answerId, hasVoted);
 //     if (!hasVoted) {
@@ -215,7 +216,7 @@ router.post(
 //       // if a user has NOT voted, update Vote table
 //       await Vote.create({
 //         userId: userId,
-//         answerId: answerId,
+//         answerId: questionId,
 //         vote: -1, //up vote
 //       });
 //       // send answerScore to the front end
