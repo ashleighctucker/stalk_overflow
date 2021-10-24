@@ -29,7 +29,7 @@ answerHTMLCltnArray.forEach((ele) => {
       },
     });
     let answerUpScore = await res.json();
-    console.log("ytrd", answerUpScore);
+    console.log("answerUpScore!", answerUpScore);
     middleLITxtScore.innerHTML = answerUpScore.answerScore;
     // console.log("up vote score", answerUpScore.answerScore);
   });
@@ -53,10 +53,9 @@ answerHTMLCltnArray.forEach((ele) => {
     });
 
     let answerDownScore = await res.json();
+    console.log("answerDownScore!", answerDownScore);
     middleLITxtScore.innerHTML = answerDownScore.answerScore;
   });
 
   //update both ANSWER voting database ---- answers.js
 });
-
-
