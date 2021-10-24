@@ -10,20 +10,24 @@ const router = express.Router();
 const searchRepo = require('../search-data/searchdata');
 
 router.get('/search', async (req, res) => {
+  const questions = await Question.findAll({
+    order: [['createdAt', 'DESC']],
+    limit: 15,
+  });
   res.render('search-result.pug', {
     listTitle: 'Search Results',
-    //   error,
-    questions: [],
-    //   answers,
+    questions: questions,
   });
 });
 
 router.post('/search', async (req, res) => {
+  const questions = await Question.findAll({
+    order: [['createdAt', 'DESC']],
+    limit: 15,
+  });
   res.render('search-result.pug', {
     listTitle: 'Search Results',
-    //   error,
-    questions: [],
-    //   answers,
+    questions: questions,
   });
 });
 
