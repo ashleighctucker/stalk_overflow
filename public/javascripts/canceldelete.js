@@ -1,7 +1,12 @@
 const canelButton = document.querySelector('#question-button-2');
 
 const createEditButton = (id, target, Target) => {
-  const buttonContainer = document.querySelector('#question-button-1');
+  let buttonContainer;
+  if (target === 'question') {
+    buttonContainer = document.querySelector('#question-button-1');
+  } else {
+    buttonContainer = document.querySelector('.edit-answer');
+  }
   const editQuestionButton = document.createElement('button');
   editQuestionButton.classList.add(`edit-${target}-button`, 'login-button');
   editQuestionButton.id = `${id}-edit`;
@@ -19,7 +24,13 @@ const createEditButton = (id, target, Target) => {
 };
 
 const createDeleteButton = (id, target, Target) => {
-  const buttonContainer = document.querySelector('#question-button-2');
+  let buttonContainer;
+  if (target === 'question') {
+    buttonContainer = document.getElementById('question-button-2');
+  } else {
+    buttonContainer = document.getElementById(`${id}-${target}-button-2`);
+  }
+
   const deleteButton = document.createElement('button');
   deleteButton.id = `${id}-delete`;
   deleteButton.classList.add(`delete-${target}-button`, 'login-button');
@@ -29,10 +40,10 @@ const createDeleteButton = (id, target, Target) => {
   return buttonContainer;
 };
 
-
 canelButton.addEventListener('click', (event) => {
   let targetElement = event.target;
   let selector = '.cancel-delete-questions-button';
+  console.log(targetElement.matches(selector));
   if (targetElement.matches(selector)) {
     const url = document.URL.split('/');
     const questionId = url[5];
@@ -53,17 +64,29 @@ canelButton.addEventListener('click', (event) => {
   }
 });
 
-canelButton.addEventListener('click', (event) => {
-  let targetElement = event.target;
-  let selector = '.cancel-delete-answers-button';
-  if (targetElement.matches(selector)) {
-    const answerId = targetElement.id.split('-')[0];
-    const buttonContainer = document.querySelector('.question-edit-buttons');
-    const editAnswerButton = createEditButton(answerId, 'answer', 'Answer');
-    const deleteAnswerButton = createDeleteButton(answerId, 'answer', 'Answer');
-    buttonContainer.innerHTML = ``;
-    buttonContainer.appendChild(editAnswerButton);
-    buttonContainer.appendChild(deleteAnswerButton);
-  }
-});
+let cancelDeleteButtons = document.getElementsByClassName('delete-answer');
 
+cancelDeleteButtons = Array.from(cancelDeleteButtons);
+
+cancelDeleteButtons.forEach((canelButton) => {
+  canelButton.addEventListener('click', (event) => {
+    let targetElement = event.target;
+    let selector = '.cancel-delete-answers-button';
+    if (targetElement.matches(selector)) {
+      const answerId = targetElement.id.split('-')[0];
+      const buttonContainer = document.getElementById(
+        `${answerId}-answer-edit-container`
+      );
+
+      const editAnswerButton = createEditButton(answerId, 'answer', 'Answer');
+      const deleteAnswerButton = createDeleteButton(
+        answerId,
+        'answer',
+        'Answer'
+      );
+      buttonContainer.innerHTML = ``;
+      buttonContainer.appendChild(editAnswerButton);
+      buttonContainer.appendChild(deleteAnswerButton);
+    }
+  });
+});

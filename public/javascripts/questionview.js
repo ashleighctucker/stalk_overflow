@@ -1,7 +1,12 @@
-const deleteButton = document.querySelector('#question-button-2');
+const deleteQuestionButton = document.querySelector('#question-button-2');
 
 const createConfirmDeleteButton = (id, target) => {
-  const buttonContainer = document.querySelector('#question-button-1');
+  let buttonContainer;
+  if (target === 'questions') {
+    buttonContainer = document.querySelector('#question-button-1');
+  } else {
+    buttonContainer = document.querySelector('.edit-answer');
+  }
   const deletePost = document.createElement('form');
   deletePost.action = `/${target}/delete/${id}`;
   deletePost.method = 'POST';
@@ -17,9 +22,14 @@ const createConfirmDeleteButton = (id, target) => {
 };
 
 const createCancelButton = (id, target) => {
-  const buttonContainer = document.querySelector('#question-button-2');
+  let buttonContainer;
+  if (target === 'questions') {
+    buttonContainer = document.querySelector('#question-button-2');
+  } else {
+    buttonContainer = document.querySelector('.delete-answer');
+  }
   const cancelButton = document.createElement('button');
-  cancelButton.classList.add(`cancel-delete-${target}-button`, 'login-button')
+  cancelButton.classList.add(`cancel-delete-${target}-button`, 'login-button');
   cancelButton.id = `${id}-cancel-delete-${target}-button`;
   cancelButton.innerText = 'Cancel';
   buttonContainer.innerHTML = ``;
@@ -28,12 +38,13 @@ const createCancelButton = (id, target) => {
 };
 
 //deleting questions
-deleteButton.addEventListener('click', (event) => {
+deleteQuestionButton.addEventListener('click', (event) => {
+  const url = document.URL.split('/');
+  const questionId = url[5];
   let targetElement = event.target;
-  let selector = '#delete-question-button';
+  let selector = `.delete-question-button`;
+  console.log(targetElement.matches(selector));
   if (targetElement.matches(selector)) {
-    const url = document.URL.split('/');
-    const questionId = url[5];
     const buttonContainer = document.querySelector('.question-edit-buttons');
     const confirmDeleteButton = createConfirmDeleteButton(
       questionId,
@@ -49,21 +60,31 @@ deleteButton.addEventListener('click', (event) => {
   }
 });
 
-//deleting answers
-deleteButton.addEventListener('click', (event) => {
-  let targetElement = event.target;
-  let selector = '.delete-answer-button';
-  if (targetElement.matches(selector)) {
-    const answerId = parseInt(targetElement.id.split('-')[0], 10);
-    const buttonContainer = document.querySelector('.question-edit-buttons');
-    const confirmDeleteButton = createConfirmDeleteButton(answerId, 'answers');
-    const cancelButton = createCancelButton(answerId, 'answers');
-    const formDiv = document.createElement('div');
-    formDiv.className = 'confirm-delete-container';
-    formDiv.appendChild(confirmDeleteButton);
-    formDiv.appendChild(cancelButton);
-    buttonContainer.innerHTML = ``;
-    buttonContainer.appendChild(formDiv);
-  }
-});
+let deleteAnswerButtons = document.getElementsByClassName('delete-answer');
 
+deleteAnswerButtons = Array.from(deleteAnswerButtons);
+
+deleteAnswerButtons.forEach((deleteButton) => {
+  deleteButton.addEventListener('click', (event) => {
+    let targetElement = event.target;
+    let selector = '.delete-answer-button';
+    if (targetElement.matches(selector)) {
+      const answerId = parseInt(targetElement.id.split('-')[0], 10);
+      const buttonContainer = document.getElementById(
+        `${answerId}-answer-edit-container`
+      );
+
+      const confirmDeleteButton = createConfirmDeleteButton(
+        answerId,
+        'answers'
+      );
+      const cancelButton = createCancelButton(answerId, 'answers');
+      const formDiv = document.createElement('div');
+      formDiv.className = 'confirm-delete-container';
+      formDiv.appendChild(confirmDeleteButton);
+      formDiv.appendChild(cancelButton);
+      buttonContainer.innerHTML = ``;
+      buttonContainer.appendChild(formDiv);
+    }
+  });
+});

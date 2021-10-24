@@ -14,22 +14,16 @@ block content
             button(type="submit" class="ask-question-button"): a(href='/questions/ask') Ask a Question
         div(class="question-container")
           ul(class="question-score-data")
-            li(class="question-score" id=`answer-${question.id}-upvote`)
-              //- a(id="question-upvote" class="upvote")
-              i(class="fas fa-chevron-up")
-            li(class="question-score") #{question.questionScore ? question.questionScore : 0}
-            li(class="question-score" id=`answer-${question.id}-downvote`)
-              //- a(id="question-downvote" class="downvote")
-              i(class="fas fa-chevron-down")
           div(class="curr-question-section")
             p #{question.question}
             if locals.authenticated
-              if question.userId === locals.user.id
-                div(class="question-edit-buttons")
-                  div(id="question-button-1" class="button-EL-div")
+              div(class="question-edit-buttons" id=`${question.id}-question-edit-container`)
+                div(id="question-button-1" class="button-EL-div")
+                  if question.userId === locals.user.id
                     button(class="login-button" id="edit-question-button"): a(href=`/questions/${question.id}/edit`) Edit Question
-                  div(id="question-button-2" class="button-EL-div")
-                    button(class="login-button" id="delete-question-button") Delete Question
+                div(id="question-button-2" class="button-EL-div")
+                  if question.userId === locals.user.id
+                    button(class="login-button delete-question-button" id=`${question.id}-delete`) Delete Question
         if locals.user && question.userId !== locals.user.id
           div(class="know-container")
             ul(class="score-data")
@@ -49,20 +43,25 @@ block content
             div(class="answer-container")
               ul(class="score-data")
                 li(class="answer-score" id=`answer-${answer.id}-upvote`)
-                  i(class="fas fa-chevron-up")
+                  if locals.autenticated
+                    i(class="fas fa-chevron-up")
                 li(class="answer-score") #{answer.answerScore ? answer.answerScore : 0}
-                li(class="answer-score" id=`answer-${answer.id}-downvote`)
-                  i(class="fas fa-chevron-down")
+                  li(class="answer-score" id=`answer-${answer.id}-downvote`)
+                    if locals.autenticated
+                      i(class="fas fa-chevron-down")
+                    else
+                      li(class="answer-score logged-out-score" ) Score
               div(class="curr-question-section")
                 p #{answer.title}
                 p #{answer.answer}
                 if locals.authenticated
-                  if answer.userId === locals.user.id
-                    div(class="question-edit-buttons")
-                      div(id="question-button-1" class="button-EL-div")
+                  div(class="question-edit-buttons" id=`${answer.id}-answer-edit-container`)
+                    div(id=`${answer.id}-answer-button-1` class="button-EL-div edit-answer")
+                      if answer.userId === locals.user.id
                         button(class="login-button edit-answer-button" id=`${answer.id}-edit` ): a(href=`/answers/${answer.id}/edit`) Edit Answer
-                      div(id="question-button-2" class="button-EL-div")
-                        button(class="login-button delete-answer-button" id=`${answer.id}-delete`  ) Delete Answer
+                    div(id=`${answer.id}-answer-button-2` class="button-EL-div delete-answer")
+                      if answer.userId === locals.user.id
+                        button(class="login-button delete-answer-button" id=`${answer.id}-delete`) Delete Answer
       div(class="empty-right-bar")
     script(src="/javascripts/questionview.js" type="module" defer)
     script(src="/javascripts/canceldelete.js" type="module" defer)
