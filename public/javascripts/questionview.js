@@ -5,7 +5,12 @@ const createConfirmDeleteButton = (id, target) => {
   if (target === 'questions') {
     buttonContainer = document.querySelector('#question-button-1');
   } else {
-    buttonContainer = document.querySelector('.edit-answer');
+    let buttonContainers = document.querySelectorAll('.edit-answer');
+    buttonContainers.forEach((container) => {
+      if (container.id === `${id}-answer-button-1`) {
+        buttonContainer = container;
+      }
+    });
   }
   const deletePost = document.createElement('form');
   deletePost.action = `/${target}/delete/${id}`;
@@ -26,7 +31,14 @@ const createCancelButton = (id, target) => {
   if (target === 'questions') {
     buttonContainer = document.querySelector('#question-button-2');
   } else {
-    buttonContainer = document.querySelector('.delete-answer');
+    let buttonContainers = document.querySelectorAll('.delete-answer');
+    buttonContainers.forEach((container) => {
+      console.log(id);
+      console.log(container.id === `${id}-answer-button-2`);
+      if (container.id === `${id}-answer-button-2`) {
+        buttonContainer = container;
+      }
+    });
   }
   const cancelButton = document.createElement('button');
   cancelButton.classList.add(`cancel-delete-${target}-button`, 'login-button');

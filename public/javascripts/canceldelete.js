@@ -5,7 +5,12 @@ const createEditButton = (id, target, Target) => {
   if (target === 'question') {
     buttonContainer = document.querySelector('#question-button-1');
   } else {
-    buttonContainer = document.querySelector('.edit-answer');
+    let buttonContainers = document.querySelectorAll('.edit-answer');
+    buttonContainers.forEach((container) => {
+      if (container.id === `${id}-answer-button-1`) {
+        buttonContainer = container;
+      }
+    });
   }
   const editQuestionButton = document.createElement('button');
   editQuestionButton.classList.add(`edit-${target}-button`, 'login-button');
@@ -28,7 +33,14 @@ const createDeleteButton = (id, target, Target) => {
   if (target === 'question') {
     buttonContainer = document.getElementById('question-button-2');
   } else {
-    buttonContainer = document.getElementById(`${id}-${target}-button-2`);
+    let buttonContainers = document.querySelectorAll('.delete-answer');
+    buttonContainers.forEach((container) => {
+      console.log(id);
+      console.log(container.id === `${id}-answer-button-2`);
+      if (container.id === `${id}-answer-button-2`) {
+        buttonContainer = container;
+      }
+    });
   }
 
   const deleteButton = document.createElement('button');
