@@ -30,7 +30,6 @@ Stalk overflow requires Postgres.
 5. Create the database by running the command: `npx dotenv sequelize db:create`
 6. Migrate the database by running the command: `npx dotenv sequelize db:migrate`
 7. Seed the database by running the command: `npx dotenv sequelize db:seed:all` 
-    (note, this will sometimes fail on adding Answers, if it fails run `npx dotenv sequelize db:seed:undo:all` and try the seed command again, repeat if necessary)
 8. You can start the server by running `npm start` in your console, nodemon is installed as a dev dependency so that you can make live changes without restarting the server. Happy coding!
 
 
