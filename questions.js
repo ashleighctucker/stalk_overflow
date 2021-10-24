@@ -55,5 +55,23 @@ module.exports = {
       `How do I keep my parlor palm from yellowing on the tips?`,
       `My majesty palm used to be pretty but now it is yellow and sparse. Any tips?`,
     ],
+
   },
+  questionScores: {
+    scoreOptions: [
+      -2,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      3,
+    ]
+  }
 };

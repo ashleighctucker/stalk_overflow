@@ -56,4 +56,7 @@ module.exports = {
       `You may need to split the plant, or get a much larger pot for it.`,
     ],
   },
+  answerScores: {
+    scoreOptions: [-2, -1, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3],
+  },
 };
