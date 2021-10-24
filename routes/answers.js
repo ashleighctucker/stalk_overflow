@@ -3,7 +3,7 @@ const express = require('express');
 const { validationResult } = require('express-validator');
 
 //Internal Imports
-const { Answer, Question } = require('../db/models');
+const { Answer, Question, Vote } = require('../db/models');
 const { asyncHandler, csrfProtection } = require('./utils');
 const { answerValidators } = require('./validators');
 
@@ -80,6 +80,102 @@ router.post(
     const answer = await Answer.findByPk(answerId);
     await answer.destroy();
     return res.redirect('/');
+  })
+);
+
+router.post(
+  `/answers/:answerId(\\d+)/upvote`,
+  asyncHandler(async (req, res) => {
+    const answerId = parseInt(req.params.answerId, 10);
+
+    // check if the user already voted
+    const { userId } = req.session.auth;
+    const hasVoted = await Vote.findOne({
+      where: {
+        userId,
+        answerId,
+      },
+    });
+    const answer = await Answer.findByPk(answerId);
+    let answerScore = answer.answerScore;
+    if (!hasVoted) {
+      answerScore++;
+      await answer.update({ answerScore });
+
+      await Vote.create({
+        userId: userId,
+        answerId: answerId,
+        vote: 1, //up vote
+      });
+      res.json({ answerScore: answer.answerScore });
+    } else {
+      if (hasVoted.vote === 1) {
+        await hasVoted.update({ vote: 0 });
+        answerScore--;
+        await answer.update({ answerScore });
+      } else if (hasVoted.vote === -1) {
+        await hasVoted.update({ vote: 1 });
+        answerScore += 2;
+        await answer.update({ answerScore });
+      } else if (hasVoted.vote === 0) {
+        await hasVoted.update({ vote: 1 });
+        answerScore++;
+        await answer.update({ answerScore });
+      }
+      res.json({ answerScore: answer.answerScore });
+    }
+    return;
+  })
+);
+
+router.post(
+  `/answers/:answerId(\\d+)/downvote`,
+  asyncHandler(async (req, res) => {
+    const answerId = parseInt(req.params.answerId, 10);
+
+    // check if the user already voted
+    const { userId } = req.session.auth;
+    const hasVoted = await Vote.findOne({
+      where: {
+        userId,
+        answerId,
+      },
+    });
+    const answer = await Answer.findByPk(answerId);
+    let answerScore = answer.answerScore;
+
+    if (!hasVoted) {
+      // have NOT voted
+      // updates  the score
+      answerScore--;
+      await answer.update({ answerScore });
+
+      // if a user has NOT voted, update Vote table
+      await Vote.create({
+        userId: userId,
+        answerId: answerId,
+        vote: -1, //down vote
+      });
+
+      res.json({ answerScore: answer.answerScore });
+    } else {
+      if (hasVoted.vote === -1) {
+        await hasVoted.update({ vote: 0 });
+        answerScore++;
+        await answer.update({ answerScore });
+      } else if (hasVoted.vote === 1) {
+        await hasVoted.update({ vote: -1 });
+        answerScore -= 2;
+        await answer.update({ answerScore });
+      } else if (hasVoted.vote === 0) {
+        await hasVoted.update({ vote: -1 });
+        answerScore--;
+        await answer.update({ answerScore });
+      }
+
+      res.json({ answerScore: answer.answerScore });
+    }
+    return;
   })
 );
 

@@ -2,7 +2,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable(
-      'Answers',
+      "Answers",
       {
         id: {
           allowNull: false,
@@ -19,42 +19,44 @@ module.exports = {
           type: Sequelize.TEXT,
         },
         answerScore: {
+          allowNull: false,
           type: Sequelize.INTEGER,
+          defaultValue: 0,
         },
         questionId: {
           allowNull: false,
           type: Sequelize.INTEGER,
-          unique: 'oneAnswer',
+          unique: "oneAnswer",
           references: {
-            model: 'Questions',
-            key: 'id',
+            model: "Questions",
+            key: "id",
           },
         },
         userId: {
           allowNull: false,
           type: Sequelize.INTEGER,
-          unique: 'oneAnswer',
+          unique: "oneAnswer",
           references: {
-            model: 'Users',
-            key: 'id',
+            model: "Users",
+            key: "id",
           },
         },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,
-          defaultValue: Sequelize.fn('now'),
+          defaultValue: Sequelize.fn("now"),
         },
         updatedAt: {
           allowNull: false,
           type: Sequelize.DATE,
-          defaultValue: Sequelize.fn('now'),
+          defaultValue: Sequelize.fn("now"),
         },
       },
       {
         // sets up for seeding that we won't have more than one answer per question per user
         uniqueKeys: {
           oneAnswer: {
-            fields: ['questionId', 'userId'],
+            fields: ["questionId", "userId"],
           },
         },
       }

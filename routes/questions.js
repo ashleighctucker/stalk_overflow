@@ -1,17 +1,17 @@
 //External Imports
-const express = require('express');
-const { validationResult } = require('express-validator');
+const express = require("express");
+const { validationResult } = require("express-validator");
 
 //Internal Imports
-const { Question } = require('../db/models');
-const { asyncHandler, csrfProtection } = require('./utils');
-const { questionValidators } = require('./validators');
+const { Question, Vote } = require("../db/models");
+const { asyncHandler, csrfProtection } = require("./utils");
+const { questionValidators } = require("./validators");
 
 const router = express.Router();
 
 //API endpoint for posting/adding a new question
 router.post(
-  '/',
+  "/",
   csrfProtection,
   questionValidators,
   asyncHandler(async (req, res) => {
@@ -49,7 +49,7 @@ router.post(
 
 //API endpoint for editing a question
 router.post(
-  '/edit/:id(\\d+)',
+  "/edit/:id(\\d+)",
   questionValidators,
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
@@ -67,10 +67,10 @@ router.post(
     const validatorErrors = validationResult(req);
     console.log(currUserId !== questionToUpdate.userId);
     if (currUserId !== questionToUpdate.userId) {
-      const err = new Error('Unauthorized');
+      const err = new Error("Unauthorized");
       err.status = 401;
-      err.message = 'Whoops! You do not have permission to edit this question.';
-      err.title = 'Unauthorized';
+      err.message = "Whoops! You do not have permission to edit this question.";
+      err.title = "Unauthorized";
       throw err;
     }
     if (validatorErrors.isEmpty()) {
@@ -78,8 +78,8 @@ router.post(
       res.redirect(`/questions/view/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('question-edit', {
-        title: 'Edit Question',
+      res.render("question-edit", {
+        title: "Edit Question",
         question: newQuestion,
         errors,
         csrfToken: req.csrfToken(),
@@ -90,13 +90,14 @@ router.post(
 
 //API endpoint for deleting a question
 router.post(
-  '/delete/:id(\\d+)',
+  "/delete/:id(\\d+)",
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
     const question = await Question.findByPk(questionId);
     await question.destroy();
-    res.redirect('/');
+    res.redirect("/");
   })
 );
 
+//=============================================
 module.exports = router;

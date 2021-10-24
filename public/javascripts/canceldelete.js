@@ -29,6 +29,7 @@ const createDeleteButton = (id, target, Target) => {
   return buttonContainer;
 };
 
+
 canelButton.addEventListener('click', (event) => {
   let targetElement = event.target;
   let selector = '.cancel-delete-questions-button';
@@ -65,3 +66,4 @@ canelButton.addEventListener('click', (event) => {
     buttonContainer.appendChild(deleteAnswerButton);
   }
 });
+
