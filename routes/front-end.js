@@ -8,7 +8,6 @@ const { asyncHandler, csrfProtection } = require('./utils');
 const router = express.Router();
 
 // Front end route for home page
-
 router.get(
   '/',
   asyncHandler(async (req, res) => {
@@ -61,6 +60,15 @@ router.get('/questions/ask', csrfProtection, async (req, res) => {
 });
 
 // Front end route for a specific question
+router.get('/questions/view/:id(\\d+)', async (req, res) => {
+  const questionId = parseInt(req.params.id, 10);
+  const question = await Question.findOne({
+    where: { id: questionId },
+    include: Answer,
+  });
+
+  res.render('question-view', { title: question.title, question });
+});
 
 //Front end route for getting the edit question page
 router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
