@@ -34,10 +34,10 @@ router.post(
           userId,
         },
       });
-      res.redirect(`/questions/view/${thisQuestion.id}`);
+      return res.redirect(`/questions/view/${thisQuestion.id}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('questions-ask', {
+      return res.render('questions-ask', {
         title: 'Ask a Question',
         question,
         errors,

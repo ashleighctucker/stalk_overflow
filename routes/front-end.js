@@ -8,7 +8,7 @@ const { asyncHandler, csrfProtection } = require('./utils');
 const router = express.Router();
 
 router.get('/splash', (req, res) => {
-  res.render('splash');
+  return res.render('splash');
 });
 
 // Front end route for home page
@@ -23,7 +23,7 @@ router.get(
       order: [['updatedAt', 'DESC']],
       limit: 15,
     });
-    res.render('index', { title: 'Stalk Overgrow', questions });
+    return res.render('index', { title: 'Stalk Overgrow', questions });
   })
 );
 
@@ -33,7 +33,7 @@ router.get(
   csrfProtection,
   asyncHandler(async (req, res) => {
     const user = await User.build();
-    res.render('sign-up', {
+    return res.render('sign-up', {
       title: 'Sign Up',
       user,
       csrfToken: req.csrfToken(),
@@ -46,7 +46,7 @@ router.get(
   '/login',
   csrfProtection,
   asyncHandler(async (req, res) => {
-    res.render('login', {
+    return res.render('login', {
       title: 'Login',
       csrfToken: req.csrfToken(),
     });
@@ -59,7 +59,7 @@ router.get('/questions/ask', csrfProtection, async (req, res) => {
     res.redirect('/login');
   }
   const question = await Question.build();
-  res.render('questions-ask', {
+  return res.render('questions-ask', {
     title: 'Ask A Question',
     question,
     csrfToken: req.csrfToken(),
@@ -74,7 +74,7 @@ router.get('/questions/view/:id(\\d+)', async (req, res) => {
     include: Answer,
   });
 
-  res.render('question-view', { title: question.title, question });
+  return res.render('question-view', { title: question.title, question });
 });
 
 //Front end route for getting the edit question page
@@ -84,7 +84,7 @@ router.get('/questions/:id(\\d+)/edit', csrfProtection, async (req, res) => {
     where: { id: id },
     include: Answer,
   });
-  res.render('question-edit', {
+  return res.render('question-edit', {
     title: `Edit Question ${id}`,
     question,
     csrfToken: req.csrfToken(),
@@ -112,7 +112,7 @@ router.get(
       return res.redirect(`/answers/${testAnswer.id}/edit`);
     }
     const answer = Answer.build();
-    res.render('answer-question', {
+    return res.render('answer-question', {
       title: `${question.title}`,
       question,
       answer,
@@ -127,7 +127,7 @@ router.get('/answers/:id(\\d+)/edit', csrfProtection, async (req, res) => {
     where: { id: id },
     include: Question,
   });
-  res.render('answer-edit', {
+  return res.render('answer-edit', {
     title: `Edit Answer ${id}`,
     question: answer.Question,
     answer,
