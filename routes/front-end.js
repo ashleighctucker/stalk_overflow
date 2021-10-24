@@ -16,7 +16,7 @@ router.get(
   '/',
   asyncHandler(async (req, res) => {
     if (!req.session.auth) {
-      res.render('splash');
+      return res.render('splash');
     }
     const questions = await Question.findAll({
       include: Answer,
