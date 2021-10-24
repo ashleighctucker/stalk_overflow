@@ -6,13 +6,11 @@ block content
   section()
     div(class="ask-question-container")
       div(class="ask-question-form")
-        form(action='/questions' method='POST' class="ask-question")
+        form(action=`/questions/${question.id}/answers` method='POST' class="ask-question")
           +validationErrorSummary(errors)
           input(type='hidden' name='_csrf' value=csrfToken )
           h1(class="form-title")= title
           h3(id='answer-question-question')= question.question
-          input(type="text" name="title" class="question-title-input"  placeholder="Answer title")
-          textarea(id="ask-question-field" name="question" placeholder="Answer question...")
-          input(type='hidden' name='userId')
+          input(type="text" name="title" class="question-title-input"  placeholder="Answer title" value=answer.title)
+          textarea(id="ask-question-field" name="answer" placeholder="Answer question..." value=answer.answer)
           button(id="question-ask-button") Submit Answer
-          
