@@ -1,17 +1,17 @@
 //External Imports
-const express = require("express");
-const { validationResult } = require("express-validator");
+const express = require('express');
+const { validationResult } = require('express-validator');
 
 //Internal Imports
-const { Answer, Vote } = require("../db/models");
-const { asyncHandler, csrfProtection } = require("./utils");
-const { answerValidators } = require("./validators");
+const { Answer, Vote } = require('../db/models');
+const { asyncHandler, csrfProtection } = require('./utils');
+const { answerValidators } = require('./validators');
 
 const router = express.Router();
 
 //API endpoint for adding an answer to a question
 router.post(
-  "/questions/:id(\\d+)/answers",
+  '/questions/:id(\\d+)/answers',
   answerValidators,
   asyncHandler(async (req, res) => {
     const { title, answer, questionId, userId } = req.body;
@@ -26,8 +26,8 @@ router.post(
       res.redirect(`/`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render("answer-question", {
-        title: "Answer",
+      res.render('answer-question', {
+        title: 'Answer',
         answer,
         errors,
         csrfToken: req.csrfToken(),
@@ -38,7 +38,7 @@ router.post(
 
 //API endpoint for editing an answer to a question
 router.post(
-  "/answers/edit/:id(\\d+)",
+  '/answers/edit/:id(\\d+)',
   answerValidators,
   asyncHandler(async (req, res) => {
     const answerId = parseInt(req.params.id, 10);
@@ -62,8 +62,8 @@ router.post(
       res.redirect(`/`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render("answer-edit", {
-        title: "Edit Answer",
+      res.render('answer-edit', {
+        title: 'Edit Answer',
         answer,
         errors,
         csrfToken: req.csrfToken(),
@@ -74,12 +74,12 @@ router.post(
 
 //API endpoint for deleting an answer to a question
 router.post(
-  "/answers/delete/:id(\\d+)",
+  '/answers/delete/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const answerId = parseInt(req.params.id, 10);
     const answer = await Answer.findByPk(answerId);
     await answer.destroy();
-    res.redirect("/");
+    res.redirect('/');
   })
 );
 
@@ -87,20 +87,19 @@ router.post(
 
 //* Route for Answers ----- Upvote / Increment vote
 router.post(
-  `/answers/:answerId/upvote`,
+  `/answers/:answerId(\\d+)/upvote`,
   asyncHandler(async (req, res) => {
     //update the score inside pug
-    const { answerId } = req.params; // from ----- /answers/:answerId/upvote & pug (middlie li)
+    const answerId = parseInt(req.params.answerId, 10); // from ----- /answers/:answerId/upvote & pug (middlie li)
 
     // check if the user already voted
-    let userId = req.session.auth.userId;
+    const { userId } = req.session.auth;
     const hasVoted = await Vote.findOne({
       where: {
-        userId: Number(userId),
-        answerId: Number(answerId),
+        userId,
+        answerId,
       },
     });
-
     const answer = await Answer.findByPk(answerId);
     let answerScore = answer.answerScore;
     // console.log("wert", userId, answerId, hasVoted);
@@ -108,7 +107,7 @@ router.post(
       // have NOT voted
       // updates  the score
       answerScore++;
-      answer.update({ answerScore });
+      await answer.update({ answerScore });
 
       // if a user has NOT voted, update Vote table
       await Vote.create({
@@ -143,19 +142,18 @@ router.post(
 
       // try {
       if (hasVoted.vote === 1) {
-        hasVoted.update({ vote: 0 });
+        await hasVoted.update({ vote: 0 });
         answerScore--;
-        answer.update({ answerScore });
+        await answer.update({ answerScore });
       } else if (hasVoted.vote === -1) {
-        hasVoted.update({ vote: 1 });
+        await hasVoted.update({ vote: 1 });
         answerScore += 2;
-        answer.update({ answerScore });
+        await answer.update({ answerScore });
       } else if (hasVoted.vote === 0) {
-        hasVoted.update({ vote: 1 });
+        await hasVoted.update({ vote: 1 });
         answerScore++;
-        answer.update({ answerScore });
+        await answer.update({ answerScore });
       }
-
       // } catch (e){
       //   console.log(e)
       // }
@@ -169,20 +167,19 @@ router.post(
 
 //* Route for Answers ------ DownVote / Decrement vote
 router.post(
-  `/answers/:answerId/downvote`,
+  `/answers/:answerId(\\d+)/downvote`,
   asyncHandler(async (req, res) => {
     //update the score inside pug
-    const { answerId } = req.params; // from ----- /answers/:answerId/upvote & pug (middlie li)
+    const answerId = parseInt(req.params.answerId, 10); // from ----- /answers/:answerId/upvote & pug (middlie li)
 
     // check if the user already voted
-    let userId = req.session.auth.userId;
+    const { userId } = req.session.auth;
     const hasVoted = await Vote.findOne({
       where: {
-        userId: Number(userId),
-        answerId: Number(answerId),
+        userId,
+        answerId,
       },
     });
-
     const answer = await Answer.findByPk(answerId); // from req.params ?
     let answerScore = answer.answerScore; // (__.____) 2nd one is from Model
     // console.log("wert", userId, answerId, hasVoted);
@@ -190,13 +187,13 @@ router.post(
       // have NOT voted
       // updates  the score
       answerScore--;
-      answer.update({ answerScore });
+      await answer.update({ answerScore });
 
       // if a user has NOT voted, update Vote table
       await Vote.create({
         userId: userId,
         answerId: answerId,
-        vote: -1, //up vote
+        vote: -1, //down vote
       });
       // send answerScore to the front end
       res.json({ answerScore: answer.answerScore });
@@ -225,19 +222,18 @@ router.post(
 
       // try {
       if (hasVoted.vote === -1) {
-        hasVoted.update({ vote: 0 });
+        await hasVoted.update({ vote: 0 });
         answerScore++;
-        answer.update({ answerScore });
+        await answer.update({ answerScore });
       } else if (hasVoted.vote === 1) {
-        hasVoted.update({ vote: -1 });
-        answerScore--;
-        answer.update({ answerScore });
+        await hasVoted.update({ vote: -1 });
+        answerScore -= 2;
+        await answer.update({ answerScore });
       } else if (hasVoted.vote === 0) {
-        hasVoted.update({ vote: -1 });
+        await hasVoted.update({ vote: -1 });
         answerScore--;
-        answer.update({ answerScore });
+        await answer.update({ answerScore });
       }
-
       // } catch (e){
       //   console.log(e)
       // }

@@ -28,41 +28,41 @@ const createCancelButton = () => {
 };
 
 //deleting questions
-deleteButton.addEventListener('click', (event) => {
-  let targetElement = event.target;
-  let selector = '#delete-question-button';
-  if (targetElement.matches(selector)) {
-    const url = document.URL.split('/');
-    const questionId = url[5];
-    const buttonContainer = document.querySelector('.question-edit-buttons');
-    const confirmDeleteButton = createConfirmDeleteButton(
-      questionId,
-      'questions'
-    );
-    const cancelButton = createCancelButton();
-    const formDiv = document.createElement('div');
-    formDiv.className = 'confirm-delete-container';
-    formDiv.appendChild(confirmDeleteButton);
-    formDiv.appendChild(cancelButton);
-    buttonContainer.innerHTML = ``;
-    buttonContainer.appendChild(formDiv);
-  }
-});
+// deleteButton.addEventListener('click', (event) => {
+//   let targetElement = event.target;
+//   let selector = '#delete-question-button';
+//   if (targetElement.matches(selector)) {
+//     const url = document.URL.split('/');
+//     const questionId = url[5];
+//     const buttonContainer = document.querySelector('.question-edit-buttons');
+//     const confirmDeleteButton = createConfirmDeleteButton(
+//       questionId,
+//       'questions'
+//     );
+//     const cancelButton = createCancelButton();
+//     const formDiv = document.createElement('div');
+//     formDiv.className = 'confirm-delete-container';
+//     formDiv.appendChild(confirmDeleteButton);
+//     formDiv.appendChild(cancelButton);
+//     buttonContainer.innerHTML = ``;
+//     buttonContainer.appendChild(formDiv);
+//   }
+// });
 
 //deleting answers
-deleteButton.addEventListener('click', (event) => {
-  let targetElement = event.target;
-  let selector = '.delete-answer-button';
-  if (targetElement.matches(selector)) {
-    const answerId = parseInt(targetElement.id.split('-')[0], 10);
-    const buttonContainer = document.querySelector('.question-edit-buttons');
-    const confirmDeleteButton = createConfirmDeleteButton(answerId, 'answers');
-    const cancelButton = createCancelButton();
-    const formDiv = document.createElement('div');
-    formDiv.className = 'confirm-delete-container';
-    formDiv.appendChild(confirmDeleteButton);
-    formDiv.appendChild(cancelButton);
-    buttonContainer.innerHTML = ``;
-    buttonContainer.appendChild(formDiv);
-  }
-});
+// deleteButton.addEventListener('click', (event) => {
+//   let targetElement = event.target;
+//   let selector = '.delete-answer-button';
+//   if (targetElement.matches(selector)) {
+//     const answerId = parseInt(targetElement.id.split('-')[0], 10);
+//     const buttonContainer = document.querySelector('.question-edit-buttons');
+//     const confirmDeleteButton = createConfirmDeleteButton(answerId, 'answers');
+//     const cancelButton = createCancelButton();
+//     const formDiv = document.createElement('div');
+//     formDiv.className = 'confirm-delete-container';
+//     formDiv.appendChild(confirmDeleteButton);
+//     formDiv.appendChild(cancelButton);
+//     buttonContainer.innerHTML = ``;
+//     buttonContainer.appendChild(formDiv);
+//   }
+// });

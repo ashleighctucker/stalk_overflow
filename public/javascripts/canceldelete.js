@@ -25,17 +25,17 @@ const createDeleteQuestionButton = () => {
   return buttonContainer;
 };
 
-canelButton.addEventListener('click', (event) => {
-  let targetElement = event.target;
-  let selector = '#cancel-delete-button';
-  if (targetElement.matches(selector)) {
-    const url = document.URL.split('/');
-    const questionId = url[5];
-    const buttonContainer = document.querySelector('.question-edit-buttons');
-    const editQuestionButton = createEditQuestionButton(questionId);
-    const deleteQuestionButton = createDeleteQuestionButton();
-    buttonContainer.innerHTML = ``;
-    buttonContainer.appendChild(editQuestionButton);
-    buttonContainer.appendChild(deleteQuestionButton);
-  }
-});
+// canelButton.addEventListener('click', (event) => {
+//   let targetElement = event.target;
+//   let selector = '#cancel-delete-button';
+//   if (targetElement.matches(selector)) {
+//     const url = document.URL.split('/');
+//     const questionId = url[5];
+//     const buttonContainer = document.querySelector('.question-edit-buttons');
+//     const editQuestionButton = createEditQuestionButton(questionId);
+//     const deleteQuestionButton = createDeleteQuestionButton();
+//     buttonContainer.innerHTML = ``;
+//     buttonContainer.appendChild(editQuestionButton);
+//     buttonContainer.appendChild(deleteQuestionButton);
+//   }
+// });
