@@ -77,6 +77,13 @@
   margin-top: 40px;
 }
 
+.line{
+    margin-top: 20px;
+    border-bottom: 6px solid lightgrey;
+    width: 150px;
+    border-radius: 5px;
+}
+
 #top-text {
   color: #ffffff;
   font-size: 60px;
@@ -116,7 +123,7 @@
 #third-box {
   display: flex;
   list-style: none;
-  margin-top: 60px;
+  margin-top: 40px;
   width: 75vw;
   justify-content: space-around;
 }
