@@ -6,6 +6,7 @@ block content
     div(class="main-content")
       div(class="side-bar")
         li(class="side-bar-li side-bar-link"): a(href="/") Home
+        li(class="side-bar-li side-bar-link"): a(href="/search") Questions
       div(class="questions-section")
         ul(class="questions-header")
             li: h2(class="questions-title") Top Questions
@@ -19,5 +20,9 @@ block content
             ul(class="indv-question-section")
               li(class="question-link")
                 a(href=`/questions/view/${question.id}`) #{question.title}
+                li(class="question-categories")
+                  span(class="question-category-link"): a(a href="/") category
+                  span(class="question-category-link"): a(a href="/") category
+                  span(class="question-category-link"): a(a href="/") category
       div(class="empty-right-bar")
   script(src="/javascripts/index.js" type="module" defer)
