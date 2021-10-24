@@ -2,12 +2,11 @@
 const express = require('express');
 
 //Internal Imports
-const { Answer, Category, Question, User } = require('../db/models');
-const { csrfProtection, asyncHandler } = require('../routes/utils');
+const { Question } = require('../db/models');
+const { asyncHandler } = require('../routes/utils');
+const searchRepo = require('../search-data/searchdata');
 
 const router = express.Router();
-
-const searchRepo = require('../search-data/searchdata');
 
 router.get('/search', async (req, res) => {
   const questions = await Question.findAll({
