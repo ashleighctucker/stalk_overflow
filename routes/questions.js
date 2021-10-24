@@ -106,11 +106,12 @@ router.post(
 //* Route for Questions ----- Upvote / Increment vote
 
 router.post(
-  `/questions/:questionId/upvote`,
+  `questions/:questionId/upvote`,
   asyncHandler(async (req, res) => {
     //update the score inside pug
+    // console.log("cvbn");
     const { questionId } = req.params; // from ----- /questions/:questionId/upvote & pug (middlie li)
-
+    console.log("dfgh", questionId);
     // check if the user already voted
     let userId = req.session.auth.userId;
     const hasVoted = await Vote.findOne({
@@ -189,84 +190,84 @@ router.post(
 
 //* Route for Questions ------ DownVote / Decrement vote
 
-router.post(
-  `/questions/:questionId/downvote`,
-  asyncHandler(async (req, res) => {
-    //update the score inside pug
-    const { questionId } = req.params; // from ----- /questions/:questionId/upvote & pug (middlie li)
+// router.post(
+//   `/questions/:questionId/downvote`,
+//   asyncHandler(async (req, res) => {
+//     //update the score inside pug
+//     const { questionId } = req.params; // from ----- /questions/:questionId/upvote & pug (middlie li)
 
-    // check if the user already voted
-    let userId = req.session.auth.userId;
-    const hasVoted = await Vote.findOne({
-      where: {
-        userId: Number(userId),
-        questionId: Number(questionId),
-      },
-    });
+//     // check if the user already voted
+//     let userId = req.session.auth.userId;
+//     const hasVoted = await Vote.findOne({
+//       where: {
+//         userId: Number(userId),
+//         questionId: Number(questionId),
+//       },
+//     });
 
-    const question = await Question.findByPk(questionId); // from req.params ?
-    let questionScore = question.questionScore; // (__.____) 2nd one is from Model
-    // console.log("wert", userId, questionId, hasVoted);
-    if (!hasVoted) {
-      // have NOT voted
-      // updates  the score
-      questionScore--;
-      question.update({ questionScore });
+//     const question = await Question.findByPk(questionId); // from req.params ?
+//     let questionScore = question.questionScore; // (__.____) 2nd one is from Model
+//     // console.log("wert", userId, questionId, hasVoted);
+//     if (!hasVoted) {
+//       // have NOT voted
+//       // updates  the score
+//       questionScore--;
+//       question.update({ questionScore });
 
-      // if a user has NOT voted, update Vote table
-      await Vote.create({
-        userId: userId,
-        questionId: questionId,
-        vote: -1, //up vote
-      });
-      // send questionScore to the front end
-      res.json({ questionScore: question.questionScore });
-      // return;
-    } else {
-      // if they HAVE voted. no update. can't vote again
-      // console.log("gdf", hasVoted);
+//       // if a user has NOT voted, update Vote table
+//       await Vote.create({
+//         userId: userId,
+//         questionId: questionId,
+//         vote: -1, //up vote
+//       });
+//       // send questionScore to the front end
+//       res.json({ questionScore: question.questionScore });
+//       // return;
+//     } else {
+//       // if they HAVE voted. no update. can't vote again
+//       // console.log("gdf", hasVoted);
 
-      //(1) if hasVote.vote = -1,
-      // ------ set hasVote.vote = 0.(update)
-      // ------ increment the score
-      // ------ questionScore++;
-      // ------ question.update({ questionScore });
+//       //(1) if hasVote.vote = -1,
+//       // ------ set hasVote.vote = 0.(update)
+//       // ------ increment the score
+//       // ------ questionScore++;
+//       // ------ question.update({ questionScore });
 
-      // (2) else if hasVote.vote = 1
-      // ------ set hasVote.vote = -1.(update)
-      // ------ decrement the score
-      // ------ questionScore -= 2;
-      // ------ question.update({ questionScore });
+//       // (2) else if hasVote.vote = 1
+//       // ------ set hasVote.vote = -1.(update)
+//       // ------ decrement the score
+//       // ------ questionScore -= 2;
+//       // ------ question.update({ questionScore });
 
-      // (3) else if hasVote.vote = 0
-      // ------ set hasVote.vote = -1.(update)
-      // ------ decrement the score
-      // ------ questionScore--;
-      // ------ question.update({ questionScore });
+//       // (3) else if hasVote.vote = 0
+//       // ------ set hasVote.vote = -1.(update)
+//       // ------ decrement the score
+//       // ------ questionScore--;
+//       // ------ question.update({ questionScore });
 
-      // try {
-      if (hasVoted.vote === -1) {
-        hasVoted.update({ vote: 0 });
-        questionScore++;
-        question.update({ questionScore });
-      } else if (hasVoted.vote === 1) {
-        hasVoted.update({ vote: -1 });
-        questionScore--;
-        question.update({ questionScore });
-      } else if (hasVoted.vote === 0) {
-        hasVoted.update({ vote: -1 });
-        questionScore--;
-        question.update({ questionScore });
-      }
+//       // try {
+//       if (hasVoted.vote === -1) {
+//         hasVoted.update({ vote: 0 });
+//         questionScore++;
+//         question.update({ questionScore });
+//       } else if (hasVoted.vote === 1) {
+//         hasVoted.update({ vote: -1 });
+//         questionScore--;
+//         question.update({ questionScore });
+//       } else if (hasVoted.vote === 0) {
+//         hasVoted.update({ vote: -1 });
+//         questionScore--;
+//         question.update({ questionScore });
+//       }
 
-      // } catch (e){
-      //   console.log(e)
-      // }
-      res.json({ questionScore: question.questionScore });
-    }
-    return;
-  })
-);
+//       // } catch (e){
+//       //   console.log(e)
+//       // }
+//       res.json({ questionScore: question.questionScore });
+//     }
+//     return;
+//   })
+// );
 
 
 //=============================================

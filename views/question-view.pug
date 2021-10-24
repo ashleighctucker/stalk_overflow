@@ -15,14 +15,14 @@ block content
           li
             button(type="submit" class="ask-question-button"): a(href='/questions/ask') Ask a Question
         div(class="question-container")
-          ul(class="score-data")
+          ul(class="question-score-data")
             li(class="question-score" id=`answer-${question.id}-upvote`)
-              a(id="question-upvote" class="upvote")
-                i(class="fas fa-chevron-up")
+              //- a(id="question-upvote" class="upvote")
+              i(class="fas fa-chevron-up")
             li(class="question-score") #{question.questionScore ? question.questionScore : 0}
             li(class="question-score" id=`answer-${question.id}-downvote`)
-              a(id="question-downvote" class="downvote")
-                i(class="fas fa-chevron-down")
+              //- a(id="question-downvote" class="downvote")
+              i(class="fas fa-chevron-down")
           div(class="curr-question-section")
             p #{question.question}
             if locals.authenticated
@@ -68,4 +68,4 @@ block content
       div(class="empty-right-bar")
     script(src="/javascripts/questionview.js" type="module" defer)
     script(src="/javascripts/canceldelete.js" type="module" defer)
-    script(src="/javascripts/voting.js" type="module" )
+    script(src="/javascripts/voting.js" type="module" defer)
