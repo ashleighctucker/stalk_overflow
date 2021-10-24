@@ -21,17 +21,15 @@ router.post(
 
     const validatorErrors = validationResult(req);
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-
     if (validatorErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(password, 12);
       user.hashedPassword = hashedPassword;
       await user.save();
       loginUser(req, res, user);
-      res.redirect('/');
+      return res.redirect('/');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('sign-up', {
+      return res.render('sign-up', {
         title: 'Sign Up',
         user,
         errors,
@@ -52,30 +50,24 @@ router.post(
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
-      // Attempt to get the user by their email address.
       const user = await User.findOne({ where: { userName } });
 
       if (user !== null) {
-        // If the user exists then compare their password
-        // to the provided password.
         const passwordMatch = await bcrypt.compare(
           password,
           user.hashedPassword.toString()
         );
 
         if (passwordMatch) {
-          // If the password hashes match, then login the user
-          // and redirect them to the default route.
           loginUser(req, res, user);
           return res.redirect('/');
         }
       }
-      // Otherwise display an error message to the user.
       errors.push('Login failed for the provided username and password');
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
     }
-    res.render('login', {
+    return res.render('login', {
       title: 'Login',
       userName,
       errors,
@@ -86,7 +78,7 @@ router.post(
 
 router.post('/logout', (req, res) => {
   logoutUser(req, res);
-  res.redirect('/');
+  return res.redirect('/');
 });
 
 module.exports = router;

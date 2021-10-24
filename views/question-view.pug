@@ -7,8 +7,6 @@ block content
       div(class="side-bar")
         li(class="side-bar-li side-bar-link"): a(href="/") Home
         li(class="side-bar-li side-bar-link"): a(href="/search") Questions
-        //- li(class="side-bar-li side-bar-link"): a(href="/") Users
-        //- li(class="side-bar-li side-bar-link"): a(href="/") Categories
       div(class="questions-section")
         ul(class="questions-header")
           li: h2(class="questions-title") #{question.title}
@@ -35,7 +33,7 @@ block content
         if locals.user && question.userId !== locals.user.id
           div(class="know-container")
             ul(class="score-data")
-              li: button(type="submit" class="ask-question-button"): a(href='/') Answer This Question
+              li: button(type="submit" class="ask-question-button"): a(href=`/questions/${question.id}/answer`) Answer This Question
         if question.Answers.length < 1
           div(class="know-container")
             div(class="know-section")
@@ -62,9 +60,9 @@ block content
                   if answer.userId === locals.user.id
                     div(class="question-edit-buttons")
                       div(id="question-button-1" class="button-EL-div")
-                        button(class="login-button" class="edit-answer-button" id=`${answer.id}-edit`) Edit Answer
+                        button(class="login-button edit-answer-button" id=`${answer.id}-edit` ): a(href=`/answers/${answer.id}/edit`) Edit Answer
                       div(id="question-button-2" class="button-EL-div")
-                        button(class="login-button" class="delete-answer-button" id=`${answer.id}-delete`) Delete Answer
+                        button(class="login-button delete-answer-button" id=`${answer.id}-delete`  ) Delete Answer
       div(class="empty-right-bar")
     script(src="/javascripts/questionview.js" type="module" defer)
     script(src="/javascripts/canceldelete.js" type="module" defer)

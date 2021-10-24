@@ -16,11 +16,11 @@ const createConfirmDeleteButton = (id, target) => {
   return buttonContainer;
 };
 
-const createCancelButton = () => {
+const createCancelButton = (id, target) => {
   const buttonContainer = document.querySelector('#question-button-2');
   const cancelButton = document.createElement('button');
-  cancelButton.className = 'login-button';
-  cancelButton.id = 'cancel-delete-button';
+  cancelButton.classList.add(`cancel-delete-${target}-button`, 'login-button')
+  cancelButton.id = `${id}-cancel-delete-${target}-button`;
   cancelButton.innerText = 'Cancel';
   buttonContainer.innerHTML = ``;
   buttonContainer.appendChild(cancelButton);
@@ -28,41 +28,42 @@ const createCancelButton = () => {
 };
 
 //deleting questions
-// deleteButton.addEventListener('click', (event) => {
-//   let targetElement = event.target;
-//   let selector = '#delete-question-button';
-//   if (targetElement.matches(selector)) {
-//     const url = document.URL.split('/');
-//     const questionId = url[5];
-//     const buttonContainer = document.querySelector('.question-edit-buttons');
-//     const confirmDeleteButton = createConfirmDeleteButton(
-//       questionId,
-//       'questions'
-//     );
-//     const cancelButton = createCancelButton();
-//     const formDiv = document.createElement('div');
-//     formDiv.className = 'confirm-delete-container';
-//     formDiv.appendChild(confirmDeleteButton);
-//     formDiv.appendChild(cancelButton);
-//     buttonContainer.innerHTML = ``;
-//     buttonContainer.appendChild(formDiv);
-//   }
-// });
+deleteButton.addEventListener('click', (event) => {
+  let targetElement = event.target;
+  let selector = '#delete-question-button';
+  if (targetElement.matches(selector)) {
+    const url = document.URL.split('/');
+    const questionId = url[5];
+    const buttonContainer = document.querySelector('.question-edit-buttons');
+    const confirmDeleteButton = createConfirmDeleteButton(
+      questionId,
+      'questions'
+    );
+    const cancelButton = createCancelButton(questionId, 'questions');
+    const formDiv = document.createElement('div');
+    formDiv.className = 'confirm-delete-container';
+    formDiv.appendChild(confirmDeleteButton);
+    formDiv.appendChild(cancelButton);
+    buttonContainer.innerHTML = ``;
+    buttonContainer.appendChild(formDiv);
+  }
+});
 
 //deleting answers
-// deleteButton.addEventListener('click', (event) => {
-//   let targetElement = event.target;
-//   let selector = '.delete-answer-button';
-//   if (targetElement.matches(selector)) {
-//     const answerId = parseInt(targetElement.id.split('-')[0], 10);
-//     const buttonContainer = document.querySelector('.question-edit-buttons');
-//     const confirmDeleteButton = createConfirmDeleteButton(answerId, 'answers');
-//     const cancelButton = createCancelButton();
-//     const formDiv = document.createElement('div');
-//     formDiv.className = 'confirm-delete-container';
-//     formDiv.appendChild(confirmDeleteButton);
-//     formDiv.appendChild(cancelButton);
-//     buttonContainer.innerHTML = ``;
-//     buttonContainer.appendChild(formDiv);
-//   }
-// });
+deleteButton.addEventListener('click', (event) => {
+  let targetElement = event.target;
+  let selector = '.delete-answer-button';
+  if (targetElement.matches(selector)) {
+    const answerId = parseInt(targetElement.id.split('-')[0], 10);
+    const buttonContainer = document.querySelector('.question-edit-buttons');
+    const confirmDeleteButton = createConfirmDeleteButton(answerId, 'answers');
+    const cancelButton = createCancelButton(answerId, 'answers');
+    const formDiv = document.createElement('div');
+    formDiv.className = 'confirm-delete-container';
+    formDiv.appendChild(confirmDeleteButton);
+    formDiv.appendChild(cancelButton);
+    buttonContainer.innerHTML = ``;
+    buttonContainer.appendChild(formDiv);
+  }
+});
+

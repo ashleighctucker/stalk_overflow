@@ -1,5 +1,17 @@
 extends layout
 
+include utils
 
 block content
-
+  section()
+    div(class="ask-question-container")
+      div(class="ask-question-form")
+        form(action=`/answers/edit/${answer.id}` method='POST' class="ask-question")
+          +validationErrorSummary(errors)
+          input(type='hidden' name='_csrf' value=csrfToken )
+          h1(class="form-title")= title
+          h3(id='answer-question-question')= question.question
+          input(type="text" name="title" class="question-title-input" value=answer.title)
+          textarea(id="ask-question-field" name="answer" value=answer.answer) #{answer.answer}
+          input(type='hidden' name='questionId' value=question.id)
+          button(id="question-ask-button") Edit Answer

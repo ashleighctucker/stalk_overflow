@@ -19,7 +19,7 @@ module.exports = {
         for (let j = 0; j < numAnswers; j++) {
           let answer = [];
           let answerTitle = [];
-
+          let answerScore;
           Object.values(answers['answerParts']).forEach((value) => {
             const arrLength = value.length;
             const index = Math.floor(Math.random() * arrLength);
@@ -30,12 +30,20 @@ module.exports = {
             const index = Math.floor(Math.random() * arrLength);
             answerTitle.push(value[index]);
           });
+          Object.values(answers['answerScores']).forEach((value) => {
+            const arrLength = value.length;
+            const index = Math.floor(Math.random() * arrLength);
+            answerScore = value[index];
+          });
           answer = answer.join(' ');
           answerTitle = answerTitle.join('');
 
           let questionCount = numQuestions;
 
           let questionId = Math.floor(Math.random() * questionCount);
+          if (questionId === 0) {
+            questionId = 1;
+          }
 
           while (questionsArray.includes(questionId))
             questionId = Math.floor(Math.random() * questionCount);
@@ -47,6 +55,7 @@ module.exports = {
             userId: i,
             title: answerTitle,
             questionId,
+            answerScore,
           });
         }
       }

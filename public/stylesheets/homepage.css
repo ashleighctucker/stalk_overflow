@@ -73,7 +73,7 @@
 }
 
 .ask-question-button:hover {
-  background-color: hsl(206, 91%, 35%);
+  background-color: hsl(206, 38%, 47%);
 }
 
 .ask-question-button a:visited {
@@ -133,7 +133,7 @@
   display: flex;
   justify-content: center;
   width: 100vw;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 #name-list li {
@@ -143,6 +143,7 @@
 .social-links {
   margin-right: 1px;
   margin-left: 2px;
+  font-size: 12px;
 }
 
 .fa-linkedin {
