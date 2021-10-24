@@ -33,7 +33,9 @@
 }
 
 #usersName {
-  margin-right: 10px;
+  margin-right: 20px;
+  margin-top: 5px;
+  font-size: 1.25rem;
 }
 
 .nav-bar-logo {
