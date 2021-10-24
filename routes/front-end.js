@@ -81,11 +81,21 @@ router.get(
   '/questions/:id(\\d+)/answer',
   csrfProtection,
   asyncHandler(async (req, res) => {
+    if (!req.session.auth) {
+      res.redirect('/login');
+    }
     const id = parseInt(req.params.id, 10);
     const question = await Question.findOne({
       where: { id: id },
       include: Answer,
     });
+    const { userId } = req.session.auth;
+    const testAnswer = await Answer.findOne({
+      where: { userId, questionId: question.id },
+    });
+    if (testAnswer) {
+      res.redirect(`/answers/${testAnswer.id}/edit`);
+    }
     const answer = Answer.build();
     res.render('answer-question', {
       title: `${question.title}`,

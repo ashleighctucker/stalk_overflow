@@ -16,11 +16,11 @@ const createConfirmDeleteButton = (id, target) => {
   return buttonContainer;
 };
 
-const createCancelButton = () => {
+const createCancelButton = (target) => {
   const buttonContainer = document.querySelector('#question-button-2');
   const cancelButton = document.createElement('button');
   cancelButton.className = 'login-button';
-  cancelButton.id = 'cancel-delete-button';
+  cancelButton.id = `cancel-delete-${target}-button`;
   cancelButton.innerText = 'Cancel';
   buttonContainer.innerHTML = ``;
   buttonContainer.appendChild(cancelButton);
@@ -39,7 +39,7 @@ deleteButton.addEventListener('click', (event) => {
       questionId,
       'questions'
     );
-    const cancelButton = createCancelButton();
+    const cancelButton = createCancelButton('questions');
     const formDiv = document.createElement('div');
     formDiv.className = 'confirm-delete-container';
     formDiv.appendChild(confirmDeleteButton);
@@ -57,7 +57,7 @@ deleteButton.addEventListener('click', (event) => {
     const answerId = parseInt(targetElement.id.split('-')[0], 10);
     const buttonContainer = document.querySelector('.question-edit-buttons');
     const confirmDeleteButton = createConfirmDeleteButton(answerId, 'answers');
-    const cancelButton = createCancelButton();
+    const cancelButton = createCancelButton('answers');
     const formDiv = document.createElement('div');
     formDiv.className = 'confirm-delete-container';
     formDiv.appendChild(confirmDeleteButton);
