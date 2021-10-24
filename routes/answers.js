@@ -46,7 +46,7 @@ router.post(
     const answerId = parseInt(req.params.id, 10);
     const answerToUpdate = await Answer.findByPk(answerId);
 
-    const { title, answer, questionId, userId } = req.body;
+    const { title, answer, userId, questionId } = req.body;
 
     const newAnswer = {
       title,
@@ -59,9 +59,7 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await answerToUpdate.update(newAnswer);
-      //re routes to specific question page - un-comment and replace once we have that page done
-      // res.redirect(`/questions/${questionId}`);
-      res.redirect(`/`);
+      res.redirect(`/questions/view/${questionId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('answer-edit', {
