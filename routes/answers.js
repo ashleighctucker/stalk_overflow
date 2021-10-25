@@ -115,7 +115,7 @@ router.post(
         answerScore--;
         await answer.update({ answerScore });
       } else if (hasVoted.vote === -1) {
-        await hasVoted.update({ vote: 1 });
+        await hasVoted.update({ vote: -1 });
         answerScore += 2;
         await answer.update({ answerScore });
       } else if (hasVoted.vote === 0) {
