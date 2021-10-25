@@ -44,6 +44,15 @@
   width: 70vw;
 }
 
+.question-link{
+  display: flex;
+  flex-direction: column;
+}
+
+.question{
+  margin-top: 5px;
+}
+
 .side-bar-li {
   padding-top: 10px;
   font-size: 15px;
