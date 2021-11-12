@@ -1,4 +1,4 @@
-Welcome to the stalk_overflow wiki! A clone of stack overflow for plant lovers! Currently a WIP.
+Welcome to the stalk_overflow! A clone of stack overflow for plant lovers! Currently a WIP.
 
 
 Here is a link to the live site:
