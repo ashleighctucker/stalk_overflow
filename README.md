@@ -40,3 +40,4 @@ Stalk Overflow is a clone of stack overflow with CRUD operations for questions a
 * Comments on answers and questions(full crud)
 * Adding question categories
 * Searching by category/user
+* MAJOR CSS mobile overhaul
