@@ -33,8 +33,6 @@ const createCancelButton = (id, target) => {
   } else {
     let buttonContainers = document.querySelectorAll('.delete-answer');
     buttonContainers.forEach((container) => {
-      console.log(id);
-      console.log(container.id === `${id}-answer-button-2`);
       if (container.id === `${id}-answer-button-2`) {
         buttonContainer = container;
       }
@@ -55,7 +53,6 @@ deleteQuestionButton.addEventListener('click', (event) => {
   const questionId = url[5];
   let targetElement = event.target;
   let selector = `.delete-question-button`;
-  console.log(targetElement.matches(selector));
   if (targetElement.matches(selector)) {
     const buttonContainer = document.querySelector('.question-edit-buttons');
     const confirmDeleteButton = createConfirmDeleteButton(
