@@ -65,7 +65,6 @@ router.post(
     };
 
     const validatorErrors = validationResult(req);
-    console.log(currUserId !== questionToUpdate.userId);
     if (currUserId !== questionToUpdate.userId) {
       const err = new Error("Unauthorized");
       err.status = 401;

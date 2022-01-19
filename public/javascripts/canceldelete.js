@@ -35,8 +35,6 @@ const createDeleteButton = (id, target, Target) => {
   } else {
     let buttonContainers = document.querySelectorAll('.delete-answer');
     buttonContainers.forEach((container) => {
-      console.log(id);
-      console.log(container.id === `${id}-answer-button-2`);
       if (container.id === `${id}-answer-button-2`) {
         buttonContainer = container;
       }
@@ -55,7 +53,6 @@ const createDeleteButton = (id, target, Target) => {
 canelButton.addEventListener('click', (event) => {
   let targetElement = event.target;
   let selector = '.cancel-delete-questions-button';
-  console.log(targetElement.matches(selector));
   if (targetElement.matches(selector)) {
     const url = document.URL.split('/');
     const questionId = url[5];
